@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <link rel="stylesheet" href="/stylesheets/reset.css" />
+  <link rel="stylesheet" href="/stylesheets/screen.css" />
+</head>
+<body>
+<div id="container">
+
+  <ul id="navigation">
+    <li><a href="#">schedule</a></li>
+    <li><a href="#">new movie night</a></li>
+    <li><a href="#">edit account</a></li>
+  </ul>
+
+  <form id="new_night">
+    <fieldset>
+      <legend>when?</legend>
+      <div class="field">
+        <label>date</label>
+        <input />
+      </div>
+      <br />
+      <br />
+    </fieldset>
+
+    <fieldset>
+      <legend>where?</legend>
+      <div class="field radio">
+        <label>
+          <input type="radio" />
+          use saved location
+        </label>
+        &nbsp; &nbsp;
+        <label>
+          <input type="radio" />
+          enter address
+        </label>
+      </div>
+      <br />
+
+      <div class="field radio saved_location">
+        <label>
+          <input type="radio" />
+          Apartment
+          <span>1481 W 7th Ave.</span>
+        </label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>movie?</legend>
+      <div class="field radio">
+        <label>
+          <input type="radio" />
+          vote
+        </label>
+        &nbsp; &nbsp;
+        <label>
+          <input type="radio" />
+          i have a movie
+        </label>
+      </div>
+      <br />
+
+      <div class="field">
+        <label>
+          movie title
+          <a href="#">add another movie</a>
+        </label>
+      </div>
+      
+      <div class="half">
+        <div class="field movie">
+          <input type="text" />
+          <a href="#">remove</a>
+        </div>
+        <div class="field movie">
+          <input type="text" />
+          <a href="#">remove</a>
+        </div>
+        <div class="field movie">
+          <input type="text" />
+          <a href="#">remove</a>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset id="additional_info">
+      <div class="half" id="drinks_and_snacks">
+        <div class="field radio beer">
+          <input type="radio" />
+          <label>should guests bring drinks?
+        </div>
+        <div class="field radio snacks">
+          <input type="radio" />
+          <label>should guests bring snackage?</label>
+        </div>
+
+        <div class="field" id="bringing_guests">
+            <input type="text" />
+            <label>
+              are <em>you</em> bringing a guest?<br /> how many?
+            </label>
+        </div>
+      </div>
+
+      <div class="half right">
+        <div class="field">
+          <label>notes</label>
+          <textarea></textarea>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="submit">
+      <input type="submit" value="schedule movie night" />
+    </div>
+  </form>
+
+</div>
+</body>
+</html>
+

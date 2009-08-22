@@ -210,5 +210,25 @@ form #bringing_guests input {
 }
 
 form #bringing_guests label {
+  position: relative;
   padding-top: 2px;
+}
+
+form .field.radio.saved_location label {
+  position: relative;
+  display: block;
+  padding: 5px 0 0 25px;
+}
+
+form .field.radio.saved_location input {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+form .field.radio.saved_location span {
+  display: block;
+  padding-top: 4px;
+  color: #593b7b;
+  font-size: 12px;
 }
