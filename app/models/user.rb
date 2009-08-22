@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
 
   has_many :locations
+  has_many :friendships
+  has_many :friends, :class_name => 'User', :through => :friendships
 
   attr_accessible :login, :email, :name, :password, :password_confirmation
 

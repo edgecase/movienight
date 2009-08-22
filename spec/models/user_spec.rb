@@ -218,6 +218,19 @@ describe User do
     users(:quentin).remember_token_expires_at.between?(before, after).should be_true
   end
 
+  # Domain
+
+  it 'should have no friends to start with' do
+    Factory(:user).friends.should be_empty
+  end
+
+  it 'should have one friend after befriending someone' do
+    user = Factory(:user)
+    user.friends << Factory(:random_user)
+    user.friends.should have(1).friend
+    user.friendships(true).should have(1).friendship
+  end
+
 protected
   def create_user(options = {})
     record = User.new({ :login => 'quire', :email => 'quire@example.com', :password => 'quire69', :password_confirmation => 'quire69' }.merge(options))
