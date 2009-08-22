@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../spec_controller_helper')
 
 describe NightsController do
 
@@ -7,39 +7,68 @@ describe NightsController do
   end
   
   describe "GET index" do
+    it_should_behave_like "an action that requires login"
+
+    def http_request
+      get :index
+    end
+
     it "assigns all nights as @nights" do
       Night.stub!(:find).with(:all).and_return([mock_night])
-      get :index
+      http_request
       assigns[:nights].should == [mock_night]
     end
   end
 
   describe "GET show" do
+    it_should_behave_like "an action that requires login"
+
+    def http_request
+      get :show, :id => "37"
+    end
+
     it "assigns the requested night as @night" do
       Night.stub!(:find).with("37").and_return(mock_night)
-      get :show, :id => "37"
+      http_request
       assigns[:night].should equal(mock_night)
     end
   end
 
   describe "GET new" do
+    it_should_behave_like "an action that requires login"
+
+    def http_request
+      get :new
+    end
+
     it "assigns a new night as @night" do
       Night.stub!(:new).and_return(mock_night)
-      get :new
+      http_request
       assigns[:night].should equal(mock_night)
     end
   end
 
   describe "GET edit" do
+    it_should_behave_like "an action that requires login"
+
+    def http_request
+      get :edit, :id => "37"
+    end
+
     it "assigns the requested night as @night" do
       Night.stub!(:find).with("37").and_return(mock_night)
-      get :edit, :id => "37"
+      http_request
       assigns[:night].should equal(mock_night)
     end
   end
 
   describe "POST create" do
-    
+    it_should_behave_like "an action that requires login"
+
+    def http_request
+      post :create, :night => {}
+    end
+
     describe "with valid params" do
       it "assigns a newly created night as @night" do
         Night.stub!(:new).with({'these' => 'params'}).and_return(mock_night(:save => true))
@@ -72,6 +101,12 @@ describe NightsController do
 
   describe "PUT update" do
     
+    it_should_behave_like "an action that requires login"
+
+    def http_request
+      put :update, :id => 1, :night => {}
+    end
+
     describe "with valid params" do
       it "updates the requested night" do
         Night.should_receive(:find).with("37").and_return(mock_night)
@@ -115,6 +150,12 @@ describe NightsController do
   end
 
   describe "DELETE destroy" do
+    it_should_behave_like "an action that requires login"
+
+    def http_request
+      delete :destroy, :id => "37"
+    end
+
     it "destroys the requested night" do
       Night.should_receive(:find).with("37").and_return(mock_night)
       mock_night.should_receive(:destroy)

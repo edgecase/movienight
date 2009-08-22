@@ -5,15 +5,11 @@
 
   <p>
     <%= f.label :curtain_time_at %><br />
-    <%= f.datetime_select :curtain_time_at %>
+    <%= f.text_field :curtain_time_at, :rel => 'date' %>
   </p>
   <p>
     <%= f.label :doors_open_at %><br />
-    <%= f.datetime_select :doors_open_at %>
-  </p>
-  <p>
-    <%= f.label :host_id %><br />
-    <%= f.text_field :host_id %>
+    <%= f.text_field :doors_open_at, :rel => 'date' %>
   </p>
   <p>
     <%= f.submit 'Create' %>
