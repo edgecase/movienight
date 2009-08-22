@@ -9,7 +9,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090822013907) do
+ActiveRecord::Schema.define(:version => 20090822044321) do
+
+  create_table "nights", :force => true do |t|
+    t.integer  "host_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.time     "doors_open_time"
+    t.date     "doors_open_date"
+    t.time     "curtain_time"
+    t.date     "curtain_date"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40
