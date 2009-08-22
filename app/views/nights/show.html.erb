@@ -1,16 +1,17 @@
 <p>
-  <b>Curtain time at:</b>
-  <%=h @night.curtain_time_at %>
+  <b>When:</b>
+  <%=h @night.doors_open_date.try(:to_s, :date) %>
 </p>
 
 <p>
-  <b>Doors open at:</b>
-  <%=h @night.doors_open_at %>
+  <b>Where:</b>
+  <%=h @night.location.name%>: 
+  <%=h @night.location.street%>
 </p>
 
 <p>
   <b>Host:</b>
-  <%=h @night.host_id %>
+  <%=h @night.host.login %>
 </p>
 
 
