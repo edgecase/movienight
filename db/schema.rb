@@ -11,6 +11,14 @@
 
 ActiveRecord::Schema.define(:version => 20090822163219) do
 
+  create_table "invitees", :force => true do |t|
+    t.integer  "night_id",   :null => false
+    t.string   "email",      :null => false
+    t.string   "hash",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "locations", :force => true do |t|
     t.string   "street"
     t.string   "city"
