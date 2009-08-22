@@ -42,6 +42,34 @@
   background: url(/images/x_red.png);
 }
 
+#sidebar .heading.see_you_there {
+  background: #194106;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+}
+
+#sidebar .heading.see_you_there a.rsvp,
+#sidebar .heading.maybe_next_time a.rsvp {
+  top: 22px;
+  height: 10px;
+}
+
+#sidebar .heading.see_you_there a.yes,
+#sidebar .heading.maybe_next_time a.yes {
+  right: 45px;
+  width: 13px;
+  background: url(/images/check_small.png);
+}
+
+#sidebar .heading.see_you_there a.no,
+#sidebar .heading.maybe_next_time a.no {
+  right: 25px;
+  width: 10px;
+  background: url(/images/x_small.png);
+}
+
 /* END HEADING */
 
 .sidebar_content {
