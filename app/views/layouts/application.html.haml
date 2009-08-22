@@ -5,7 +5,8 @@
     %title Movie Night
     = stylesheet_link_tag 'reset', 'screen'
     = stylesheet_link_tag 'jquery-ui/dot-luv/jquery-ui-1.7.2.custom.css'
-    = javascript_include_tag 'jquery-1.3.2.min', 'jquery-ui-1.7.2.custom.min', 'application'
+    = javascript_include_tag 'jquery-1.3.2.min', 'jquery-ui-1.7.2.custom.min'
+    = javascript_include_tag 'jquery.always', 'application'
     = yield :head
   
   %body{ :class => "#{params[:controller]} #{params[:action]}" }
