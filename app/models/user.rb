@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :email
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
 
+  has_many :locations
+
   attr_accessible :login, :email, :name, :password, :password_confirmation
 
   def self.authenticate(login, password)

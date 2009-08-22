@@ -9,7 +9,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090822044321) do
+ActiveRecord::Schema.define(:version => 20090822163219) do
+
+  create_table "locations", :force => true do |t|
+    t.string   "street"
+    t.string   "city"
+    t.string   "state"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
 
   create_table "nights", :force => true do |t|
     t.integer  "host_id"
@@ -19,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20090822044321) do
     t.date     "doors_open_date"
     t.time     "curtain_time"
     t.date     "curtain_date"
+    t.integer  "location_id"
   end
 
   create_table "users", :force => true do |t|
