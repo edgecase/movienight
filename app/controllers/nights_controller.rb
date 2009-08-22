@@ -45,7 +45,7 @@ class NightsController < ApplicationController
 
     respond_to do |format|
       if @night.save
-        flash[:notice] = 'Night was successfully created.'
+        flash[:success] = 'Night was successfully created.'
         format.html { redirect_to(@night) }
         format.xml  { render :xml => @night, :status => :created, :location => @night }
       else
