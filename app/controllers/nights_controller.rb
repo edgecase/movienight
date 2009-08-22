@@ -41,6 +41,7 @@ class NightsController < ApplicationController
   # POST /nights.xml
   def create
     @night = Night.new(params[:night])
+    @night.host = current_user
 
     respond_to do |format|
       if @night.save

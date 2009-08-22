@@ -1,9 +1,90 @@
-%h1
-  New night
-- form_for(@night) do |f|
-  = render :partial => "form", :object => f
-  %p
-    = f.submit 'create'
-
-= link_to 'Back', nights_path
-
+- form_for Night.new do |form|
+  %fieldset#when_fields
+    %legend
+      %span
+        when?
+    .field
+      %label
+        date
+      = form.text_field :doors_open_date, :rel => :date, :size => 10
+      = form.time_select :doors_open_time, :minute_step => 15
+    %br
+    %br
+  %fieldset
+    %legend
+      %span
+        where?
+    .mozilla_is_rubbish
+    .field.radio
+      %label
+        %input{ :type => "radio" }
+        use saved location
+      \&nbsp; &nbsp;
+      %label
+        %input{ :type => "radio" }
+        enter address
+    %br
+    .field.radio.saved_location
+      %label
+        %input{ :type => "radio" }
+        Apartment
+        %span
+          1481 W 7th Ave.
+  %fieldset
+    %legend
+      %span
+        movie?
+    .mozilla_is_rubbish
+    .field.radio
+      %label
+        %input{ :type => "radio" }
+        vote
+      \&nbsp; &nbsp;
+      %label
+        %input{ :type => "radio" }
+        i have a movie
+    %br
+    .field
+      %label
+        movie title
+        %a{ :href => "#" }
+          add another movie
+    .half
+      .field.movie
+        %input{ :type => "text" }
+        %a{ :href => "#" }
+          remove
+      .field.movie
+        %input{ :type => "text" }
+        %a{ :href => "#" }
+          remove
+      .field.movie
+        %input{ :type => "text" }
+        %a{ :href => "#" }
+          remove
+  %fieldset#additional_info
+    #drinks_and_snacks.half
+      .field.radio.beer
+        %input{ :type => "radio" }
+        %label
+          should guests bring drinks?
+      .field.radio.snacks
+        %input{ :type => "radio" }
+        %label
+          should guests bring snackage?
+      #bringing_guests.field
+        %input{ :type => "text" }
+        %label
+          are
+          %em
+            you
+          bringing a guest?
+          %br
+          how many?
+    .half.right
+      .field
+        %label
+          notes
+        %textarea
+  .submit
+    %input{ :type => "submit", :value => "schedule movie night" }

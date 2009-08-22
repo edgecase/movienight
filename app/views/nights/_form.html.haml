@@ -4,10 +4,10 @@
   = form.label :doors_open_time, "doors open"
   %br
   = form.text_field :doors_open_date, :rel => 'date'
-  = form.time_select :doors_open_time
+  = form.time_select :doors_open_time, :minute_step => 15
 
 %p
   = form.label :curtain_time, "curtain time"
   %br
   = form.text_field :curtain_date, :rel => 'date'
-  = form.time_select :curtain_time
+  = form.time_select :curtain_time, :minute_step => 15
