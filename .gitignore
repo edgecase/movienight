@@ -3,6 +3,7 @@ log/*.log
 tmp/**/*
 tmp/*
 config/database.yml
+config/deploy.rb
 db/*.sqlite3
 .zsh_rake_cache
 public/system
