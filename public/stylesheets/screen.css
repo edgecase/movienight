@@ -50,13 +50,18 @@ ul#navigation:hover li a {
 form fieldset {
   position: relative;
   border-bottom: 1px solid #291c2f;
-  padding: 20px 0;
+  padding: 0 0 20px 0;
 }
 
-form fieldset legend {
+form div.mozilla_is_rubbish {
+  height: 20px;
+}
+
+form fieldset legend span {
   position: absolute;
-  top: 13px;
+  top: 15px;
   left: -150px;
+  display: block;
   width: 125px;
   font-size: 24px;
   text-align: right;
@@ -231,4 +236,8 @@ form .field.radio.saved_location span {
   padding-top: 4px;
   color: #593b7b;
   font-size: 12px;
+}
+
+#when_fields span {
+  top: -7px;
 }
