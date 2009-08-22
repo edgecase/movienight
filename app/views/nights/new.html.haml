@@ -36,10 +36,10 @@
       - fields_for Location.new do |form|
         = hidden_field_tag "authenticity_token", form_authenticity_token
         .field
-          = form.label :name
+          = form.label :name, 'location name'
           = form.text_field :name
         .field
-          = form.label :street, "Street Address"
+          = form.label :street, "street address"
           = form.text_field :street
         -# .field
         -#   = form.label :city
