@@ -21,8 +21,8 @@ describe Night do
 
     describe "when emails have associated user accounts" do
       it "sends the registered member invite email" do
-        Notifier.should_receive(:send_registered_member_invitation).with(@user1)
-        Notifier.should_receive(:send_registered_member_invitation).with(@user2)
+        Notifier.should_receive(:send_registered_member_invitation).with(@user1, @night)
+        Notifier.should_receive(:send_registered_member_invitation).with(@user2, @night)
         @night.invitiation_emails = 'user1@example.com,user2@example.com'
       end
     end

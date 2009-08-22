@@ -1,44 +1,37 @@
 class NightsController < ApplicationController
-  # GET /nights
-  # GET /nights.xml
+  before_filter :persist_host_info, :only => [:send_invitations]
+
   def index
     @nights = Night.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.xml  { render :xml => @nights }
     end
   end
 
-  # GET /nights/1
-  # GET /nights/1.xml
   def show
     @night = Night.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html 
       format.xml  { render :xml => @night }
     end
   end
 
-  # GET /nights/new
-  # GET /nights/new.xml
   def new
     @night = Night.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html 
       format.xml  { render :xml => @night }
     end
   end
 
-  # GET /nights/1/edit
   def edit
     @night = Night.find(params[:id])
   end
 
-  # POST /nights
-  # POST /nights.xml
   def create
     @night = Night.new(params[:night])
     @night.host = current_user
@@ -55,8 +48,6 @@ class NightsController < ApplicationController
     end
   end
 
-  # PUT /nights/1
-  # PUT /nights/1.xml
   def update
     @night = Night.find(params[:id])
 
@@ -72,8 +63,6 @@ class NightsController < ApplicationController
     end
   end
 
-  # DELETE /nights/1
-  # DELETE /nights/1.xml
   def destroy
     @night = Night.find(params[:id])
     @night.destroy
@@ -91,5 +80,11 @@ class NightsController < ApplicationController
   def send_invitations
     @night = Night.find(params[:id])
     @night.update_attributes(params[:night])
+    flash[:success] = "Invitations sent."
+    redirect_to @night
+  end
+
+  def nonmember_rsvp
+    
   end
 end

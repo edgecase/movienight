@@ -22,10 +22,10 @@ class Night < ActiveRecord::Base
   def invite(email)
     user = User.find_by_email(email)
     if user
-      Notifier.send_registered_member_invitation user
+      Notifier.send_registered_member_invitation user, self
     else
       invitee = invitees.create! :email => email
-      Notifier.send_nonmember_invitation invitee
+      Notifier.send_nonmember_invitation invitee, self
     end
   end
 
