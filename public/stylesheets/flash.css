@@ -1,0 +1,24 @@
+#flash_message {
+  position: absolute;
+  top: 0;
+  left: 315px;
+  padding: 15px;
+  font-weight: bold;
+  -webkit-border-bottom-left-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  -moz-border-radius-bottomright: 3px;
+}
+
+#flash_message.success {
+  background: #194106;
+}
+
+#flash_message.error {
+  background: #d00;
+}
+
+#flash_message.warning {
+  color: #000;
+  background: #ff9;
+}

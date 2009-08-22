@@ -4,6 +4,7 @@
 @import "/stylesheets/sidebar.css";
 @import "/stylesheets/voting.css";
 @import "/stylesheets/login.css";
+@import "/stylesheets/flash.css";
 
 body {
   color: #fff;
@@ -18,6 +19,7 @@ em {
 }
 
 #container {
+  position: relative;
   width: 915px;
   margin: 0 auto;
   padding-bottom: 40px;
