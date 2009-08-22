@@ -13,6 +13,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :schedules
   map.resources :nights, :member => { :add_invitations => :get, :send_invitations => :post }
+  map.nonmember_rsvp "/nights/:id/:access_hash", :controller => 'nights', :action => 'nonmember_rsvp'
 
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
