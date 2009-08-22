@@ -1,0 +1,18 @@
+<p>
+  <b>Curtain time at:</b>
+  <%=h @night.curtain_time_at %>
+</p>
+
+<p>
+  <b>Doors open at:</b>
+  <%=h @night.doors_open_at %>
+</p>
+
+<p>
+  <b>Host:</b>
+  <%=h @night.host_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_night_path(@night) %> |
+<%= link_to 'Back', nights_path %>

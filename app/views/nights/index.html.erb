@@ -1,0 +1,24 @@
+<h1>Listing nights</h1>
+
+<table>
+  <tr>
+    <th>Curtain time at</th>
+    <th>Doors open at</th>
+    <th>Host</th>
+  </tr>
+
+<% @nights.each do |night| %>
+  <tr>
+    <td><%=h night.curtain_time_at %></td>
+    <td><%=h night.doors_open_at %></td>
+    <td><%=h night.host_id %></td>
+    <td><%= link_to 'Show', night %></td>
+    <td><%= link_to 'Edit', edit_night_path(night) %></td>
+    <td><%= link_to 'Destroy', night, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New night', new_night_path %>

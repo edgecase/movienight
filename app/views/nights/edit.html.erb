@@ -1,0 +1,24 @@
+<h1>Editing night</h1>
+
+<% form_for(@night) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :curtain_time_at %><br />
+    <%= f.datetime_select :curtain_time_at %>
+  </p>
+  <p>
+    <%= f.label :doors_open_at %><br />
+    <%= f.datetime_select :doors_open_at %>
+  </p>
+  <p>
+    <%= f.label :host_id %><br />
+    <%= f.text_field :host_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @night %> |
+<%= link_to 'Back', nights_path %>
