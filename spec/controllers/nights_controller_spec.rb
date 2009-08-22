@@ -65,33 +65,39 @@ describe NightsController do
   describe "POST create" do
     it_should_behave_like "an action that requires login"
 
+    before do
+      @night = Factory(:night)
+      Night.stub!(:new).and_return(@night)
+    end
+
     def http_request
       post :create, :night => {}
     end
 
     describe "with valid params" do
       it "assigns a newly created night as @night" do
-        Night.stub!(:new).with({'these' => 'params'}).and_return(mock_night(:save => true))
         post :create, :night => {:these => 'params'}
-        assigns[:night].should equal(mock_night)
+        assigns[:night].should equal(@night)
       end
 
       it "redirects to the created night" do
-        Night.stub!(:new).and_return(mock_night(:save => true))
         post :create, :night => {}
-        response.should redirect_to(night_url(mock_night))
+        response.should redirect_to(night_url(@night))
+      end
+
+      it "makes the current_user the host" do
+        post :create, :night => {:these => 'params'}
+        @night.host.should == @currently_logged_in_user
       end
     end
     
     describe "with invalid params" do
       it "assigns a newly created but unsaved night as @night" do
-        Night.stub!(:new).with({'these' => 'params'}).and_return(mock_night(:save => false))
         post :create, :night => {:these => 'params'}
-        assigns[:night].should equal(mock_night)
       end
 
       it "re-renders the 'new' template" do
-        Night.stub!(:new).and_return(mock_night(:save => false))
+        @night.stub!(:save).and_return(false)
         post :create, :night => {}
         response.should render_template('new')
       end
