@@ -3,7 +3,7 @@
 
 = error_messages_for :night
 
-- form_for Night.new do |form|
+- form_for @night do |form|
   %fieldset#when_fields
     %legend
       %span
@@ -33,20 +33,20 @@
       = render :partial => "locations/location", :collection => current_user.locations
     #new_location.location_source{ :style => "display:none" }
       #location_errors
-      - fields_for Location.new do |form|
+      - fields_for Location.new do |location|
         = hidden_field_tag "authenticity_token", form_authenticity_token
         .field
-          = form.label :name, 'location name'
-          = form.text_field :name
+          = location.label :name, 'location name'
+          = location.text_field :name
         .field
-          = form.label :street, "street address"
-          = form.text_field :street
+          = location.label :street, "street address"
+          = location.text_field :street
         -# .field
-        -#   = form.label :city
-        -#   = form.text_field :city
+        -#   = location.label :city
+        -#   = location.text_field :city
         -# .field
-        -#   = form.label :state
-        -#   = form.text_field :state, :size => 3
+        -#   = location.label :state
+        -#   = location.text_field :state, :size => 3
         .submit
           = link_to "save location", '#', :id => "add_address"
       
@@ -85,26 +85,17 @@
   %fieldset#additional_info
     #drinks_and_snacks.half
       .field.radio.beer
-        %input{ :type => "radio" }
+        = form.check_box :bring_drinks
         %label
           should guests bring drinks?
       .field.radio.snacks
-        %input{ :type => "radio" }
+        = form.check_box :bring_snacks
         %label
           should guests bring snackage?
-      #bringing_guests.field
-        %input{ :type => "text" }
-        %label
-          are
-          %em
-            you
-          bringing a guest?
-          %br
-          how many?
     .half.right
       .field
         %label
           notes
-        %textarea
+        = form.text_area :notes
   .submit
     %input{ :type => "submit", :value => "schedule movie night" }
