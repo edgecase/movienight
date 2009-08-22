@@ -1,0 +1,109 @@
+#sidebar {
+  float: left;
+  width: 325px;
+  background: #000;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+}
+
+/* HEADING */
+
+#sidebar .heading {
+  position: relative;
+  height: 56px;
+  border-bottom: 1px solid #110217;
+  padding-left: 25px;
+  line-height: 56px;
+}
+
+#sidebar .heading span.title {
+  font-size: 24px;
+}
+
+#sidebar .heading a.rsvp {
+  position: absolute;
+  top: 18px;
+  display: block;
+  height: 18px;
+  text-indent: -999em;
+}
+
+#sidebar .heading a.yes {
+  right: 60px;
+  width: 23px;
+  background: url(/images/check_green.png);
+}
+
+#sidebar .heading a.no {
+  right: 25px;
+  width: 18px;
+  background: url(/images/x_red.png);
+}
+
+/* END HEADING */
+
+.sidebar_content {
+  padding: 20px 25px 25px 25px;
+}
+
+.sidebar_content h1 {
+  margin-bottom: 0.75em;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.sidebar_content p {
+  margin-bottom: 1em;
+}
+
+.sidebar_content p,
+.sidebar_content ul li {
+  color: #808080;
+  font-size: 12px;
+  line-height: 125%;
+}
+
+.sidebar_content p.more {
+  position: relative;
+  left: -25px;
+}
+
+.sidebar_content p.more a {
+  position: relative;
+  display: block;
+  width: 275px;
+  padding: 6px 25px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.sidebar_content p.more a:hover {
+  background: #111;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#141414), to(#000));
+}
+
+.sidebar_content p.more a img {
+  position: absolute;
+  top: 6px;
+  right: 25px;
+}
+
+.sidebar_content p.drinks_and_snacks {
+  height: 27px;
+  padding-left: 35px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 27px;
+}
+
+.sidebar_content p.beer {
+  background: url(/images/beer.png) no-repeat 0% 50%;
+}
+
+.sidebar_content p.snacks {
+  background: url(/images/fork_and_knife.png) no-repeat 1px 50%;
+}
