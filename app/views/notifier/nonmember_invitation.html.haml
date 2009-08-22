@@ -3,4 +3,4 @@
   %br
   Click the following link to RSVP
 
-= link_to "RSVP", nonmember_rsvp_night_path(@night, @invitee.access_hash, :email => @invitee.email)
+= link_to "RSVP", nonmember_rsvp_night_url(@night, @invitee.access_hash, :email => @invitee.email)

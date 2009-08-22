@@ -11,7 +11,7 @@ class Night < ActiveRecord::Base
 
   before_create :generate_invitee_salt
 
-  def invitiation_emails=(emails)
+  def invitation_emails=(emails)
     emails.split(/[\s;,]+/).each do |email|
       invite(email)
     end

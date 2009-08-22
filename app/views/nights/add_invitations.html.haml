@@ -1,7 +1,7 @@
 %h1
   Invite people
 
-- form_for @night, :url => send_invitations_night_path(@night) do |f|
+- form_tag send_invitations_night_path(@night) do
   %p
     %label{ :for => 'night[invitation_emails]' }
       Email addresses:
