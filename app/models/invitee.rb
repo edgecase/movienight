@@ -1,9 +1,10 @@
 class Invitee < ActiveRecord::Base
+  extend Authentication::ByPassword::ModelClassMethods
   include Authentication
 
   belongs_to :night
 
-  validates_presence_of :night, :email, :access_hash
+  validates_presence_of :night_id, :email
 
   validates_uniqueness_of :email
   validates_format_of     :email, :with => Authentication.email_regex, :message => Authentication.bad_email_message
@@ -11,6 +12,6 @@ class Invitee < ActiveRecord::Base
   before_create :generate_access_hash
 
   def generate_access_hash
-    
+    self.access_hash = Invitee.password_digest(email, night.invitee_salt)
   end
 end
