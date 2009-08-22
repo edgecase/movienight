@@ -83,4 +83,13 @@ class NightsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def add_invitations
+    @night = Night.find(params[:id])
+  end
+
+  def send_invitations
+    @night = Night.find(params[:id])
+    @night.update_attributes(params[:night])
+  end
 end

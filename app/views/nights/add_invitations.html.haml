@@ -1,0 +1,10 @@
+%h1
+  Invite people
+
+- form_for @night, :url => send_invitations_night_path(@night) do |f|
+  %p
+    %label{ :for => 'night[new_invitations]' }
+      Email addresses:
+    = text_area_tag 'night[new_invitations]'
+
+  = submit_tag "Send Invites!"
