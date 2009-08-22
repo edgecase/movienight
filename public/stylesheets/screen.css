@@ -57,3 +57,28 @@ em {
   margin-bottom: 2em;
   font-size: 14px;
 }
+
+/* FOOTER */
+
+#footer {
+  clear: both;
+  padding-top: 60px;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  opacity: 0.5;
+}
+
+#footer:hover {
+  opacity: 0.9;
+}
+
+#footer a {
+  margin-left: 10px;
+  color: #fff;
+  text-decoration: none;
+}
+
+#footer a span {
+  opacity: 0.5;
+}

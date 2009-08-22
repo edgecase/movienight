@@ -57,3 +57,7 @@ body.login_or_signup form .submit p a {
   font-weight: bold;
   text-transform: uppercase;
 }
+
+body.login_or_signup #footer {
+  display: none;
+}
