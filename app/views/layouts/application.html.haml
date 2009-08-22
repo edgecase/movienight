@@ -8,5 +8,5 @@
     = yield :head
   
   %body{ :class => "#{params[:controller]} #{params[:action]}" }
-    = render 'header'
+    = render 'shared/header'
     = yield
