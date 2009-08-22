@@ -7,3 +7,55 @@
   margin-bottom: 1.5em;
   font-weight: bold;
 }
+
+#voting .movie {
+  position: relative;
+  height: 90px;
+  padding-left: 115px;
+}
+
+#voting .movie img.movie_image {
+  position: absolute;
+  top: 0;
+  left: 50px;
+  width: 46px;
+}
+
+#voting .movie h3 {
+  margin-bottom: 10px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#voting .movie p.more_info {
+  font-size: 14px;
+}
+
+#voting .movie p.more_info a {
+  color: #fff;
+  margin-right: 8px;
+}
+
+#voting .movie a.vote_for_me {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 23px;
+  height: 18px;
+  text-indent: -999em;
+  background: url(/images/x.png) no-repeat;
+}
+
+#voting .movie a.vote_for_me.i_choose_you_pikachu {
+  background: url(/images/check_green.png) no-repeat;
+}
+
+#voting .movie .vote_count {
+  position: absolute;
+  top: 4px;
+  left: -28px;
+  color: #53b800;
+  font-size: 14px;
+}
