@@ -1,0 +1,16 @@
+%p
+  %b When:
+  = h @night.curtain_date.try(:to_s, :date)
+
+%p
+  %b Where
+  = "#{h @night.location.name}:"
+  = h @night.location.street
+
+%p
+  %b Host:
+  = h @night.host.login
+
+= "#{link_to 'Invite people', add_invitations_night_path(@night)} |"
+= "#{link_to 'Edit', edit_night_path(@night)} |"
+= link_to 'Back', nights_path

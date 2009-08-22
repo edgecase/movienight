@@ -1,0 +1,29 @@
+%h1 Listing nights
+
+%table 
+  %tr
+    %th Date
+    %th Curtain time
+    %th Host
+    %th Location
+
+- @nights.each do |night|
+  %tr
+    %td
+      = h night.curtain_date
+    %td
+      = h night.curtain_time
+    %td
+      = h night.host.login
+    %td
+      = h night.location.street
+    %td
+      = link_to 'Show', night
+    %td
+      = link_to 'Edit', edit_night_path(night)
+    %td
+      = link_to 'Destroy', night, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New night', new_night_path

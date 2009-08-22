@@ -21,15 +21,15 @@ describe Night do
 
     describe "when emails have associated user accounts" do
       it "sends the registered member invite email" do
-        Notifier.should_receive(:send_registered_member_invitation).with(@user1, @night)
-        Notifier.should_receive(:send_registered_member_invitation).with(@user2, @night)
+        Notifier.should_receive(:deliver_registered_member_invitation).with(@user1, @night)
+        Notifier.should_receive(:deliver_registered_member_invitation).with(@user2, @night)
         @night.invitiation_emails = 'user1@example.com,user2@example.com'
       end
     end
 
     describe "when emails do not have associated user accounts" do
       before do
-        Notifier.stub! :send_nonmember_invitation
+        Notifier.stub! :deliver_nonmember_invitation
       end
 
       it "creates invitees for each email" do
@@ -38,7 +38,7 @@ describe Night do
       end
 
       it "sends the non-member invitation" do
-        Notifier.should_receive(:send_nonmember_invitation).twice
+        Notifier.should_receive(:deliver_nonmember_invitation).twice
         @night.invitiation_emails = "nonreg1@foobars.com; nonreg2@goober.com"
       end
     end
