@@ -1,6 +1,7 @@
 @import "/stylesheets/navigation.css";
 @import "/stylesheets/forms.css";
 @import "/stylesheets/sidebar.css";
+@import "/stylesheets/voting.css";
 
 body {
   color: #fff;
@@ -24,3 +25,25 @@ em {
   float: right;
   width: 540px;
 }
+
+#main_content h1 {
+  margin-bottom: 0.9em;
+  font-size: 42px;
+}
+
+#main_content h1 span.movie {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 21px;
+}
+
+#main_content h1 span.movie.undecided {
+  color: #f00;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+#main_content h1 span.time {
+  color: #645a68;
+}
+

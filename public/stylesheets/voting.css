@@ -1,0 +1,9 @@
+#voting {
+  border-top: 1px solid #1d0f23;
+  padding-top: 12px;
+}
+
+#voting h2 {
+  margin-bottom: 1.5em;
+  font-weight: bold;
+}
