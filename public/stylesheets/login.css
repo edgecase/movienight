@@ -14,7 +14,8 @@ body.login_or_signup form .field {
   clear: both;
 }
 
-body.login_or_signup form .field label {
+body.login_or_signup form .field label,
+body.users.edit form .field label {
   float: left;
   width: 100px;
   padding-right: 12px;
@@ -39,7 +40,8 @@ body.login_or_signup form .field.password a {
   line-height: 45px;
 }
 
-body.login_or_signup form .submit {
+body.login_or_signup form .submit,
+body.users.edit form .submit {
   padding-left: 115px;
 }
 
