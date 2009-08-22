@@ -221,3 +221,7 @@ form .field.radio.saved_location span {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
 }
+
+body.users.edit form .field {
+  margin-bottom: 10px;
+}

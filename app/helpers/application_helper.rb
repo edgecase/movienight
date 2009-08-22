@@ -12,7 +12,7 @@ module ApplicationHelper
 
   def body_classes
     classes = "#{params[:controller]} #{params[:action]}"
-    classes << ' login_or_signup' if ((params[:controller] == 'sessions' && params[:action] == 'new') || (params[:controller] == 'users' && params[:action] == 'new') || (params[:controller] == 'users' && params[:action] == 'edit'))
+    classes << ' login_or_signup' if ((params[:controller] == 'sessions' && params[:action] == 'new') || (params[:controller] == 'users' && params[:action] == 'new'))
     classes
   end
 end
