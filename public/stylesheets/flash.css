@@ -18,7 +18,7 @@
   background: #d00;
 }
 
-#flash_message.warning {
+#flash_message.notice {
   color: #000;
   background: #ff9;
 }
