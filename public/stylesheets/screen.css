@@ -59,7 +59,7 @@ form div.mozilla_is_rubbish {
 
 form fieldset legend span {
   position: absolute;
-  top: 0;
+  top: 15px;
   left: -150px;
   display: block;
   width: 125px;
@@ -238,6 +238,6 @@ form .field.radio.saved_location span {
   font-size: 12px;
 }
 
-#date_field {
-  padding-top: 7px;
+#when_fields span {
+  top: -7px;
 }
