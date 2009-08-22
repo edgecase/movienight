@@ -4,5 +4,5 @@ class Night < ActiveRecord::Base
 
   validates_presence_of :doors_open_date
   validates_presence_of :doors_open_time
-  validates_presence_of :host
+  validates_presence_of :host, :location
 end
