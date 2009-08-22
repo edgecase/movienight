@@ -4,7 +4,7 @@ module ApplicationHelper
   
     flash_info = keys.collect { |key| 
       content_tag(:div, 
-        flash[key], :id => "flash_#{key}") if flash[key] 
+        flash[key], :id => "flash_message", :class => key) if flash[key] 
     }.join
     
     flash_info
