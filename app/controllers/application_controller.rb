@@ -7,4 +7,6 @@ class ApplicationController < ActionController::Base
   helper :all
   protect_from_forgery
   filter_parameter_logging :password if Rails.env.production?
+
+  before_filter :login_required
 end

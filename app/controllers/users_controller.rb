@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_filter :login_required, :only => [:new, :create]
+
   def new
     @user = User.new
   end
@@ -19,5 +21,9 @@ class UsersController < ApplicationController
       flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
       render :action => 'new'
     end
+  end
+
+  def edit
+    @user = User.find(params[:id])
   end
 end

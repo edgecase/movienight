@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require File.dirname(__FILE__) + '/../spec_controller_helper'
 
 describe UsersController do
   fixtures :users
@@ -48,8 +48,31 @@ describe UsersController do
     post :create, :user => { :login => 'quire', :email => 'quire@example.com',
       :password => 'quire69', :password_confirmation => 'quire69' }.merge(options)
   end
+
 end
 
 describe UsersController do
+
+  describe "handling /users/:id/edit via GET" do
+    it_should_behave_like 'an action that requires login'
+
+    before do
+      @user = Factory.create(:user)
+    end
+
+    def http_request
+      get :edit, :id => @user.id
+    end
+
+    it "finds the user" do
+      http_request
+      assigns[:user].should == @user
+    end
+
+    it "renders the edit template" do
+      http_request
+      response.should render_template('edit')
+    end
+  end
   
 end
