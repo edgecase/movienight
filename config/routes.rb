@@ -12,7 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :sessions
 
   map.resources :schedules
-  map.resources :nights
+  map.resources :nights, :member => { :add_invitations => :get, :send_invitations => :post }
 
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'

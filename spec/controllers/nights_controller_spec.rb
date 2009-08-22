@@ -175,4 +175,38 @@ describe NightsController do
     end
   end
 
+  describe "GET add_invitations" do
+    it_should_behave_like "an action that requires login"
+
+    before do
+      @night = Factory.create(:night)
+    end
+
+    def http_request
+      get :add_invitations, :id => @night.id
+    end
+
+    it "finds the night" do
+      http_request
+      assigns[:night].should == @night
+    end
+  end
+
+  describe "GET send_invitations" do
+    it_should_behave_like "an action that requires login"
+
+    before do
+      @night = Factory.create(:night)
+    end
+
+    def http_request
+      get :send_invitations, :id => @night.id
+    end
+
+    it "finds the night" do
+      http_request
+      assigns[:night].should == @night
+    end
+  end
+
 end
