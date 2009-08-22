@@ -6,6 +6,8 @@
 @import "/stylesheets/login.css";
 @import "/stylesheets/flash.css";
 
+.clear { clear: both; }
+
 body {
   color: #fff;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", arial, sans-serif;
