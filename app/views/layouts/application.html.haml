@@ -10,4 +10,5 @@
   
   %body{ :class => "#{params[:controller]} #{params[:action]}" }
     = render 'shared/header'
+    = flash_div :success, :error, :notice
     = yield

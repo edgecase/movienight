@@ -74,5 +74,46 @@ describe UsersController do
       response.should render_template('edit')
     end
   end
+
+  describe "handling /users/:id via PUT" do
+    it_should_behave_like 'an action that requires login'
+
+    before do
+      @user = Factory.create(:user)
+    end
+
+    def http_request(user_attrs = {})
+      put :update, :id => @user.id, :user => user_attrs
+    end
+
+    describe "with valid attributes" do
+      it "updates the user" do
+        http_request :name => "some new name"
+        assigns[:user].name.should == "some new name"
+      end
+
+      it "sets flash[:success]" do
+        http_request
+        flash[:success].should_not be_blank
+      end
+
+      it "redirects to the edit page" do
+        http_request
+        response.should redirect_to(edit_user_path(@user))
+      end
+    end
+
+    describe "with invalid attributes" do
+      it "does not set flash[:success]" do
+        http_request :login => ''
+        flash[:success].should be_blank
+      end
+
+      it "re-renders the edit template" do
+        http_request :login => ''
+        response.should render_template('edit')
+      end
+    end
+  end
   
 end
