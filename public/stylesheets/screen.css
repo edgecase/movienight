@@ -1,7 +1,9 @@
+@import "/stylesheets/login.css";
 @import "/stylesheets/navigation.css";
 @import "/stylesheets/forms.css";
 @import "/stylesheets/sidebar.css";
 @import "/stylesheets/voting.css";
+@import "/stylesheets/login.css";
 
 body {
   color: #fff;

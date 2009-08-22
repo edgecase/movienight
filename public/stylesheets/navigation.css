@@ -22,3 +22,7 @@ ul#navigation:hover li a {
   color: #fff;
   text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
 }
+
+body.login_or_signup ul#navigation {
+  display: none;
+}

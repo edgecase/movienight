@@ -45,7 +45,7 @@ form .field label a {
 form .field input,
 form .field textarea {
   border: 0;
-  padding: 7px 10px 7px 0;
+  padding: 7px 0 7px 10px;
   font-size: 20px;
   letter-spacing: -0.05em;
   background: #aca7ae;
@@ -162,6 +162,7 @@ form #bringing_guests input {
   float: left;
   width: 1.25em;
   margin-right: 12px;
+  padding-right: 10px;
   text-align: center;
 }
 
@@ -194,3 +195,29 @@ form .field.radio.saved_location span {
   top: -7px;
 }
 
+#new_location .field {
+  float: left;
+  width: 49%;
+  margin-bottom: 10px;
+}
+
+#new_location .field input {
+  width: 95%;
+}
+
+#new_location .submit {
+  clear: both;
+  padding-top: 10px;
+}
+
+#new_location .submit a {
+  padding: 7px 15px 5px 15px;
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+  text-shadow: -1px -1px 1px rgba(0,0,0, 0.7);
+  cursor: pointer;
+  background: #26123a url(/images/button_background.png) repeat-x;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+}

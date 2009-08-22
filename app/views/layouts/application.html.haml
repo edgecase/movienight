@@ -9,7 +9,8 @@
     = javascript_include_tag 'jquery.always', 'application'
     = yield :head
   
-  %body{ :class => "#{params[:controller]} #{params[:action]}" }
-    = render 'shared/header'
-    = flash_div :success, :error, :notice
-    = yield
+  %body{ :class => body_classes }
+    #container
+      = render 'shared/header'
+      = flash_div :success, :error, :notice
+      = yield

@@ -1,4 +1,4 @@
-%h1 Sign up as a new user
+%h1 Sign up
 -@user.password = @user.password_confirmation = nil
 
 =error_messages_for :user
@@ -7,5 +7,5 @@
 
   = render 'form', :f => f
 
-  %p
+  .submit
     = submit_tag "Sign up"
