@@ -73,6 +73,11 @@ class NightsController < ApplicationController
     redirect_to night_path(@night)
   end
 
+  def title_search
+    params[:movie_title]
+    render :layout => false 
+  end
+
   private
   def logged_in_or_invited?
     if !logged_in?

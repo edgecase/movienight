@@ -12,7 +12,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :sessions
 
   map.resource :schedule
-  map.resources :nights, :member => { :add_invitations => :get, :send_invitations => :post, :complete_rsvp => :put }
+  map.resources :nights, :member => { :add_invitations => :get, :send_invitations => :post, :complete_rsvp => :put },
+                         :collection => { :title_search => :get }
 
   map.nonmember_rsvp_night "/nights/:id/nonmember_rsvp/:access_hash", 
                            :controller => 'nights', 

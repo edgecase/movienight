@@ -13,11 +13,15 @@ $(function() {
   });
 
   $('.movie input').blur(function() {
-    var results = $(this).nextAll('span.results');
+    var title_input = $(this)
+    var results = title_input.nextAll('span.results');
     // TODO: Make this populate via some ajax response
-    if ($(this).val())
-      results.html('<a href="#" class="results">Some results found!</a>');
-    else
+    if (title_input.val()) {
+      var search_link = $(this).nextAll('a.search');
+      $.get(search_link.attr('href'), { movie_title: title_input.val() }, function(html) {
+        results.html(html);
+      });
+    } else
       results.html('');
   });
   
