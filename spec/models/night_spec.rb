@@ -23,14 +23,6 @@ describe Night do
       proc { @night.send_invitations nil }.should_not raise_error
     end
 
-    describe "when emails have associated user accounts" do
-      it "sends the registered member invite email" do
-        Notifier.should_receive(:deliver_registered_member_invitation).with(@user1, @night)
-        Notifier.should_receive(:deliver_registered_member_invitation).with(@user2, @night)
-        @night.send_invitations 'user1@example.com,user2@example.com'
-      end
-    end
-
     describe "when emails do not have associated user accounts" do
       before do
         Notifier.stub! :deliver_nonmember_invitation

@@ -17,7 +17,7 @@ class Night < ActiveRecord::Base
     return unless emails
 
     emails.split(/[\s;,]+/).each do |email|
-      invite(email)
+      invite(email.strip)
     end
   end
 
@@ -28,11 +28,9 @@ class Night < ActiveRecord::Base
   private
 
   def invite(email)
-    user = User.find_by_email(email)
-    if user
-      Notifier.deliver_registered_member_invitation user, self
-    else
-      invitee = invitees.create! :email => email
+    user = User.find(:first, :conditions => ["LOWER(email)=?", email.downcase.strip])
+    invitee = invitees.new :email => email, :invited_user => user
+    if invitee.save
       Notifier.deliver_nonmember_invitation invitee, self
     end
   end
