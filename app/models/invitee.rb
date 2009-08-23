@@ -12,7 +12,11 @@ class Invitee < ActiveRecord::Base
 
   attr_protected :access_hash
 
-  named_scope :are_attending, { :conditions => {:attending => true} }
+  named_scope :are_attending, { :conditions => { :attending => true } }
+  named_scope :awaiting_reply, { :conditions => { :attending => nil } }
+  named_scope :not_attending, { :conditions => { :attending => false } }
+
+  delegate :location_name, :human_curtain_date, :human_curtain_time, :host_name, :to => :night
 
   private
 

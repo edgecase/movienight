@@ -1,5 +1,6 @@
 class SchedulesController < ApplicationController
   def show
-    @nights = Night.all
+    @accepted_invitations = current_user.invitations.accepted
+    @pending_invitations = current_user.invitations.pending
   end
 end

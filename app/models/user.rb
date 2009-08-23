@@ -23,6 +23,20 @@ class User < ActiveRecord::Base
   has_many :friends, :class_name => 'User', :through => :friendships
   has_many :hosted_nights, :class_name => 'Night', :foreign_key => :host_id
 
+  has_many :invitations, :class_name => 'Invitee', :foreign_key => :invited_user_id do
+    def accepted
+      self.are_attending
+    end
+
+    def pending
+      self.awaiting_reply
+    end
+
+    def rejected
+      self.not_attending
+    end
+  end
+
   attr_accessible :login, :email, :name, :password, :password_confirmation
 
   def to_s

@@ -14,6 +14,7 @@ class Night < ActiveRecord::Base
   before_create :generate_invitee_salt
 
   delegate :name, :to => :location, :prefix => true
+  delegate :name, :to => :host,     :prefix => true
 
   def human_curtain_date
     curtain_date.strftime("%B %d")
