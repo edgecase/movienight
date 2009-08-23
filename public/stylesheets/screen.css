@@ -41,6 +41,10 @@ em {
   margin-bottom: 1em;
 }
 
+#main_content span.you {
+  color: #f55;
+}
+
 #main_content h1.scheduled_night a {
   color: #fff;
   text-decoration: none;

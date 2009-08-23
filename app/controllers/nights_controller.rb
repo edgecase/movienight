@@ -9,6 +9,9 @@ class NightsController < ApplicationController
   def show
     @night = Night.find(params[:id])
     redirect_to login_path and return unless logged_in_or_invited?
+    if logged_in?
+      @invitee = current_user.invitations.pending.find_by_night_id(@night)
+    end
   end
 
   def new
