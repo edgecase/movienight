@@ -3,8 +3,8 @@
 
 - form_tag send_invitations_night_path(@night) do
   %p
-    %label{ :for => 'night[invitation_emails]' }
+    %label{ :for => 'invitation_emails' }
       Email addresses:
-    = text_area_tag 'night[invitation_emails]'
+    = text_area_tag :invitation_emails
 
   = submit_tag "Send Invites!"

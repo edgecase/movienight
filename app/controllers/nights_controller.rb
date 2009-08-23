@@ -79,7 +79,7 @@ class NightsController < ApplicationController
 
   def send_invitations
     @night = current_user.hosted_nights.find(params[:id])
-    @night.update_attributes(params[:night])
+    @night.send_invitations params[:invitation_emails]
     flash[:success] = "Invitations sent."
     redirect_to @night
   end
@@ -91,5 +91,7 @@ class NightsController < ApplicationController
 
   def complete_rsvp
     @night = Night.find(params[:id])
+    @invitee = @night.find_invitee params[:access_hash]
+    @invitee.update_attributes(:attending => params[:attending])
   end
 end

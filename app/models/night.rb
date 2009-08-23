@@ -9,9 +9,13 @@ class Night < ActiveRecord::Base
   validates_presence_of :curtain_date, :curtain_time
   validates_presence_of :host, :location
 
+  attr_protected :invitee_salt
+
   before_create :generate_invitee_salt
 
-  def invitation_emails=(emails)
+  def send_invitations(emails)
+    return unless emails
+
     emails.split(/[\s;,]+/).each do |email|
       invite(email)
     end

@@ -12,18 +12,22 @@ describe Night do
     night.invitee_salt.should_not be_blank
   end
 
-  describe "#invitation_emails" do
+  describe "#send_invitations" do
     before do
       @user1 = Factory(:user, :email => "user1@example.com")
       @user2 = Factory(:user, :login => "user2", :email => "user2@example.com")
       @night = Factory(:night)
     end
 
+    it "does not blow up when passed nil" do
+      proc { @night.send_invitations nil }.should_not raise_error
+    end
+
     describe "when emails have associated user accounts" do
       it "sends the registered member invite email" do
         Notifier.should_receive(:deliver_registered_member_invitation).with(@user1, @night)
         Notifier.should_receive(:deliver_registered_member_invitation).with(@user2, @night)
-        @night.invitation_emails = 'user1@example.com,user2@example.com'
+        @night.send_invitations 'user1@example.com,user2@example.com'
       end
     end
 
@@ -33,13 +37,13 @@ describe Night do
       end
 
       it "creates invitees for each email" do
-        @night.invitation_emails = "nonreg1@foobars.com; nonreg2@goober.com"
+        @night.send_invitations "nonreg1@foobars.com; nonreg2@goober.com"
         @night.invitees.count.should == 2
       end
 
       it "sends the non-member invitation" do
         Notifier.should_receive(:deliver_nonmember_invitation).twice
-        @night.invitation_emails = "nonreg1@foobars.com; nonreg2@goober.com"
+        @night.send_invitations "nonreg1@foobars.com; nonreg2@goober.com"
       end
     end
   end

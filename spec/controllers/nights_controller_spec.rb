@@ -196,21 +196,87 @@ describe NightsController do
     end
   end
 
-  describe "GET send_invitations" do
+  describe "POST send_invitations" do
     it_should_behave_like "an action that requires login"
 
     before do
       @night = Factory.create(:night, :host => @currently_logged_in_user)
     end
 
-    def http_request
-      get :send_invitations, :id => @night.id
+    def http_request(emails = nil)
+      post :send_invitations, :id => @night.id, :invitation_emails => emails
     end
 
     it "finds the night" do
       http_request
       assigns[:night].should == @night
     end
+
+    it "sends invitations" do
+      http_request "email@example.com, email2@foobar.com"
+      @night.invitees.count.should == 2
+    end
+
+    it "sets flash[:success]" do
+      http_request
+      flash[:success].should_not be_blank
+    end
+
+    it "redirects to the night show page" do
+      http_request
+      response.should redirect_to(night_path(@night))
+    end
   end
 
+  describe "GET /nights/:id/nonmember_rsvp/:access_hash" do
+    before do
+      @night = Factory(:night)
+      @night.send_invitations "foo@bar.com"
+      @invitee = @night.invitees.first
+    end
+
+    def http_request(access_hash = @invitee.access_hash)
+      get :nonmember_rsvp, :id => @night.id, :access_hash => access_hash
+    end
+
+    it "finds the night" do
+      http_request
+      assigns[:night].should == @night
+    end
+
+    it "attempts to find an invitee" do
+      http_request
+      assigns[:invitee].should == @invitee
+      http_request "notahash"
+      assigns[:invitee].should be_nil
+    end
+  end
+
+  describe "PUT /nights/:id/complete_rsvp" do
+    before do
+      @night = Factory(:night)
+      @night.send_invitations "foo@bar.com"
+      @invitee = @night.invitees.first
+    end
+
+    def http_request(attending = nil)
+      put :complete_rsvp, :id => @night.id, :access_hash => @invitee.access_hash, :attending => attending
+    end
+
+    it "finds the night" do
+      http_request
+      assigns[:night].should == @night
+    end
+
+    it "updates the invitee" do
+      @invitee.attending.should be_nil
+      http_request 'true'
+      @invitee.reload.attending.should be_true
+    end
+
+    it "renders the complete_rsvp template" do
+      http_request
+      response.should render_template("complete_rsvp")
+    end
+  end
 end
