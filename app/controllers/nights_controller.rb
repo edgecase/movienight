@@ -7,8 +7,8 @@ class NightsController < ApplicationController
   end
 
   def show
-    redirect_to login_path and return unless logged_in_or_invited?
     @night = Night.find(params[:id])
+    redirect_to login_path and return unless logged_in_or_invited?
   end
 
   def new
