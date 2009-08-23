@@ -5,6 +5,8 @@ class Invitee < ActiveRecord::Base
   belongs_to :night
   belongs_to :invited_user, :class_name => "User"
 
+  has_many :votes
+
   validates_presence_of :night, :email
   validates_uniqueness_of :night_id, :scope => [:email]
 

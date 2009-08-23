@@ -73,11 +73,12 @@
       = @night.human_curtain_time
   %p#time_info
     -# Doors open at 8:00pm &ndash; Movie start at 8:30pm
-  - if @night.voteable_movies
+
+  - unless @night.voteable_movies.empty?
     #voting
       %h2
         Vote:
-      - false and @night.voteable_movies.each do |movie|
+      - @night.voteable_movies.each do |movie|
         .movie
           %h3
             = h movie.title
