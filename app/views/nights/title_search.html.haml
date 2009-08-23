@@ -1,6 +1,13 @@
 %a.results{ :href => '#' }
-  Results for 
-  = params[:movie_title]
+  = "#{@movies.size} results found"
 
-.full_results{ :style => "display: none" }
-  Results go here
+.full_results
+  - @movies.each do |movie|
+    %ul
+      %li
+        = h movie.title
+      %li
+        = h movie.release
+      %li
+        = image_tag poster_url(movie, :thumb)
+

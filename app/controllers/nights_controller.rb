@@ -74,7 +74,7 @@ class NightsController < ApplicationController
   end
 
   def title_search
-    params[:movie_title]
+    @movies = TheMovieDatabase.search_titles(params[:movie_title])
     render :layout => false 
   end
 

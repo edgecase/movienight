@@ -139,6 +139,7 @@ form .field.movie a.search {
 form .field.movie a.results {
   position: absolute;
   top: 0;
+  left: 420px;
   right: 0;
   color: #fff;
   line-height: 40px;

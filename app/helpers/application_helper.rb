@@ -15,4 +15,8 @@ module ApplicationHelper
     classes << ' login_or_signup' if ((params[:controller] == 'sessions' && params[:action] == 'new') || (params[:controller] == 'users' && params[:action] == 'new'))
     classes
   end
+
+  def poster_url(movie, size)
+    movie.poster_url(size) || ''
+  end
 end

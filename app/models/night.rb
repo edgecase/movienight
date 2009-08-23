@@ -18,6 +18,7 @@ class Night < ActiveRecord::Base
   delegate :name, :to => :location, :prefix => true
   delegate :human_name, :to => :location, :prefix => true
   delegate :name, :to => :host,     :prefix => true
+  delegate :title, :to => :movie, :prefix => true, :allow_nil => true
 
   def human_curtain_date
     curtain_date.strftime("%B ") +
