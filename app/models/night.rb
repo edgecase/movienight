@@ -6,7 +6,7 @@ class Night < ActiveRecord::Base
   has_many :invitees
 
   belongs_to  :movie
-  has_many :voteable_movies, :class_name => 'Movie'
+  has_many :voteable_movies
 
   validates_presence_of :curtain_date, :curtain_time
   validates_presence_of :host, :location
