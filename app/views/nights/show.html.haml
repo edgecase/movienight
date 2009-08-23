@@ -68,10 +68,9 @@
       class="movie.undecided" when still voting
     %span.movie
       Ghostbusters at Ehren's
-    = @night.curtain_date.strftime("%B")
-    = @night.curtain_date.day.ordinalize
+    = @night.human_curtain_date
     %span.time
-      = @night.curtain_time.to_s(:time).downcase.sub(/^0/, '')
+      = @night.human_curtain_time
   %p#time_info
     -# Doors open at 8:00pm &ndash; Movie start at 8:30pm
   #voting

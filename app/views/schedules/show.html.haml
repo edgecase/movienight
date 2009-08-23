@@ -16,7 +16,7 @@
 #main_content
   - @accepted_invitations.each do |invitation|
     %h1.scheduled_night
-      %a{ :href => '#' }
+      %a{ :href => night_path(invitation.night) }
         %span.movie 
           Some Movie at
           = h invitation.location_name

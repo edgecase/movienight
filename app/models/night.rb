@@ -17,11 +17,12 @@ class Night < ActiveRecord::Base
   delegate :name, :to => :host,     :prefix => true
 
   def human_curtain_date
-    curtain_date.strftime("%B %d")
+    curtain_date.strftime("%B ") +
+    curtain_date.day.ordinalize
   end
 
   def human_curtain_time
-    curtain_time.strftime("%I:%M%p")
+    curtain_time.to_s(:time).downcase.sub(/^0/, '')
   end
 
   def send_invitations(emails)
