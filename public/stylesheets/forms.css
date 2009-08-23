@@ -128,7 +128,6 @@ form #drinks_and_snacks {
 form .field.beer,
 form .field.snacks {
   height: 27px;
-  padding-left: 62px;
   line-height: 27px;
 }
 
@@ -142,6 +141,17 @@ form .field.snacks input {
   position: absolute;
   top: 1px;
   left: 0;
+}
+
+form .field.beer label,
+form .field.snacks label {
+  display: block;
+  height: 27px;
+}
+
+form .field.beer label span,
+form .field.snacks label span {
+  margin-left: 62px;
 }
 
 form .field.beer {

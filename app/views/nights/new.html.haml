@@ -85,13 +85,13 @@
   %fieldset#additional_info
     #drinks_and_snacks.half
       .field.radio.beer
-        = form.check_box :bring_drinks
-        %label
-          should guests bring drinks?
+        %label{ :for => 'night_bring_drinks' }
+          = form.check_box :bring_drinks
+          <span>should guests bring drinks?</span>
       .field.radio.snacks
-        = form.check_box :bring_snacks
-        %label
-          should guests bring snackage?
+        %label{ :for => 'night_bring_snacks' }
+          = form.check_box :bring_snacks
+          <span>should guests bring snackage?</span>
     .half.right
       .field
         %label
