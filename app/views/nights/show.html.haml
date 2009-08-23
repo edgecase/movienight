@@ -1,13 +1,20 @@
 #sidebar
   /
     HEADING when user needs to rsvp
-  .heading.can_you_make_it
-    %span.title
-      Can you make it?
-    %a.rsvp.yes{ :href => "#" }
-      yes
-    %a.rsvp.no{ :href => "#" }
-      no
+  - if @invitee
+    - form_tag complete_rsvp_night_path(@night), :method => :put, :id => "rsvp_yes" do
+      = hidden_field_tag :access_hash, params[:access_hash]
+      = hidden_field_tag :attending, true
+    - form_tag complete_rsvp_night_path(@night), :method => :put, :id => "rsvp_no" do
+      = hidden_field_tag :access_hash, params[:access_hash]
+      = hidden_field_tag :attending, false
+    .heading.can_you_make_it
+      %span.title
+        Can you make it?
+      %a.rsvp.yes{ :href => "#", :onclick => "$('#rsvp_yes').submit();" }
+        yes
+      %a.rsvp.no{ :href => "#", :onclick => "$('#rsvp_no').submit();" }
+        no
   /
     HEADING  when user has rsvp-ed YES
     <div class="heading see_you_there">
@@ -23,8 +30,9 @@
     <a href="#" class="rsvp no">no</a>
     </div>
   .sidebar_content
-    %p.more
-      = link_to "Invite people", add_invitations_night_path(@night)
+    - if logged_in? and current_user = @night.host
+      %p.more
+        = link_to "Invite people", add_invitations_night_path(@night)
     %p.more
       %a{ :href => "http://maps.google.com?q=#{CGI.escape(@night.location.to_s)}", :rel => "external" }
         = @night.location.user.name + "'s"
@@ -43,14 +51,13 @@
       %p= @night.notes
       %br
     %h1
-      5 people attending
+      - attending = @night.invitees.are_attending
+      = pluralize attending.count, "person"
+      attending in addition to host
     %ul
-      %li
-        Ehren Murdick +1
-      %li
-        Jon Distad
-      %li
-        Matt Yoho +1
+      - attending.each do |inv|
+        %li
+          = inv.invited_user || inv.email
   /
     \/.sidebar_content
 /

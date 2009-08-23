@@ -276,7 +276,7 @@ describe NightsController do
 
     it "renders the complete_rsvp template" do
       http_request
-      response.should render_template("complete_rsvp")
+      response.should redirect_to(night_url(@night))
     end
   end
 end
