@@ -120,7 +120,7 @@
 }
 
 .sidebar_content p.more a:hover {
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#141414), to(#000));
+  background: url(/images/sidebar_link_background.png) repeat-x;
 }
 
 .sidebar_content p.more a img {
