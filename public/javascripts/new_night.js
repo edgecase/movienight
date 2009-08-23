@@ -11,6 +11,15 @@ $(function() {
       return false;
     }
   });
+
+  $('.movie input').blur(function() {
+    var results = $(this).nextAll('span.results');
+    // TODO: Make this populate via some ajax response
+    if ($(this).val())
+      results.html('<a href="#" class="results">Some results found!</a>');
+    else
+      results.html('');
+  });
   
 
   $('#add_address').click(function() {

@@ -117,12 +117,23 @@ form .field.movie input {
 form .field.movie a.remove {
   position: absolute;
   top: 10px;
-  left: 385px;
+  left: 395px;
   display: block;
   width: 18px;
   height: 18px;
   text-indent: -999em;
-  background: url(/images/x_red.png);
+  background: url(/images/x_red.png) no-repeat;
+}
+
+form .field.movie a.search {
+  position: absolute;
+  top: 11px;
+  left: 375px;
+  display: block;
+  width: 18px;
+  height: 18px;
+  text-indent: -999em;
+  background: url(/images/zoom_small.png) no-repeat;
 }
 
 form .field.movie a.results {

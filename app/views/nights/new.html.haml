@@ -70,30 +70,25 @@
         %a{ :href => "#" }
           add another movie
     .half
-      .field.movie
-        %input{ :type => "text" }
-        %a{ :href => "#", :class => 'remove' }
-          remove
-      .field.movie
-        %input{ :type => "text" }
-        %a{ :href => "#", :class => 'remove' }
-          remove
-        %a{ :href => '#', :class => 'results' }
-          3 results found
-      .field.movie
-        %input{ :type => "text" }
-        %a{ :href => "#", :class => 'remove' }
-          remove
+      - 3.times do
+        .field.movie
+          %input{ :type => "text" }
+          %a{ :href => "#", :class => 'remove' }
+            remove
+          %a{ :href => '#', :class => 'search', :onclick => "return false" }
+            search
+          %span.results
+
   %fieldset#additional_info
     #drinks_and_snacks.half
       .field.radio.beer
         %label{ :for => 'night_bring_drinks' }
           = form.check_box :bring_drinks
-          <span>should guests bring drinks?</span>
+          %span should guests bring drinks?
       .field.radio.snacks
         %label{ :for => 'night_bring_snacks' }
           = form.check_box :bring_snacks
-          <span>should guests bring snackage?</span>
+          %span should guests bring snackage?
     .half.right
       .field
         %label
