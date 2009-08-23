@@ -4,29 +4,14 @@ class NightsController < ApplicationController
 
   def index
     @nights = Night.all
-
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => @nights }
-    end
   end
 
   def show
     @night = Night.find(params[:id])
-
-    respond_to do |format|
-      format.html 
-      format.xml  { render :xml => @night }
-    end
   end
 
   def new
     @night = current_user.hosted_nights.build
-
-    respond_to do |format|
-      format.html 
-      format.xml  { render :xml => @night }
-    end
   end
 
   def edit
@@ -36,30 +21,22 @@ class NightsController < ApplicationController
   def create
     @night = current_user.hosted_nights.build(params[:night])
 
-    respond_to do |format|
-      if @night.save
-        flash[:success] = 'Night was successfully created.'
-        format.html { redirect_to(@night) }
-        format.xml  { render :xml => @night, :status => :created, :location => @night }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @night.errors, :status => :unprocessable_entity }
-      end
+    if @night.save
+      flash[:success] = 'Night was successfully created.'
+      redirect_to(@night)
+    else
+      render :action => "new"
     end
   end
 
   def update
     @night = current_user.hosted_nights.find(params[:id])
 
-    respond_to do |format|
-      if @night.update_attributes(params[:night])
-        flash[:notice] = 'Night was successfully updated.'
-        format.html { redirect_to(@night) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @night.errors, :status => :unprocessable_entity }
-      end
+    if @night.update_attributes(params[:night])
+      flash[:notice] = 'Night was successfully updated.'
+      redirect_to(@night)
+    else
+      render :action => "edit"
     end
   end
 
@@ -67,10 +44,7 @@ class NightsController < ApplicationController
     @night = current_user.hosted_nights.find(params[:id])
     @night.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(nights_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to(nights_url)
   end
 
   def add_invitations
