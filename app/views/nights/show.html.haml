@@ -24,6 +24,8 @@
     </div>
   .sidebar_content
     %p.more
+      = link_to "Invite people", add_invitations_night_path(@night)
+    %p.more
       %a{ :href => "http://maps.google.com?q=#{CGI.escape(@night.location.to_s)}", :rel => "external" }
         = @night.location.user.name + "'s"
         = @night.location.name
