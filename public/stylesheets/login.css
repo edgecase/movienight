@@ -12,10 +12,12 @@ body.login_or_signup h1 {
 
 body.login_or_signup form .field {
   clear: both;
+  zoom: 1;
 }
 
 body.login_or_signup form .field label,
 body.users.edit form .field label {
+  zoom: 1;
   float: left;
   width: 100px;
   padding-right: 12px;
