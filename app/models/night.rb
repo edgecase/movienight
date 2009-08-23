@@ -20,6 +20,8 @@ class Night < ActiveRecord::Base
   delegate :name, :to => :host,     :prefix => true
   delegate :title, :to => :movie, :prefix => true, :allow_nil => true
 
+  named_scope :sorted, { :order => "curtain_date ASC" }
+
   def human_curtain_date
     curtain_date.strftime("%B ") +
     curtain_date.day.ordinalize

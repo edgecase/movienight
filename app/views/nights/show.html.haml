@@ -3,10 +3,10 @@
     HEADING when user needs to rsvp
   - if @invitee
     - form_tag complete_rsvp_night_path(@night), :method => :put, :id => "rsvp_yes" do
-      = hidden_field_tag :access_hash, params[:access_hash]
+      = hidden_field_tag :access_hash, params[:access_hash] || @invitee.access_hash
       = hidden_field_tag :attending, true
     - form_tag complete_rsvp_night_path(@night), :method => :put, :id => "rsvp_no" do
-      = hidden_field_tag :access_hash, params[:access_hash]
+      = hidden_field_tag :access_hash, params[:access_hash] || @invitee.access_hash
       = hidden_field_tag :attending, false
     .heading.can_you_make_it
       %span.title
@@ -67,7 +67,9 @@
     /
       class="movie.undecided" when still voting
     %span.movie
-      = "#{h @night.movie_title || "NO SELECTION"} at #{@night.location_human_name}"
+      = "#{h @night.movie_title || "NO SELECTION"} at"
+      %span{ :class => current_user_is_host ? "you" : "" }
+        = @night.location_human_name
     = @night.human_curtain_date
     %span.time
       = @night.human_curtain_time

@@ -19,4 +19,10 @@ module ApplicationHelper
   def poster_url(movie, size)
     movie.poster_url(size) || ''
   end
+
+  def current_user_is_host
+    return unless logged_in?
+    return unless @night
+    @night.host == current_user
+  end
 end
