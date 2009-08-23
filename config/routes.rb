@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.root :controller => 'schedules', :action => 'index'
+  map.root :controller => 'schedules', :action => 'show'
 
   map.logout   '/logout',   :controller => 'sessions', :action => 'destroy'
   map.login    '/login',    :controller => 'sessions', :action => 'new'
@@ -11,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :sessions
 
-  map.resources :schedules
+  map.resource :schedule
   map.resources :nights, :member => { :add_invitations => :get, :send_invitations => :post, :complete_rsvp => :put }
 
   map.nonmember_rsvp_night "/nights/:id/nonmember_rsvp/:access_hash", 

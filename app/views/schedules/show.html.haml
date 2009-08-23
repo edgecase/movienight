@@ -1,0 +1,34 @@
+#sidebar
+  .heading
+    %span.title Invitations
+
+  .sidebar_content.invitations
+    %p.more
+      %a{ :href => "http://google.com", :rel => "external" }
+        %span.label from:
+        Jon
+        &nbsp;
+        %span.label for:
+        October 24th
+        = image_tag "images/zoom_small.png", :alt => ''
+    %p.more
+      %a{ :href => "http://google.com", :rel => "external" }
+        %span.label from:
+        Matt
+        &nbsp;
+        %span.label for:
+        September 24th
+        = image_tag "images/zoom_small.png", :alt => ''
+
+#main_content
+  %h1.scheduled_night
+    %a{ :href => '#' }
+      %span.movie Ghostbusters at Ehren's
+      September 19th 
+      %span.time 8:00pm
+  %h1.scheduled_night
+    %a{ :href => '#' }
+      %span.movie Ghostbusters at Ehren's
+      September 19th 
+      %span.time 8:00pm
+
