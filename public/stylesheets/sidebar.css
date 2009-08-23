@@ -98,6 +98,10 @@
   left: -25px;
 }
 
+.sidebar_content.invitations p.more {
+  margin-bottom: 0;
+}
+
 .sidebar_content p.more a {
   position: relative;
   display: block;
@@ -109,8 +113,13 @@
   text-decoration: none;
 }
 
+.sidebar_content p.more a span.label {
+  color: #9f9f9f;
+  font-size: 12px;
+  font-weight: normal;
+}
+
 .sidebar_content p.more a:hover {
-  background: #111;
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#141414), to(#000));
 }
 

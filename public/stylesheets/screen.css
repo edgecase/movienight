@@ -37,6 +37,21 @@ em {
   font-size: 42px;
 }
 
+#main_content h1.scheduled_night {
+  margin-bottom: 1em;
+}
+
+#main_content h1.scheduled_night a {
+  color: #fff;
+  text-decoration: none;
+  -webkit-transition: all 0.25s linear;
+  text-shadow: 0px 0px 1px rgba(255, 255, 255, 0.0);
+}
+
+#main_content h1.scheduled_night a:hover {
+  text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
+}
+
 #main_content h1 span.movie {
   display: block;
   margin-bottom: 3px;
