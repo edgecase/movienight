@@ -16,7 +16,7 @@ class Invitee < ActiveRecord::Base
   named_scope :awaiting_reply, { :conditions => { :attending => nil } }
   named_scope :not_attending, { :conditions => { :attending => false } }
 
-  delegate :location_name, :human_curtain_date, :human_curtain_time, :host_name, :to => :night
+  delegate :location_name, :location_human_name, :human_curtain_date, :human_curtain_time, :host_name, :to => :night
 
   private
 

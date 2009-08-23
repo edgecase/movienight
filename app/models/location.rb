@@ -8,4 +8,8 @@ class Location < ActiveRecord::Base
     city_state = [city, state].compact.join(" ")
     [street, city_state].compact.join(", ")
   end
+
+  def human_name
+    "#{user.name}'s #{name}"
+  end
 end

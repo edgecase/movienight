@@ -30,7 +30,7 @@
     <a href="#" class="rsvp no">no</a>
     </div>
   .sidebar_content
-    - if logged_in? and current_user = @night.host
+    - if logged_in? and current_user == @night.host
       %p.more
         = link_to "Invite people", add_invitations_night_path(@night)
     %p.more
@@ -67,7 +67,8 @@
     /
       class="movie.undecided" when still voting
     %span.movie
-      Ghostbusters at Ehren's
+      Ghostbusters at 
+      = @night.location_human_name
     = @night.human_curtain_date
     %span.time
       = @night.human_curtain_time
