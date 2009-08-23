@@ -106,19 +106,32 @@ form#new_night .half.right {
   margin-left: 19px;
 }
 
-form .field.movie input {
-  width: 450px;
+form .field.movie {
+  width: 580px;
 }
 
-form .field.movie a {
+form .field.movie input {
+  width: 360px;
+}
+
+form .field.movie a.remove {
   position: absolute;
   top: 10px;
-  left: 475px;
+  left: 385px;
   display: block;
   width: 18px;
   height: 18px;
   text-indent: -999em;
   background: url(/images/x_red.png);
+}
+
+form .field.movie a.results {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #fff;
+  line-height: 40px;
+  text-align: right;
 }
 
 form #drinks_and_snacks {
