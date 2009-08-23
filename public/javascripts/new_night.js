@@ -5,6 +5,14 @@ $(function() {
     $(target).show();
   });
 
+  $('#new_location input').keydown(function(e) {
+    if(e.keyCode == 13) {
+      $("#add_address").click();
+      return false;
+    }
+  });
+  
+
   $('#add_address').click(function() {
     var data = $('#new_location input').serialize();
 
