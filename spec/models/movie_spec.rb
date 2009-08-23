@@ -9,7 +9,7 @@ describe Movie do
       :tmdb_id => "value for tmdb_id",
       :imdb_id => "value for imdb_id",
       :release => Time.now,
-      :posters => "value for posters"
+      :posters => ["value for posters"]
     }
   end
 
