@@ -10,7 +10,7 @@
         &nbsp;
         %span.label for:
         October 24th
-        = image_tag "images/zoom_small.png", :alt => ''
+        = image_tag "zoom_small.png", :alt => ''
     %p.more
       %a{ :href => "http://google.com", :rel => "external" }
         %span.label from:
@@ -18,17 +18,16 @@
         &nbsp;
         %span.label for:
         September 24th
-        = image_tag "images/zoom_small.png", :alt => ''
+        = image_tag "zoom_small.png", :alt => ''
 
 #main_content
-  %h1.scheduled_night
-    %a{ :href => '#' }
-      %span.movie Ghostbusters at Ehren's
-      September 19th 
-      %span.time 8:00pm
-  %h1.scheduled_night
-    %a{ :href => '#' }
-      %span.movie Ghostbusters at Ehren's
-      September 19th 
-      %span.time 8:00pm
-
+  - @nights.each do |night|
+    %h1.scheduled_night
+      %a{ :href => '#' }
+        %span.movie 
+          Some Movie at
+          = h night.location_name
+        = night.human_curtain_date
+        %span.time 
+          = night.human_curtain_time
+          

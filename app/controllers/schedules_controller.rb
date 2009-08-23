@@ -1,4 +1,5 @@
 class SchedulesController < ApplicationController
-  def index
+  def show
+    @nights = Night.all
   end
 end

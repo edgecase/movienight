@@ -13,6 +13,16 @@ class Night < ActiveRecord::Base
 
   before_create :generate_invitee_salt
 
+  delegate :name, :to => :location, :prefix => true
+
+  def human_curtain_date
+    curtain_date.strftime("%B %d")
+  end
+
+  def human_curtain_time
+    curtain_time.strftime("%I:%M%p")
+  end
+
   def send_invitations(emails)
     return unless emails
 
