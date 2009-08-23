@@ -3,4 +3,9 @@ class Location < ActiveRecord::Base
   has_many :nights
 
   validates_presence_of :street, :name
+
+  def to_s
+    city_state = [city, state].compact.join(" ")
+    [street, city_state].compact.join(", ")
+  end
 end

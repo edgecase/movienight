@@ -1,5 +1,5 @@
 formats = {
-  :date => "%A %d/%m",
+  :date => "%B %d",
   :time => "%I:%M%p"
 }
 

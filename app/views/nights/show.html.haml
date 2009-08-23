@@ -1,16 +1,124 @@
-%p
-  %b When:
-  = h @night.curtain_date.try(:to_s, :date)
-
-%p
-  %b Where
-  = "#{h @night.location.name}:"
-  = h @night.location.street
-
-%p
-  %b Host:
-  = h @night.host.login
-
-= "#{link_to 'Invite people', add_invitations_night_path(@night)} |"
-= "#{link_to 'Edit', edit_night_path(@night)} |"
-= link_to 'Back', nights_path
+#sidebar
+  /
+    HEADING when user needs to rsvp
+  .heading.can_you_make_it
+    %span.title
+      Can you make it?
+    %a.rsvp.yes{ :href => "#" }
+      yes
+    %a.rsvp.no{ :href => "#" }
+      no
+  /
+    HEADING  when user has rsvp-ed YES
+    <div class="heading see_you_there">
+    <span class="title">See you there!</span>
+    <a href="#" class="rsvp yes">yes</a>
+    <a href="#" class="rsvp no">no</a>
+    </div>
+  /
+    HEADING  when user has rsvp-ed NO
+    <div class="heading maybe_next_time">
+    <span class="title">Maybe next time :(</span>
+    <a href="#" class="rsvp yes">yes</a>
+    <a href="#" class="rsvp no">no</a>
+    </div>
+  .sidebar_content
+    %p.more
+      %a{ :href => "http://maps.google.com?q=#{CGI.escape(@night.location.to_s)}", :rel => "external" }
+        = @night.location.user.name + "'s"
+        = @night.location.name
+        %img{ :src => "/images/zoom_small.png", :alt => "" }
+    - if @night.bring_drinks
+      %p.drinks_and_snacks.beer
+        Bring drinks!
+    - if @night.bring_snacks
+      %p.drinks_and_snacks.snacks
+        Bring snackage!
+    %br
+    - unless @night.notes.blank?
+      %h1
+        Notes
+      %p= @night.notes
+      %br
+    %h1
+      5 people attending
+    %ul
+      %li
+        Ehren Murdick +1
+      %li
+        Jon Distad
+      %li
+        Matt Yoho +1
+  /
+    \/.sidebar_content
+/
+  \/#sidebar
+#main_content
+  %h1
+    /
+      class="movie.undecided" when still voting
+    %span.movie
+      Ghostbusters at Ehren's
+    = @night.curtain_date.strftime("%B")
+    = @night.curtain_date.day.ordinalize
+    %span.time
+      = @night.curtain_time.to_s(:time).downcase.sub(/^0/, '')
+  %p#time_info
+    -# Doors open at 8:00pm &ndash; Movie start at 8:30pm
+  #voting
+    %h2
+      Vote:
+    .movie
+      %h3
+        2001: A Space Odyssey
+      %img.movie_image{ :src => "/images/example_movie_small.png", :alt => "" }
+      %p.more_info
+        %a{ :href => "http://wikipedia.org", :rel => "external" }
+          wikipedia
+        %a{ :href => "#", :rel => "external" }
+          movie database
+        %a{ :href => "#", :rel => "external" }
+          imdb
+      %a.vote_for_me.i_choose_you_pikachu{ :href => "#" }
+        vote
+      %span.vote_count
+        +2
+    /
+      \/.movie
+    .movie
+      %h3
+        A Clockwork Orange
+      %img.movie_image{ :src => "/images/example_movie_small.png", :alt => "" }
+      %p.more_info
+        %a{ :href => "http://wikipedia.org", :rel => "external" }
+          wikipedia
+        %a{ :href => "#", :rel => "external" }
+          movie database
+        %a{ :href => "#", :rel => "external" }
+          imdb
+      %a.vote_for_me{ :href => "#" }
+        vote
+      %span.vote_count
+        +1
+    /
+      \/.movie
+  /
+    \/#voting
+#footer
+  Brought to you by:
+  %a{ :href => "http://twitter.com/jondistad", :rel => "external" }
+    Jon Distad
+    %span
+      @jondistad
+  %a{ :href => "http://twitter.com/rubyprogrammer", :rel => "external" }
+    Ehren Murdick
+    %span
+      @rubyprogrammer
+  %a{ :href => "http://twitter.com/nummi", :rel => "external" }
+    Jerry Nummi
+    %span
+      @nummi
+  %a{ :href => "http://twitter.com/DigiMatt", :rel => "external" }
+    Matt Yoyo
+    %span
+      @DigiMatt

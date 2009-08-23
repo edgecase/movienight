@@ -41,12 +41,12 @@
         .field
           = location.label :street, "street address"
           = location.text_field :street
-        -# .field
-        -#   = location.label :city
-        -#   = location.text_field :city
-        -# .field
-        -#   = location.label :state
-        -#   = location.text_field :state, :size => 3
+        .field
+          = location.label :city
+          = location.text_field :city
+        .field
+          = location.label :state
+          = location.text_field :state, :size => 3
         .submit
           = link_to "save location", '#', :id => "add_address"
       
