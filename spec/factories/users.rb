@@ -13,3 +13,11 @@ Factory.define :random_user, :class => User do |u|
   u.password "123bobrules"
   u.password_confirmation "123bobrules"
 end
+
+Factory.define :current_user, :class => User do |u|
+  u.name "Current User"
+  u.login "current_user"
+  u.email "current.user@example.com"
+  u.password "curr3ntus3r"
+  u.password_confirmation "curr3ntus3r"
+end

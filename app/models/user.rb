@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   has_many :locations
   has_many :friendships
   has_many :friends, :class_name => 'User', :through => :friendships
+  has_many :hosted_nights, :class_name => 'Night', :foreign_key => :host_id
 
   attr_accessible :login, :email, :name, :password, :password_confirmation
 

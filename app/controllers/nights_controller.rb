@@ -1,4 +1,5 @@
 class NightsController < ApplicationController
+  skip_before_filter :login_required, :only => [:nonmember_rsvp, :complete_rsvp]
   before_filter :persist_host_info, :only => [:send_invitations]
 
   def index
@@ -20,7 +21,7 @@ class NightsController < ApplicationController
   end
 
   def new
-    @night = Night.new
+    @night = current_user.hosted_nights.build
 
     respond_to do |format|
       format.html 
@@ -29,12 +30,11 @@ class NightsController < ApplicationController
   end
 
   def edit
-    @night = Night.find(params[:id])
+    @night = current_user.hosted_nights.find(params[:id])
   end
 
   def create
-    @night = Night.new(params[:night])
-    @night.host = current_user
+    @night = current_user.hosted_nights.build(params[:night])
 
     respond_to do |format|
       if @night.save
@@ -49,7 +49,7 @@ class NightsController < ApplicationController
   end
 
   def update
-    @night = Night.find(params[:id])
+    @night = current_user.hosted_nights.find(params[:id])
 
     respond_to do |format|
       if @night.update_attributes(params[:night])
@@ -64,7 +64,7 @@ class NightsController < ApplicationController
   end
 
   def destroy
-    @night = Night.find(params[:id])
+    @night = current_user.hosted_nights.find(params[:id])
     @night.destroy
 
     respond_to do |format|
@@ -74,17 +74,24 @@ class NightsController < ApplicationController
   end
 
   def add_invitations
-    @night = Night.find(params[:id])
+    @night = current_user.hosted_nights.find(params[:id])
   end
 
   def send_invitations
-    @night = Night.find(params[:id])
-    @night.update_attributes(params[:night])
+    @night = current_user.hosted_nights.find(params[:id])
+    @night.send_invitations params[:invitation_emails]
     flash[:success] = "Invitations sent."
     redirect_to @night
   end
 
   def nonmember_rsvp
-    
+    @night = Night.find(params[:id])
+    @invitee = @night.find_invitee params[:access_hash]
+  end
+
+  def complete_rsvp
+    @night = Night.find(params[:id])
+    @invitee = @night.find_invitee params[:access_hash]
+    @invitee.update_attributes(:attending => params[:attending])
   end
 end

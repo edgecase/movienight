@@ -1,36 +1,38 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_controller_helper')
 
 describe NightsController do
-
-  def mock_night(stubs={})
-    @mock_night ||= mock_model(Night, stubs)
-  end
   
   describe "GET index" do
     it_should_behave_like "an action that requires login"
+
+    before do
+      @night = Factory.create(:night, :host => @currently_logged_in_user)
+    end
 
     def http_request
       get :index
     end
 
     it "assigns all nights as @nights" do
-      Night.stub!(:find).with(:all).and_return([mock_night])
       http_request
-      assigns[:nights].should == [mock_night]
+      assigns[:nights].should == [@night]
     end
   end
 
   describe "GET show" do
     it_should_behave_like "an action that requires login"
 
+    before do
+      @night = Factory.create(:night, :host => @currently_logged_in_user)
+    end
+
     def http_request
-      get :show, :id => "37"
+      get :show, :id => @night.id
     end
 
     it "assigns the requested night as @night" do
-      Night.stub!(:find).with("37").and_return(mock_night)
       http_request
-      assigns[:night].should equal(mock_night)
+      assigns[:night].should == @night
     end
   end
 
@@ -42,63 +44,66 @@ describe NightsController do
     end
 
     it "assigns a new night as @night" do
-      Night.stub!(:new).and_return(mock_night)
       http_request
-      assigns[:night].should equal(mock_night)
+      assigns[:night].should be_instance_of(Night)
+      assigns[:night].should be_new_record
     end
   end
 
   describe "GET edit" do
     it_should_behave_like "an action that requires login"
 
+    before do
+      @night = Factory.create(:night, :host => @currently_logged_in_user)
+    end
+
     def http_request
-      get :edit, :id => "37"
+      get :edit, :id => @night.id
     end
 
     it "assigns the requested night as @night" do
-      Night.stub!(:find).with("37").and_return(mock_night)
       http_request
-      assigns[:night].should equal(mock_night)
+      assigns[:night].should == @night
     end
   end
 
   describe "POST create" do
     it_should_behave_like "an action that requires login"
 
-    before do
-      @night = Factory(:night)
-      Night.stub!(:new).and_return(@night)
-    end
-
-    def http_request
-      post :create, :night => {}
+    def http_request(night_attrs = {})
+      post :create, :night => night_attrs
     end
 
     describe "with valid params" do
+      before do
+        http_request Factory.attributes_for(:night, :host => nil)
+      end
+
       it "assigns a newly created night as @night" do
-        post :create, :night => {:these => 'params'}
-        assigns[:night].should equal(@night)
+        assigns[:night].should be_instance_of(Night)
+        assigns[:night].should_not be_new_record
       end
 
       it "redirects to the created night" do
-        post :create, :night => {}
-        response.should redirect_to(night_url(@night))
+        response.should redirect_to(night_url(assigns[:night]))
       end
 
       it "makes the current_user the host" do
-        post :create, :night => {:these => 'params'}
-        @night.host.should == @currently_logged_in_user
+        assigns[:night].host.should == @currently_logged_in_user
       end
     end
     
     describe "with invalid params" do
+      before do
+        http_request
+      end
+
       it "assigns a newly created but unsaved night as @night" do
-        post :create, :night => {:these => 'params'}
+        assigns[:night].should be_instance_of(Night)
+        assigns[:night].should be_new_record
       end
 
       it "re-renders the 'new' template" do
-        @night.stub!(:save).and_return(false)
-        post :create, :night => {}
         response.should render_template('new')
       end
     end
@@ -109,46 +114,42 @@ describe NightsController do
     
     it_should_behave_like "an action that requires login"
 
-    def http_request
-      put :update, :id => 1, :night => {}
+    before do
+      @night = Factory(:night, :host => @currently_logged_in_user)
+    end
+
+    def http_request(night_attrs = {})
+      put :update, :id => @night.id, :night => night_attrs
     end
 
     describe "with valid params" do
       it "updates the requested night" do
-        Night.should_receive(:find).with("37").and_return(mock_night)
-        mock_night.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => "37", :night => {:these => 'params'}
+        @night.bring_drinks?.should be_false
+        http_request :bring_drinks => 'true'
+        @night.reload.bring_drinks?.should be_true
       end
 
       it "assigns the requested night as @night" do
-        Night.stub!(:find).and_return(mock_night(:update_attributes => true))
-        put :update, :id => "1"
-        assigns[:night].should equal(mock_night)
+        http_request
+        assigns[:night].should == @night
       end
 
       it "redirects to the night" do
-        Night.stub!(:find).and_return(mock_night(:update_attributes => true))
-        put :update, :id => "1"
-        response.should redirect_to(night_url(mock_night))
+        http_request
+        response.should redirect_to(night_path(@night))
       end
     end
     
     describe "with invalid params" do
-      it "updates the requested night" do
-        Night.should_receive(:find).with("37").and_return(mock_night)
-        mock_night.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => "37", :night => {:these => 'params'}
+      before do
+        http_request :location_id => nil
       end
 
       it "assigns the night as @night" do
-        Night.stub!(:find).and_return(mock_night(:update_attributes => false))
-        put :update, :id => "1"
-        assigns[:night].should equal(mock_night)
+        assigns[:night].should == @night
       end
 
       it "re-renders the 'edit' template" do
-        Night.stub!(:find).and_return(mock_night(:update_attributes => false))
-        put :update, :id => "1"
         response.should render_template('edit')
       end
     end
@@ -158,19 +159,22 @@ describe NightsController do
   describe "DELETE destroy" do
     it_should_behave_like "an action that requires login"
 
+    before do
+      @night = Factory(:night, :host => @currently_logged_in_user)
+    end
+
     def http_request
-      delete :destroy, :id => "37"
+      delete :destroy, :id => @night.id
     end
 
     it "destroys the requested night" do
-      Night.should_receive(:find).with("37").and_return(mock_night)
-      mock_night.should_receive(:destroy)
-      delete :destroy, :id => "37"
+      Night.all.should include(@night)
+      http_request
+      Night.all.should_not include(@night)
     end
   
     it "redirects to the nights list" do
-      Night.stub!(:find).and_return(mock_night(:destroy => true))
-      delete :destroy, :id => "1"
+      http_request
       response.should redirect_to(nights_url)
     end
   end
@@ -179,7 +183,7 @@ describe NightsController do
     it_should_behave_like "an action that requires login"
 
     before do
-      @night = Factory.create(:night)
+      @night = Factory.create(:night, :host => @currently_logged_in_user)
     end
 
     def http_request
@@ -192,21 +196,87 @@ describe NightsController do
     end
   end
 
-  describe "GET send_invitations" do
+  describe "POST send_invitations" do
     it_should_behave_like "an action that requires login"
 
     before do
-      @night = Factory.create(:night)
+      @night = Factory.create(:night, :host => @currently_logged_in_user)
     end
 
-    def http_request
-      get :send_invitations, :id => @night.id
+    def http_request(emails = nil)
+      post :send_invitations, :id => @night.id, :invitation_emails => emails
     end
 
     it "finds the night" do
       http_request
       assigns[:night].should == @night
     end
+
+    it "sends invitations" do
+      http_request "email@example.com, email2@foobar.com"
+      @night.invitees.count.should == 2
+    end
+
+    it "sets flash[:success]" do
+      http_request
+      flash[:success].should_not be_blank
+    end
+
+    it "redirects to the night show page" do
+      http_request
+      response.should redirect_to(night_path(@night))
+    end
   end
 
+  describe "GET /nights/:id/nonmember_rsvp/:access_hash" do
+    before do
+      @night = Factory(:night)
+      @night.send_invitations "foo@bar.com"
+      @invitee = @night.invitees.first
+    end
+
+    def http_request(access_hash = @invitee.access_hash)
+      get :nonmember_rsvp, :id => @night.id, :access_hash => access_hash
+    end
+
+    it "finds the night" do
+      http_request
+      assigns[:night].should == @night
+    end
+
+    it "attempts to find an invitee" do
+      http_request
+      assigns[:invitee].should == @invitee
+      http_request "notahash"
+      assigns[:invitee].should be_nil
+    end
+  end
+
+  describe "PUT /nights/:id/complete_rsvp" do
+    before do
+      @night = Factory(:night)
+      @night.send_invitations "foo@bar.com"
+      @invitee = @night.invitees.first
+    end
+
+    def http_request(attending = nil)
+      put :complete_rsvp, :id => @night.id, :access_hash => @invitee.access_hash, :attending => attending
+    end
+
+    it "finds the night" do
+      http_request
+      assigns[:night].should == @night
+    end
+
+    it "updates the invitee" do
+      @invitee.attending.should be_nil
+      http_request 'true'
+      @invitee.reload.attending.should be_true
+    end
+
+    it "renders the complete_rsvp template" do
+      http_request
+      response.should render_template("complete_rsvp")
+    end
+  end
 end
