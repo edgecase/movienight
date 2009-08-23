@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  night_id: 1
+  movie_id: 1
+  votes: 1
+
+two:
+  night_id: 1
+  movie_id: 1
+  votes: 1

@@ -1,0 +1,237 @@
+From 67af23c7d616456b556e1cdc2f2d1241b8ad3d39 Mon Sep 17 00:00:00 2001
+From: Matt Yoho <mbyoho@gmail.com>
+Date: Sun, 23 Aug 2009 18:48:42 -0400
+Subject: added voteable movies, some show night helper shizzy
+
+---
+ app/helpers/nights_helper.rb                       |   11 ++++
+ app/models/movie.rb                                |    5 +-
+ app/models/night.rb                                |    4 +-
+ app/models/voteable_movie.rb                       |    2 +
+ app/views/nights/show.html.haml                    |   64 +++++++-------------
+ .../20090823222650_add_movie_id_to_nights.rb       |    9 +++
+ .../20090823223326_create_voteable_movies.rb       |   14 ++++
+ spec/fixtures/voteable_movies.yml                  |   11 ++++
+ spec/models/voteable_movie_spec.rb                 |   15 +++++
+ 9 files changed, 90 insertions(+), 45 deletions(-)
+ create mode 100644 app/models/voteable_movie.rb
+ create mode 100644 db/migrate/20090823222650_add_movie_id_to_nights.rb
+ create mode 100644 db/migrate/20090823223326_create_voteable_movies.rb
+ create mode 100644 spec/fixtures/voteable_movies.yml
+ create mode 100644 spec/models/voteable_movie_spec.rb
+
+diff --git a/app/helpers/nights_helper.rb b/app/helpers/nights_helper.rb
+index fffb3b27399577ba0ca2aac41a5861c2912fbafb..1156ecd703da08ea2899e3593aaaa9e1765b8be7 100644
+--- a/app/helpers/nights_helper.rb
++++ b/app/helpers/nights_helper.rb
+@@ -1,2 +1,13 @@
+ module NightsHelper
++  def what_and_where(night)
++    h("#{night.movie.title} at #{night.host.name | night.host.login}'s")
++  end
++
++  def poster_url(movie)
++    if movie.posters
++      movie.poster_url
++    else
++      ""
++    end
++  end
+ end
+diff --git a/app/models/movie.rb b/app/models/movie.rb
+index ce35e6cb9ffa948e6d13a28ab7ed7820ae28cfc2..8ae66859239c0157bea503114cd94cb76a76c60c 100644
+--- a/app/models/movie.rb
++++ b/app/models/movie.rb
+@@ -1,10 +1,9 @@
+ class Movie < ActiveRecord::Base
+   serialize :posters, Array
+ 
+-  def poster_url(size = :thumb)
+-    size = nil if size == :full
++  def poster_url(size = :cover)
+     self.posters.select do |p|
+-      p =~ /#{size.to_s}.(jpg|gif|png|bmp)\Z/i
++      p =~ /#{size}.(jpg|gif|png|bmp)\Z/i
+     end.first
+   end
+ end
+diff --git a/app/models/night.rb b/app/models/night.rb
+index 8ad5515cb9e9a81cc647ea04232de4d56c564e51..047340c3dd24f137a7cea407870e272cddc65e95 100644
+--- a/app/models/night.rb
++++ b/app/models/night.rb
+@@ -3,9 +3,11 @@ class Night < ActiveRecord::Base
+ 
+   belongs_to :host, :class_name => "User"
+   belongs_to :location
+-
+   has_many :invitees
+ 
++  belongs_to  :movie
++  has_many :voteable_movies, :class_name => 'Movie'
++
+   validates_presence_of :curtain_date, :curtain_time
+   validates_presence_of :host, :location
+ 
+diff --git a/app/models/voteable_movie.rb b/app/models/voteable_movie.rb
+new file mode 100644
+index 0000000000000000000000000000000000000000..2bdad9c30e8e75d4debfbcd338ca38553e8f0ae4
+--- /dev/null
++++ b/app/models/voteable_movie.rb
+@@ -0,0 +1,2 @@
++class VoteableMovie < ActiveRecord::Base
++end
+diff --git a/app/views/nights/show.html.haml b/app/views/nights/show.html.haml
+index caf1a2931f98f507054d738ee0d0d4ff030f8ee8..59779ac1154c1e9b731aca6ae5d7fceee0273ff8 100644
+--- a/app/views/nights/show.html.haml
++++ b/app/views/nights/show.html.haml
+@@ -66,50 +66,32 @@
+   %h1
+     /
+       class="movie.undecided" when still voting
+-    %span.movie
+-      Ghostbusters at Ehren's
++    %span.movie.undecided
++      = #what_and_where(@night)
+     = @night.curtain_date.strftime("%B")
+     = @night.curtain_date.day.ordinalize
+     %span.time
+       = @night.curtain_time.to_s(:time).downcase.sub(/^0/, '')
+   %p#time_info
+     -# Doors open at 8:00pm &ndash; Movie start at 8:30pm
+-  #voting
+-    %h2
+-      Vote:
+-    .movie
+-      %h3
+-        2001: A Space Odyssey
+-      %img.movie_image{ :src => "/images/example_movie_small.png", :alt => "" }
+-      %p.more_info
+-        %a{ :href => "http://wikipedia.org", :rel => "external" }
+-          wikipedia
+-        %a{ :href => "#", :rel => "external" }
+-          movie database
+-        %a{ :href => "#", :rel => "external" }
+-          imdb
+-      %a.vote_for_me.i_choose_you_pikachu{ :href => "#" }
+-        vote
+-      %span.vote_count
+-        +2
+-    /
+-      \/.movie
+-    .movie
+-      %h3
+-        A Clockwork Orange
+-      %img.movie_image{ :src => "/images/example_movie_small.png", :alt => "" }
+-      %p.more_info
+-        %a{ :href => "http://wikipedia.org", :rel => "external" }
+-          wikipedia
+-        %a{ :href => "#", :rel => "external" }
+-          movie database
+-        %a{ :href => "#", :rel => "external" }
+-          imdb
+-      %a.vote_for_me{ :href => "#" }
+-        vote
+-      %span.vote_count
+-        +1
+-    /
+-      \/.movie
+-  /
+-    \/#voting
++  - if @night.voteable_movies
++    #voting
++      %h2
++        Vote:
++      - false and @night.voteable_movies.each do |movie|
++        .movie
++          %h3
++            = h movie.title
++          %img.movie_image{ :src => "#{poster_url(movie)}", :alt => "#{movie.title}" }
++          %p.more_info
++            %a{ :href => "http://www.amazon.com/s?index=blended&field-keywords=#{CGI.escape(movie.title)}", :rel => "external" }
++              search amazon.com
++            - if movie.tmdb_id
++              %a{ :href => "http://www.themoviedb.org/movie/#{movie.tmdb_id}", :rel => "external" }
++                movie database
++            - if movie.imdb_id
++              %a{ :href => "http://www.imdb.com/title/#{movie.imdb_id}/", :rel => "external" }
++                imdb
++          %a.vote_for_me.i_choose_you_pikachu{ :href => "#" }
++            vote
++          %span.vote_count= "+#{movie.votes}"
+diff --git a/db/migrate/20090823222650_add_movie_id_to_nights.rb b/db/migrate/20090823222650_add_movie_id_to_nights.rb
+new file mode 100644
+index 0000000000000000000000000000000000000000..4b1f9433570660963807703818c3f4ee53bcbd7d
+--- /dev/null
++++ b/db/migrate/20090823222650_add_movie_id_to_nights.rb
+@@ -0,0 +1,9 @@
++class AddMovieIdToNights < ActiveRecord::Migration
++  def self.up
++    add_column :nights, :movie_id, :integer, :default => nil
++  end
++
++  def self.down
++    remove_column :nights, :movie_id
++  end
++end
+diff --git a/db/migrate/20090823223326_create_voteable_movies.rb b/db/migrate/20090823223326_create_voteable_movies.rb
+new file mode 100644
+index 0000000000000000000000000000000000000000..30113a11ccbbdd89fd2600afae1ddc3028a56196
+--- /dev/null
++++ b/db/migrate/20090823223326_create_voteable_movies.rb
+@@ -0,0 +1,14 @@
++class CreateVoteableMovies < ActiveRecord::Migration
++  def self.up
++    create_table :voteable_movies do |t|
++      t.integer :night_id
++      t.integer :movie_id
++
++      t.timestamps
++    end
++  end
++
++  def self.down
++    drop_table :voteable_movies
++  end
++end
+diff --git a/spec/fixtures/voteable_movies.yml b/spec/fixtures/voteable_movies.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..0af3725b523f1a7be9dc3c77bb10e4d3d21ee80c
+--- /dev/null
++++ b/spec/fixtures/voteable_movies.yml
+@@ -0,0 +1,11 @@
++# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
++
++one:
++  night_id: 1
++  movie_id: 1
++  votes: 1
++
++two:
++  night_id: 1
++  movie_id: 1
++  votes: 1
+diff --git a/spec/models/voteable_movie_spec.rb b/spec/models/voteable_movie_spec.rb
+new file mode 100644
+index 0000000000000000000000000000000000000000..c18b44e9f10cdbcdbe5b0eb772c469b508bc9cb2
+--- /dev/null
++++ b/spec/models/voteable_movie_spec.rb
+@@ -0,0 +1,15 @@
++require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
++
++describe VoteableMovie do
++  before(:each) do
++    @valid_attributes = {
++      :night_id => 1,
++      :movie_id => 1,
++      :votes => 1
++    }
++  end
++
++  it "should create a new instance given valid attributes" do
++    VoteableMovie.create!(@valid_attributes)
++  end
++end
+-- 
+1.5.6
+
+

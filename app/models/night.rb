@@ -3,8 +3,10 @@ class Night < ActiveRecord::Base
 
   belongs_to :host, :class_name => "User"
   belongs_to :location
-
   has_many :invitees
+
+  belongs_to  :movie
+  has_many :voteable_movies, :class_name => 'Movie'
 
   validates_presence_of :curtain_date, :curtain_time
   validates_presence_of :host, :location

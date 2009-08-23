@@ -1,10 +1,9 @@
 class Movie < ActiveRecord::Base
   serialize :posters, Array
 
-  def poster_url(size = :thumb)
-    size = nil if size == :full
+  def poster_url(size = :cover)
     self.posters.select do |p|
-      p =~ /#{size.to_s}.(jpg|gif|png|bmp)\Z/i
+      p =~ /#{size}.(jpg|gif|png|bmp)\Z/i
     end.first
   end
 end

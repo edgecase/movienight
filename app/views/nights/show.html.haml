@@ -67,49 +67,30 @@
     /
       class="movie.undecided" when still voting
     %span.movie
-      Ghostbusters at 
-      = @night.location_human_name
+      = "#{h @night.title} at #{@night.location_human_name}"
     = @night.human_curtain_date
     %span.time
       = @night.human_curtain_time
   %p#time_info
     -# Doors open at 8:00pm &ndash; Movie start at 8:30pm
-  #voting
-    %h2
-      Vote:
-    .movie
-      %h3
-        2001: A Space Odyssey
-      %img.movie_image{ :src => "/images/example_movie_small.png", :alt => "" }
-      %p.more_info
-        %a{ :href => "http://wikipedia.org", :rel => "external" }
-          wikipedia
-        %a{ :href => "#", :rel => "external" }
-          movie database
-        %a{ :href => "#", :rel => "external" }
-          imdb
-      %a.vote_for_me.i_choose_you_pikachu{ :href => "#" }
-        vote
-      %span.vote_count
-        +2
-    /
-      \/.movie
-    .movie
-      %h3
-        A Clockwork Orange
-      %img.movie_image{ :src => "/images/example_movie_small.png", :alt => "" }
-      %p.more_info
-        %a{ :href => "http://wikipedia.org", :rel => "external" }
-          wikipedia
-        %a{ :href => "#", :rel => "external" }
-          movie database
-        %a{ :href => "#", :rel => "external" }
-          imdb
-      %a.vote_for_me{ :href => "#" }
-        vote
-      %span.vote_count
-        +1
-    /
-      \/.movie
-  /
-    \/#voting
+  - if @night.voteable_movies
+    #voting
+      %h2
+        Vote:
+      - false and @night.voteable_movies.each do |movie|
+        .movie
+          %h3
+            = h movie.title
+          %img.movie_image{ :src => "#{poster_url(movie)}", :alt => "#{movie.title}" }
+          %p.more_info
+            %a{ :href => "http://www.amazon.com/s?index=blended&field-keywords=#{CGI.escape(movie.title)}", :rel => "external" }
+              search amazon.com
+            - if movie.tmdb_id
+              %a{ :href => "http://www.themoviedb.org/movie/#{movie.tmdb_id}", :rel => "external" }
+                movie database
+            - if movie.imdb_id
+              %a{ :href => "http://www.imdb.com/title/#{movie.imdb_id}/", :rel => "external" }
+                imdb
+          %a.vote_for_me.i_choose_you_pikachu{ :href => "#" }
+            vote
+          %span.vote_count= "+#{movie.votes}"
