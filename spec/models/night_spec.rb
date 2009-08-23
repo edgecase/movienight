@@ -43,4 +43,5 @@ describe Night do
       end
     end
   end
+
 end

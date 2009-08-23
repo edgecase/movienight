@@ -1,0 +1,16 @@
+- if @invitee
+  - form_tag complete_rsvp_night_path(@night), :method => :put do
+    = hidden_field_tag :access_hash, params[:access_hash]
+    = hidden_field_tag :email, params[:email]
+    - fields_for @invitee do |f|
+      %p
+        %label Attending?
+        %label
+          = f.radio_button :attending, true
+          Yes
+        %label
+          = f.radio_button :attending, false
+          No
+    = submit_tag 'RSVP'
+- else
+  Whooops! Looks like your invitation got lost in the mail! Better luck next time, chump.

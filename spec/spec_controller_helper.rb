@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/spec_helper'
 
 shared_examples_for "an action that requires login" do
   before do
-    @currently_logged_in_user = stub_model(User)
+    @currently_logged_in_user = Factory(:current_user)
     request.session[:user] = @currently_logged_in_user.id
     controller.stub! :logged_in? => true
     controller.stub! :current_user => @currently_logged_in_user

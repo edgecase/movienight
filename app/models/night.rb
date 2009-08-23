@@ -17,6 +17,10 @@ class Night < ActiveRecord::Base
     end
   end
 
+  def find_invitee(access_hash)
+    invitees.find_by_access_hash(access_hash)
+  end
+
   private
 
   def invite(email)
