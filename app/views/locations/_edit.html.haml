@@ -1,0 +1,18 @@
+#edit_location_errors
+- fields_for location do |loc|
+  = hidden_field_tag "authenticity_token", form_authenticity_token
+  .field
+    = loc.label :name, 'name (like "House" or "Basement")'
+    = loc.text_field :name
+  .field
+    = loc.label :street, "street address"
+    = loc.text_field :street
+  .field
+    = loc.label :city
+    = loc.text_field :city
+  .field
+    = loc.label :state
+    = loc.text_field :state, :size => 3
+  .submit
+    = link_to "update location", location_path, :id => "update_location"
+    = link_to "cancel", locations_path, :id => "cancel_edit_location"

@@ -230,21 +230,25 @@ form .field.radio.saved_location span {
   top: -7px;
 }
 
+#edit_location .field,
 #new_location .field {
   float: left;
   width: 49%;
   margin-bottom: 10px;
 }
 
+#edit_location .field input,
 #new_location .field input {
   width: 95%;
 }
 
+#edit_location .submit,
 #new_location .submit {
   clear: both;
   padding-top: 10px;
 }
 
+#edit_location .submit a,
 #new_location .submit a {
   padding: 7px 15px 5px 15px;
   color: #fff;
@@ -257,6 +261,11 @@ form .field.radio.saved_location span {
   -moz-border-radius: 3px;
 }
 
+.field#movie_header {
+  margin-top: 12px;
+  margin-bottom: 8px;
+}
+
 .field.date,
 .field.time {
   float: left;
@@ -266,6 +275,42 @@ form .field.radio.saved_location span {
 
 .field.date input {
   width: 150px;
+}
+
+fieldset #saved_locations a#add_new_location {
+  display: block;
+  clear: both;
+  margin-left: 10px;
+  color: #664084;
+}
+
+fieldset #saved_locations #saved_location_list {
+  width: 50%;
+  float: left;
+  margin-bottom: 10px;
+}
+
+fieldset #saved_locations #saved_location_details {
+  width: 50%;
+  float: left;
+}
+
+#saved_location_details span#name {
+  font-size: 21px;
+  line-height: 1.5em;
+  color: #f55;
+}
+
+#saved_location_details a {
+  display: inline-block;
+  margin-top: 8px;
+  margin-right: 6px;
+  color: #664084;
+}
+
+fieldset #new_location {
+  display: none;
+  clear: both;
 }
 
 #additional_info .half.right {

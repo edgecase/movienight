@@ -20,64 +20,57 @@
       %span
         where?
     .mozilla_is_rubbish
-    .field.radio
-      %label
-        %input#use_saved_location{ :type => "radio", :name => "location_source", :rel => "#saved_locations", :checked => "checked" }
-        use saved location
-      \&nbsp; &nbsp;
-      %label
-        %input{ :type => "radio", :name => "location_source", :rel => "#new_location" }
-        enter address
-    %br
+    #edit_location.location_source
     #saved_locations.location_source
-      = render :partial => "locations/location", :collection => current_user.locations
-    #new_location.location_source{ :style => "display:none" }
-      #location_errors
-      - fields_for Location.new do |location|
-        = hidden_field_tag "authenticity_token", form_authenticity_token
-        .field
-          = location.label :name, 'location name'
-          = location.text_field :name
-        .field
-          = location.label :street, "street address"
-          = location.text_field :street
-        .field
-          = location.label :city
-          = location.text_field :city
-        .field
-          = location.label :state
-          = location.text_field :state, :size => 3
-        .submit
-          = link_to "save location", '#', :id => "add_address"
-      
-  %fieldset
+      #saved_location_list
+        = render :partial => "locations/location", :collection => current_user.locations
+      #saved_location_details
+      = link_to "add a new location", '#', :id => 'add_new_location'
+    #new_location.location_source
+      = render :partial => "locations/new"
+  %fieldset{:style => 'clear: both;'}
     %legend
       %span
         movie?
     .mozilla_is_rubbish
-    .field.radio
+    .field.radio#vote_or_dictate
       %label
-        %input{ :type => "radio" }
-        vote
+        %input{ :type => "radio", :name => 'vote', :value => 'yes'}
+        let everyone vote
       \&nbsp; &nbsp;
       %label
-        %input{ :type => "radio" }
-        i have a movie
-    %br
-    .field
+        %input{ :type => "radio", :name => 'vote', :value => 'no'}
+        i have a movie picked out
+    .field#movie_header{:style => 'display: none'}
       %label
         movie title
-        %a{ :href => "#" }
+        %a{ :href => "#", :id => 'add_movie' }
           add another movie
-    .half
-      - 3.times do
-        .field.movie
-          %input{ :type => "text" }
-          %a{ :href => "#", :class => 'remove' }
-            remove
-          %a{ :href => title_search_nights_path, :class => 'search', :onclick => "return false" }
-            search
-          %span.results
+    .half#dictate_movie{:style => 'display: none'}
+      .field.movie
+        %input{ :type => "text" }
+        %a{ :href => title_search_nights_path, :class => 'search', :onclick => "return false" }
+          search
+        %span.results
+      %a#nah_lets_vote{:href => '#'}
+        you know what, let's vote instead
+    .half#voting_options{:style => 'display: none'}
+      .field.movie{:style => 'display: none;'}
+        %input{ :type => "text" }
+        %a{ :href => "#", :class => 'remove' }
+          remove
+        %a{ :href => title_search_nights_path, :class => 'search', :onclick => "return false" }
+          search
+        %span.results
+      .field.movie
+        %input{ :type => "text" }
+        %a{ :href => "#", :class => 'remove' }
+          remove
+        %a{ :href => title_search_nights_path, :class => 'search', :onclick => "return false" }
+          search
+        %span.results
+      %a#im_gonna_dictate{:href => '#'}
+        actually, i know what i want to see
 
   %fieldset#additional_info
     #drinks_and_snacks.half

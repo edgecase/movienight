@@ -1,6 +1,16 @@
 .field.radio.saved_location
   %label
-    %input{ :type => "radio", :name => "night[location_id]", :value => location.id }
+    %input{ :type => "radio", :name => "night[location_id]", :value => location.id, :class => should_check?(location) }
     = location.name
-    %span
-      = location.street
+  .location_details{:style => 'display: none;'}
+    %span#name= "#{location.name} Details:"
+    %br
+    = location.street
+    %br
+    = "#{location.city}, #{location.state}"
+    %br
+    = link_to "edit", edit_location_path(location), :class => 'edit_location'
+    = link_to "delete", location_path(location), :class => 'delete_location'
+    %form.delete_location
+      = hidden_field_tag "authenticity_token", form_authenticity_token
+      = hidden_field_tag "_method", "delete"
