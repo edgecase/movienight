@@ -1,6 +1,5 @@
 $(function() {
   $('input[name=location_source]').change(function() {
-//    $('#saved_or_new_location').hide();
     var target = $('input:checked[name=location_source]').attr('rel');
     $('.location_source').hide();
     $(target).show();
@@ -83,7 +82,6 @@ $(function() {
         $("#location_errors").html(req.responseText);
       },
       success: function(response) {
-        $('#use_saved_location').attr('checked', 'checked');
         $('.location_source').hide();
         $('#saved_location_list').html(response);
         $('#saved_locations').show();
@@ -104,7 +102,6 @@ $(function() {
         $("#edit_location_errors").html(req.responseText);
       },
       success: function(response) {
-        $('#use_saved_location').attr('checked', 'checked');
         $('.location_source').hide();
         $('#saved_location_list').html(response);
         $('#saved_locations').show();

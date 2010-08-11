@@ -284,10 +284,13 @@ fieldset #saved_locations a#add_new_location {
   color: #664084;
 }
 
+fieldset #saved_locations {
+  margin-bottom: 10px;
+}
+
 fieldset #saved_locations #saved_location_list {
   width: 50%;
   float: left;
-  margin-bottom: 10px;
 }
 
 fieldset #saved_locations #saved_location_details {
