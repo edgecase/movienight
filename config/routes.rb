@@ -1,5 +1,5 @@
 Movienight::Application.routes.draw do
-  match '/'         => 'schedules#show'
+  root :to => "schedules#show"
   match '/logout'   => 'sessions#destroy', :as => :logout
   match '/login'    => 'sessions#new', :as => :login
   match '/register' => 'users#create', :as => :register
