@@ -1,9 +1,7 @@
 .DS_Store
+
+.bundle
+db/*.sqlite3
 log/*.log
 tmp/**/*
-tmp/*
-config/database.yml
-db/*.sqlite3
-.zsh_rake_cache
 public/system
-db/schema.rb
