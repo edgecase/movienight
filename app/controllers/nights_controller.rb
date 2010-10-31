@@ -1,6 +1,5 @@
 class NightsController < ApplicationController
-  skip_before_filter :login_required, :only => [:nonmember_rsvp, :complete_rsvp, :show]
-  before_filter :persist_host_info, :only => [:send_invitations]
+  skip_before_filter :user_authenticated?, :only => [:nonmember_rsvp, :complete_rsvp, :show]
 
   def index
     @nights = Night.all
@@ -9,7 +8,7 @@ class NightsController < ApplicationController
   def show
     @night = Night.find(params[:id])
     redirect_to login_path and return unless logged_in_or_invited?
-    if logged_in?
+    if user_signed_in?
       @invitee = current_user.invitations.pending.find_by_night_id(@night)
     end
   end
@@ -83,7 +82,7 @@ class NightsController < ApplicationController
 
   private
   def logged_in_or_invited?
-    if !logged_in?
+    if !user_signed_in?
       if session[:accessible_night] != @night.id
         return false
       end

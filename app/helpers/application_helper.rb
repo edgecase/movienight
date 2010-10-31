@@ -2,10 +2,10 @@ module ApplicationHelper
   def flash_div(*keys)
     return '' if keys.nil? or keys.empty?
 
-    flash_info = keys.collect { |key| 
-      content_tag(:div, 
-        flash[key], :id => "flash_message", :class => key) if flash[key] 
-    }.join
+    flash_info = keys.collect { |key|
+      content_tag(:div,
+        flash[key], :id => "flash_message", :class => key) if flash[key]
+    }.join.html_safe
 
     flash_info
   end
@@ -14,7 +14,7 @@ module ApplicationHelper
     classes = "#{params[:controller]} #{params[:action]}"
     if ((params[:controller] == 'sessions' && params[:action] == 'new') ||
         (params[:controller] == 'users' && params[:action] == 'new'))
-      classes << ' login_or_signup' 
+      classes << ' login_or_signup'
     end
     classes
   end
@@ -24,7 +24,7 @@ module ApplicationHelper
   end
 
   def current_user_is_host
-    return unless logged_in?
+    return unless user_signed_in?
     return unless @night
     @night.host == current_user
   end

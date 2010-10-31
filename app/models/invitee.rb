@@ -1,6 +1,4 @@
 class Invitee < ActiveRecord::Base
-  extend Authentication::ByPassword::ModelClassMethods
-  extend Authentication::ModelClassMethods
 
   belongs_to :night
   belongs_to :invited_user, :class_name => "User"
@@ -26,6 +24,6 @@ class Invitee < ActiveRecord::Base
   private
 
   def generate_access_hash
-    self.access_hash = Invitee.password_digest(email, night.invitee_salt)
+    self.access_hash = 'abc123'#Invitee.password_digest(email, night.invitee_salt)
   end
 end

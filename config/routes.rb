@@ -1,15 +1,4 @@
 Movienight::Application.routes.draw do
-  root :to => "schedules#show"
-  match '/logout'   => 'sessions#destroy', :as => :logout
-  match '/login'    => 'sessions#new', :as => :login
-  match '/register' => 'users#create', :as => :register
-  match '/signup'   => 'users#new', :as => :signup
-
-  resources :locations
-  resources :users
-  resources :sessions
-  resource :schedule
-
   resources :nights do
     collection do
       get  :title_search
@@ -19,10 +8,20 @@ Movienight::Application.routes.draw do
       get  :add_invitations
       post :send_invitations
     end
-
   end
 
-  #match '/nights/:id/nonmember_rsvp/:access_hash' => 'nights#nonmember_rsvp', :as => :nonmember_rsvp_night, :via => get
+  devise_for :users
+
+  match '/register' => 'users#create', :as => :register
+  match '/signup'   => 'users#new',    :as => :signup
+
+  resources :locations
+  resources :users
+  resource  :schedule
+
+  root :to => "schedules#show"
+
+  match '/nights/:id/nonmember_rsvp/:access_hash' => 'nights#nonmember_rsvp', :as => :nonmember_rsvp_night, :via => :get
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

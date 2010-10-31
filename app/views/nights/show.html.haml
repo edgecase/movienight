@@ -30,7 +30,7 @@
     <a href="#" class="rsvp no">no</a>
     </div>
   .sidebar_content
-    - if logged_in? and current_user == @night.host
+    - if user_signed_in? and current_user == @night.host
       %p.more
         = link_to "Invite people", add_invitations_night_path(@night)
     %p.more
