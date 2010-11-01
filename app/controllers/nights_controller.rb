@@ -1,5 +1,5 @@
 class NightsController < ApplicationController
-  skip_before_filter :user_authenticated?, :only => [:nonmember_rsvp, :complete_rsvp, :show]
+  skip_before_filter :authenticate_user!, :only => [:nonmember_rsvp, :complete_rsvp, :show]
 
   def index
     @nights = Night.all
