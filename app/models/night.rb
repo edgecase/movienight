@@ -2,24 +2,23 @@ class Night < ActiveRecord::Base
 
   belongs_to :host, :class_name => "User"
   belongs_to :location
-  has_many :invitees
+  has_many   :invitees
 
-  belongs_to  :movie
-  has_many :voteable_movies
+  belongs_to :movie
+  has_many   :voteable_movies
 
-  validates_presence_of :curtain_date, :curtain_time
-  validates_presence_of :host, :location
+  validates_presence_of :curtain_date, :curtain_time, :host, :location
 
   attr_protected :invitee_salt
 
   before_create :generate_invitee_salt
 
-  delegate :name, :to => :location, :prefix => true
+  delegate :name,       :to => :location, :prefix => true
   delegate :human_name, :to => :location, :prefix => true
-  delegate :name, :to => :host,     :prefix => true
-  delegate :title, :to => :movie, :prefix => true, :allow_nil => true
+  delegate :name,       :to => :host,     :prefix => true
+  delegate :title,      :to => :movie,    :prefix => true, :allow_nil => true
 
-  named_scope :sorted, { :order => "curtain_date ASC" }
+  scope :sorted, order("nights.curtain_date ASC")
 
   def human_curtain_date
     curtain_date.strftime("%B ") +
