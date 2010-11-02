@@ -1,4 +1,5 @@
 class Night < ActiveRecord::Base
+  extend TokenGeneration
 
   belongs_to :host, :class_name => "User"
   belongs_to :location

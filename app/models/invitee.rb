@@ -24,6 +24,6 @@ class Invitee < ActiveRecord::Base
   private
 
   def generate_access_hash
-    self.access_hash = 'abc123'#Invitee.password_digest(email, night.invitee_salt)
+    self.access_hash = Invitee.make_hash(email, night.invitee_salt)
   end
 end
