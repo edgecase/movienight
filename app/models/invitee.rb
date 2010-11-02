@@ -1,4 +1,5 @@
 class Invitee < ActiveRecord::Base
+  extend TokenGeneration
 
   belongs_to :night
   belongs_to :invited_user, :class_name => "User"
