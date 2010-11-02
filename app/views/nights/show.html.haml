@@ -2,10 +2,10 @@
   /
     HEADING when user needs to rsvp
   - if @invitee
-    - form_tag complete_rsvp_night_path(@night), :method => :put, :id => "rsvp_yes" do
+    = form_tag complete_rsvp_night_path(@night), :method => :put, :id => "rsvp_yes" do
       = hidden_field_tag :access_hash, params[:access_hash] || @invitee.access_hash
       = hidden_field_tag :attending, true
-    - form_tag complete_rsvp_night_path(@night), :method => :put, :id => "rsvp_no" do
+    = form_tag complete_rsvp_night_path(@night), :method => :put, :id => "rsvp_no" do
       = hidden_field_tag :access_hash, params[:access_hash] || @invitee.access_hash
       = hidden_field_tag :attending, false
     .heading.can_you_make_it
