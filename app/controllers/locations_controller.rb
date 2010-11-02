@@ -1,6 +1,6 @@
 class LocationsController < ApplicationController
   layout false
-  
+
   def create
     @location = current_user.locations.new(params[:location])
     if @location.save
