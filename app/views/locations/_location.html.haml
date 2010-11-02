@@ -9,8 +9,5 @@
     %br
     = "#{location.city}, #{location.state}"
     %br
-    = link_to "edit", edit_location_path(location), :class => 'edit_location'
-    = link_to "delete", location_path(location), :class => 'delete_location'
-    %form.delete_location
-      = hidden_field_tag "authenticity_token", form_authenticity_token
-      = hidden_field_tag "_method", "delete"
+    = link_to "edit",   edit_location_path(location), :class => 'edit location'
+    = link_to "delete", location_path(location),      :class => 'delete location'
