@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require 'spec_helper'
 
 describe TheMovieDatabase do
   before(:all) { FakeWeb.allow_net_connect = true  }
