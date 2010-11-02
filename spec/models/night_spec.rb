@@ -25,7 +25,8 @@ describe Night do
 
     describe "when emails do not have associated user accounts" do
       before do
-        Notifier.stub! :deliver_nonmember_invitation
+        @mail = stub(:deliver => true)
+        Notifier.stub!(:nonmember_invitation => @mail)
       end
 
       it "creates invitees for each email" do
@@ -34,7 +35,7 @@ describe Night do
       end
 
       it "sends the non-member invitation" do
-        Notifier.should_receive(:deliver_nonmember_invitation).twice
+        Notifier.should_receive(:nonmember_invitation).twice
         @night.send_invitations "nonreg1@foobars.com; nonreg2@goober.com"
       end
     end

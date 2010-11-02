@@ -48,7 +48,7 @@ class Night < ActiveRecord::Base
     user = User.find(:first, :conditions => ["LOWER(email)=?", email.downcase.strip])
     invitee = invitees.new :email => email, :invited_user => user
     if invitee.save
-      Notifier.deliver_nonmember_invitation invitee, self
+      Notifier.nonmember_invitation(invitee, self).deliver
     end
   end
 
