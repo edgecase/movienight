@@ -93,6 +93,7 @@ $(function() {
 
   $('a#update_location').always().click(function(event) {
     var data = $('#edit_location input').serialize();
+    var name = $('#edit_location input#location_name').val();
     $.ajax({
       url: event.target.href,
       data: data + "&_method=put",
@@ -104,6 +105,7 @@ $(function() {
       success: function(response) {
         $('.location_source').hide();
         $('#saved_location_list').html(response);
+        $('#saved_location_details span#name').html(name + ' Details');
         $('#saved_locations').show();
       },
       complete: function() {
