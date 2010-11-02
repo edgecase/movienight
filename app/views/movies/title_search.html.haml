@@ -1,13 +1,13 @@
-%a.results{ :href => '#' }
+%a.results{ :href => '#full_results', :rel => 'facebox' }
   = "#{@movies.size} results found"
 
-.full_results
+#full_results{:style => 'display: none;'}
   - @movies.each do |movie|
     %ul
       %li
         = h movie.title
       %li
-        = h movie.release.to_s(:long)
+        = h movie.release.to_s(:long) if movie.release.present?
       %li
         = image_tag poster_url(movie, :thumb)
 

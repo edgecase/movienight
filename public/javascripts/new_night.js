@@ -59,16 +59,15 @@ $(function() {
   $('.movie input').blur(function() {
     var title_input = $(this)
     var results = title_input.nextAll('span.results');
-    // TODO: Make this populate via some ajax response
     if (title_input.val()) {
       var search_link = $(this).nextAll('a.search');
       $.get(search_link.attr('href'), { movie_title: title_input.val() }, function(html) {
         results.html(html);
+        $('a[rel*=facebox]').facebox();
       });
     } else
       results.html('');
   });
-  
 
   $('#add_location').click(function() {
     var data = $('#new_location input').serialize();
