@@ -10,7 +10,7 @@ gem 'jquery-rails', '~> 0.2.4'
 gem 'nokogiri',     '~> 1.4.3.1'
 gem 'mysql2',       '~> 0.2.6'
 
-# gem 'unicorn'
+gem 'thin'
 # gem 'capistrano'
 
 gem 'ruby-debug',   '~> 0.10.3', :platforms => :mri_18
