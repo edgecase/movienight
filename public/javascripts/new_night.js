@@ -21,7 +21,7 @@ $(function() {
     return false;
   });
 
-  $('a.edit_location').always().click(function(event) {
+  $('a.edit.location').always().click(function(event) {
     $('#edit_location').css('height', $('#saved_locations').css('height')).show();
     $("#saved_locations.location_source").hide();
     $(this).siblings("input[type='radio']").attr('checked', 'checked');
