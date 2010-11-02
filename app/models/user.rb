@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
     def rejected() self.not_attending end
   end
 
+  validates :name, :presence => true
+
   def to_s
     name
   end
