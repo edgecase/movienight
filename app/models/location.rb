@@ -4,7 +4,7 @@ class Location < ActiveRecord::Base
 
   validates_presence_of :street, :name
 
-  named_scope :enabled, :conditions => ["disabled = ?", false]
+  scope :enabled, where(:disabled => false)
 
   def to_s
     city_state = [city, state].compact.join(" ")
