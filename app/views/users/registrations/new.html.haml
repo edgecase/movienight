@@ -3,9 +3,9 @@
 
 = error_messages_for :user
 
-=form_for @user do |f|
+=form_for @user, :url => user_registration_path do |f|
 
-  = render 'form', :f => f
+  = render 'users/form', :f => f, :current_password_required => false
 
   .submit
     = submit_tag "Sign up"

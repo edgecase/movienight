@@ -16,7 +16,6 @@ Movienight::Application.routes.draw do
   match '/signup'   => 'users#new',    :as => :signup
 
   resources :locations
-  resources :users
   resource  :schedule
 
   root :to => "schedules#show"
