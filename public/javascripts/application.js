@@ -1,5 +1,5 @@
 $(function() {
-  $('[rel=date]').datepicker();
+  $('[rel=date]').datepicker({dateFormat: 'yy-mm-dd'});
 
   $('a[rel=external]').click(function() {
     var newWindow = window.open($(this).attr('href'), '_blank');
