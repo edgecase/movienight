@@ -75,11 +75,6 @@ class NightsController < ApplicationController
     redirect_to night_path(@night)
   end
 
-  def title_search
-    @movies = TheMovieDatabase.search_titles(params[:movie_title])
-    render :layout => false 
-  end
-
   private
   def logged_in_or_invited?
     if !user_signed_in?

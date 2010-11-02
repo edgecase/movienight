@@ -49,7 +49,7 @@
     .half#dictate_movie{:style => 'display: none'}
       .field.movie
         %input{ :type => "text" }
-        %a{ :href => title_search_nights_path, :class => 'search', :onclick => "return false" }
+        %a{ :href => title_search_movies_path, :class => 'search', :onclick => "return false" }
           search
         %span.results
       %a#nah_lets_vote{:href => '#'}
@@ -59,18 +59,18 @@
         %input{ :type => "text" }
         %a{ :href => "#", :class => 'remove' }
           remove
-        %a{ :href => title_search_nights_path, :class => 'search', :onclick => "return false" }
+        %a{ :href => title_search_movies_path, :class => 'search', :onclick => "return false" }
           search
         %span.results
       .field.movie
         %input{ :type => "text" }
         %a{ :href => "#", :class => 'remove' }
           remove
-        %a{ :href => title_search_nights_path, :class => 'search', :onclick => "return false" }
+        %a{ :href => title_search_movies_path, :class => 'search', :onclick => "return false" }
           search
         %span.results
       %a#im_gonna_dictate{:href => '#'}
-        actually, i know what i want to see
+        actually, i know what i want to watch
 
   %fieldset#additional_info
     #drinks_and_snacks.half

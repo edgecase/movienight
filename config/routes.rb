@@ -1,8 +1,5 @@
 Movienight::Application.routes.draw do
   resources :nights do
-    collection do
-      get  :title_search
-    end
     member do
       put  :complete_rsvp
       get  :add_invitations
@@ -17,6 +14,12 @@ Movienight::Application.routes.draw do
 
   resources :locations
   resource  :schedule
+
+  resources :movies, :only => [] do
+    collection do
+      get :title_search
+    end
+  end
 
   root :to => "schedules#show"
 
