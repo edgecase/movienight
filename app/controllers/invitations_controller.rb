@@ -10,11 +10,11 @@ class InvitationsController < ApplicationController
     flash[:success] = "Invitations sent."
     redirect_to @night
   end
-  
+
   protected
-  
+
   def find_night
     @night = current_user.hosted_nights.find(params[:night_id])
   end
-  
+
 end
