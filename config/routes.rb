@@ -1,4 +1,7 @@
 Movienight::Application.routes.draw do
+
+  devise_for :users
+
   resources :nights do
     resources :invitations, :only => [:new, :create]
     member do
@@ -6,13 +9,10 @@ Movienight::Application.routes.draw do
     end
   end
 
-  devise_for :users
+  match '/nights/:id/nonmember_rsvp/:access_hash' => 'nights#nonmember_rsvp', :as => :nonmember_rsvp_night, :via => :get
 
-  match '/register' => 'users#create', :as => :register
-  match '/signup'   => 'users#new',    :as => :signup
-
-  resources :locations
-  resource  :schedule
+  resources :locations, :except => [:new, :show]
+  resource  :schedule,  :only => :show
 
   resources :movies, :only => [] do
     collection do
@@ -21,6 +21,4 @@ Movienight::Application.routes.draw do
   end
 
   root :to => "schedules#show"
-
-  match '/nights/:id/nonmember_rsvp/:access_hash' => 'nights#nonmember_rsvp', :as => :nonmember_rsvp_night, :via => :get
 end
