@@ -1,12 +1,12 @@
 %h1
   Editing night
-= form_for(@night) do |f|
+= form_for(night) do |f|
   = render :partial => "form", :object => f
 
   %p
     = f.submit 'Update'
 
-= link_to 'Show', @night
+= link_to 'Show', night
 |
 = link_to 'Back', nights_path
 

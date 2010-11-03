@@ -1,10 +1,10 @@
 #sidebar
   /
     HEADING when user needs to rsvp
-  - if @invitee
-    = form_tag night_invitation_path(@night, @invitee), :method => :put, :id => "rsvp_yes" do
+  - if invitee
+    = form_tag night_invitation_path(night, invitee), :method => :put, :id => "rsvp_yes" do
       = hidden_field_tag :attending, true
-    = form_tag night_invitation_path(@night, @invitee), :method => :put, :id => "rsvp_no" do
+    = form_tag night_invitation_path(night, invitee), :method => :put, :id => "rsvp_no" do
       = hidden_field_tag :attending, false
     .heading.can_you_make_it
       %span.title
@@ -28,28 +28,28 @@
     <a href="#" class="rsvp no">no</a>
     </div>
   .sidebar_content
-    - if user_signed_in? and current_user == @night.host
+    - if user_signed_in? and current_user == night.host
       %p.more
-        = link_to "Invite people", new_night_invitation_path(@night)
+        = link_to "Invite people", new_night_invitation_path(night)
     %p.more
-      %a{ :href => "http://maps.google.com?q=#{CGI.escape(@night.location.to_s)}", :rel => "external" }
-        = @night.location.user.name + "'s"
-        = @night.location.name
+      %a{ :href => "http://maps.google.com?q=#{CGI.escape(night.location.to_s)}", :rel => "external" }
+        = night.location.user.name + "'s"
+        = night.location.name
         %img{ :src => "/images/zoom_small.png", :alt => "" }
-    - if @night.bring_drinks
+    - if night.bring_drinks
       %p.drinks_and_snacks.beer
         Bring drinks!
-    - if @night.bring_snacks
+    - if night.bring_snacks
       %p.drinks_and_snacks.snacks
         Bring snackage!
     %br
-    - unless @night.notes.blank?
+    - unless night.notes.blank?
       %h1
         Notes
-      %p= @night.notes
+      %p= night.notes
       %br
     %h1
-      - attending = @night.invitees.are_attending
+      - attending = night.invitees.are_attending
       = pluralize attending.count, "person"
       attending in addition to host
     %ul
@@ -65,20 +65,20 @@
     /
       class="movie.undecided" when still voting
     %span.movie
-      = "#{h @night.movie_title || "NO SELECTION"} at"
+      = "#{movie_name(night)} at"
       %span{ :class => current_user_is_host ? "you" : "" }
-        = @night.location_human_name
-    = @night.human_curtain_date
+        = night.location_human_name
+    = night.human_curtain_date
     %span.time
-      = @night.human_curtain_time
+      = night.human_curtain_time
   %p#time_info
     -# Doors open at 8:00pm &ndash; Movie start at 8:30pm
 
-  - unless @night.voteable_movies.empty?
+  - unless night.voteable_movies.empty?
     #voting
       %h2
         Vote:
-      - @night.voteable_movies.each do |movie|
+      - night.voteable_movies.each do |movie|
         .movie
           %h3
             = h movie.title

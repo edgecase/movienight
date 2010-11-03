@@ -1,8 +1,8 @@
 %a.results{ :href => '#full_results', :rel => 'facebox' }
-  = "#{@movies.size} results found"
+  = "#{movies.size} results found"
 
 #full_results{:style => 'display: none;'}
-  - @movies.each do |movie|
+  - movies.each do |movie|
     %ul
       %li
         = h movie.title

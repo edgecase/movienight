@@ -15,7 +15,7 @@ class Invitee < ActiveRecord::Base
 
   delegate :location_name, :location_human_name, :curtain_date,
            :human_curtain_date, :human_curtain_time, :host_name,
-           :to => :night
+           :movie_title, :to => :night
 
   scope :are_attending,  where(:attending => true)
   scope :awaiting_reply, where(:attending => nil)

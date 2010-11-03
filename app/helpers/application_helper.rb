@@ -25,7 +25,11 @@ module ApplicationHelper
 
   def current_user_is_host
     return unless user_signed_in?
-    return unless @night
-    @night.host == current_user
+    return unless night
+    night.host == current_user
+  end
+
+  def movie_name(night)
+    night.movie_title || "DUNNO YET"
   end
 end

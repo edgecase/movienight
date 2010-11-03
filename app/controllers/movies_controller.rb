@@ -1,7 +1,8 @@
 class MoviesController < ApplicationController
 
+  assume(:movies) { TheMovieDatabase.search_titles(params[:movie_title]) }
+
   def title_search
-    @movies = TheMovieDatabase.search_titles(params[:movie_title])
     render :layout => false
   end
 
