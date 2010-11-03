@@ -1,29 +1,36 @@
-%h1 Listing nights
+#sidebar
+  .heading
+    %span.title Invitations
 
-%table
-  %tr
-    %th Date
-    %th Curtain time
-    %th Host
-    %th Location
+  .sidebar_content.invitations
+    - @pending_invitations.each do |invitation|
+      %p.more
+        %a{ :href => night_path(invitation.night), :rel => "external" }
+          %span.label from:
+          = h invitation.host_name
+          %br
+          %span.label for:
+          = "#{invitation.human_curtain_date}, #{invitation.human_curtain_time}"
+          = image_tag "zoom_small.png", :alt => ''
 
-- @nights.each do |night|
-  %tr
-    %td
-      = h night.curtain_date
-    %td
-      = h night.curtain_time
-    %td
-      = h night.host.email
-    %td
-      = h night.location.street
-    %td
-      = link_to 'Show', night
-    %td
-      = link_to 'Edit', edit_night_path(night)
-    %td
-      = link_to 'Destroy', night, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New night', new_night_path
+#main_content
+  - @hosted_nights.each do |night|
+    %h1.scheduled_night
+      %a{ :href => night_path(night) }
+        %span.movie
+          Some Movie at
+          %span.you
+            = h night.location_human_name
+        = night.human_curtain_date
+        %span.time 
+          = night.human_curtain_time
+  - @accepted_invitations.each do |invitation|
+    %h1.scheduled_night
+      %a{ :href => night_path(invitation.night) }
+        %span.movie 
+          Some Movie at
+          = h invitation.location_human_name
+        = invitation.human_curtain_date
+        %span.time 
+          = invitation.human_curtain_time
+          

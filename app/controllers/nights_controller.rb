@@ -2,7 +2,9 @@ class NightsController < ApplicationController
   skip_before_filter :authenticate_user!, :only => :show
 
   def index
-    @nights = Night.all
+    @hosted_nights        = current_user.hosted_nights.sorted
+    @accepted_invitations = current_user.invitations.accepted.sorted
+    @pending_invitations  = current_user.invitations.pending.sorted
   end
 
   def show

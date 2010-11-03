@@ -7,7 +7,6 @@ Movienight::Application.routes.draw do
   end
 
   resources :locations, :except => [:new, :show]
-  resource  :schedule,  :only   => :show
 
   resources :movies, :only => [] do
     collection do
@@ -15,5 +14,5 @@ Movienight::Application.routes.draw do
     end
   end
 
-  root :to => "schedules#show"
+  root :to => "nights#index"
 end
