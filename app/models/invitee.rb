@@ -22,9 +22,14 @@ class Invitee < ActiveRecord::Base
   scope :not_attending,  where(:attending => false)
   scope :sorted,         joins(:night).order("nights.curtain_date")
 
+  def to_param
+    access_hash if persisted?
+  end
+
   private
 
   def generate_access_hash
     self.access_hash = Invitee.make_hash(email, night.invitee_salt)
   end
+
 end
