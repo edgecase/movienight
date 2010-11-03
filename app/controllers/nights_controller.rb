@@ -50,17 +50,6 @@ class NightsController < ApplicationController
     redirect_to(nights_url)
   end
 
-  def add_invitations
-    @night = current_user.hosted_nights.find(params[:id])
-  end
-
-  def send_invitations
-    @night = current_user.hosted_nights.find(params[:id])
-    @night.send_invitations params[:invitation_emails]
-    flash[:success] = "Invitations sent."
-    redirect_to @night
-  end
-
   def nonmember_rsvp
     @night = Night.find(params[:id])
     @invitee = @night.find_invitee params[:access_hash]

@@ -32,7 +32,7 @@
   .sidebar_content
     - if user_signed_in? and current_user == @night.host
       %p.more
-        = link_to "Invite people", add_invitations_night_path(@night)
+        = link_to "Invite people", new_night_invitation_path(@night)
     %p.more
       %a{ :href => "http://maps.google.com?q=#{CGI.escape(@night.location.to_s)}", :rel => "external" }
         = @night.location.user.name + "'s"

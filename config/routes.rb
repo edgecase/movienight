@@ -1,9 +1,8 @@
 Movienight::Application.routes.draw do
   resources :nights do
+    resources :invitations, :only => [:new, :create]
     member do
       put  :complete_rsvp
-      get  :add_invitations
-      post :send_invitations
     end
   end
 
