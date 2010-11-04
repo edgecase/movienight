@@ -20,12 +20,12 @@ form fieldset legend span {
 
 form .field {
   position: relative;
-  margin-bottom: 2px;
+  margin-bottom: 15px;
 }
 
 form .field label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   padding-left: 2px;
   font-size: 16px;
 }

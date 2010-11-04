@@ -6,7 +6,7 @@
       = hidden_field_tag :attending, true
     = form_tag night_invitation_path(night, invitation), :method => :put, :id => "rsvp_no" do
       = hidden_field_tag :attending, false
-    .heading.can_you_make_it
+    %header.can_you_make_it
       %span.title
         Can you make it?
       %a.rsvp.yes{ :href => "#", :onclick => "$('#rsvp_yes').submit();" }
@@ -15,18 +15,18 @@
         no
   /
     HEADING  when user has rsvp-ed YES
-    <div class="heading see_you_there">
+    <header class="see_you_there">
     <span class="title">See you there!</span>
     <a href="#" class="rsvp yes">yes</a>
     <a href="#" class="rsvp no">no</a>
-    </div>
+    </header>
   /
     HEADING  when user has rsvp-ed NO
-    <div class="heading maybe_next_time">
+    <header class="maybe_next_time">
     <span class="title">Maybe next time :(</span>
     <a href="#" class="rsvp yes">yes</a>
     <a href="#" class="rsvp no">no</a>
-    </div>
+    </header>
   .sidebar_content
     - if user_signed_in? and current_user == night.host
       %p.more
@@ -84,13 +84,13 @@
             = h movie.title
           %img.movie_image{ :src => "#{poster_url(movie)}", :alt => "#{movie.title}" }
           %p.more_info
-            %a{ :href => "http://www.amazon.com/s?index=blended&field-keywords=#{CGI.escape(movie.title)}", :rel => "external" }
+            %a{ :href => "http://www.amazon.com/s?index=blended&field-keywords=#{CGI.escape(movie.title)}", :target => '_blank' }
               search amazon.com
             - if movie.tmdb_id
-              %a{ :href => "http://www.themoviedb.org/movie/#{movie.tmdb_id}", :rel => "external" }
+              %a{ :href => "http://www.themoviedb.org/movie/#{movie.tmdb_id}", :target => '_blank' }
                 movie database
             - if movie.imdb_id
-              %a{ :href => "http://www.imdb.com/title/#{movie.imdb_id}/", :rel => "external" }
+              %a{ :href => "http://www.imdb.com/title/#{movie.imdb_id}/", :target => '_blank' }
                 imdb
           %a.vote_for_me.i_choose_you_pikachu{ :href => "#" }
             vote

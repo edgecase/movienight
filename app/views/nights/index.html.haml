@@ -1,11 +1,11 @@
 #sidebar
-  .heading
+  %header
     %span.title Invitations
 
   .sidebar_content.invitations
     - pending_invitations.each do |invitation|
       %p.more
-        %a{ :href => night_path(invitation.night), :rel => "external" }
+        %a{ :href => night_path(invitation.night), :target => '_blank' }
           %span.label from:
           = invitation.host_name
           %br

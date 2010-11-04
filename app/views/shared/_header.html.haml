@@ -1,11 +1,8 @@
-%ul#navigation
-  %li
-    = link_to 'schedule', nights_path
-  %li
-    = link_to 'new movie night', new_night_path
-  - if user_signed_in?
-    %li
-      = link_to 'edit account', edit_user_registration_path
-    %li
-      = link_to 'logout', destroy_user_session_path
-
+%nav
+  %ul
+    %li= link_to 'movie night', nights_path, :id => 'logo_link'
+    %li= link_to 'Your Schedule', nights_path
+    %li= link_to 'New Movie Night', new_night_path
+    - if user_signed_in?
+      %li= link_to 'Edit Account', edit_user_registration_path
+      %li= link_to 'Logout', destroy_user_session_path

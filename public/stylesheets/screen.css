@@ -1,49 +1,38 @@
-@import "/stylesheets/login.css";
-@import "/stylesheets/navigation.css";
-@import "/stylesheets/forms.css";
-@import "/stylesheets/sidebar.css";
-@import "/stylesheets/voting.css";
-@import "/stylesheets/login.css";
-@import "/stylesheets/flash.css";
-
-.clear { clear: both; }
+@import '/stylesheets/login.css';
+@import '/stylesheets/navigation.css';
+@import '/stylesheets/forms.css';
+@import '/stylesheets/sidebar.css';
+@import '/stylesheets/voting.css';
+@import '/stylesheets/flash.css';
 
 body {
-  color: #fff;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", arial, sans-serif;
-  font-weight: 300;
-  background: #000 url(/images/body_background.png) repeat-x;
-  background-attachment: fixed;
+  color       : #fff;
+  font-family : 'museo-slab-1','museo-slab-2', 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', arial, sans-serif;
+  font-weight : 300;
+  background  : #000 url(/images/body_background.png) repeat-x;
 }
 
-em {
-  font-style: italic;
-}
+em { font-style: italic; }
 
 #container {
-  position: relative;
-  width: 915px;
-  margin: 0 auto;
-  padding-bottom: 40px;
+  position   : relative;
+  width      : 915px;
+  margin     : 0 auto;
 }
 
 #main_content {
-  float: right;
-  width: 540px;
+  float  : right;
+  width  : 540px;
 }
 
 #main_content h1 {
-  margin-bottom: 0.5em;
-  font-size: 42px;
+  margin-bottom : 0.5em;
+  font-size     : 42px;
 }
 
-#main_content h1.scheduled_night {
-  margin-bottom: 1em;
-}
+#main_content h1.scheduled_night { margin-bottom: 1em; }
 
-#main_content span.you {
-  color: #f55;
-}
+#main_content span.you { color: #f55; }
 
 #main_content h1.scheduled_night a {
   color: #fff;
@@ -68,36 +57,32 @@ em {
   text-transform: uppercase;
 }
 
-#main_content h1 span.time {
-  color: #645a68;
-}
+#main_content h1 span.time { color: #645a68; }
 
 #main_content p#time_info {
   margin-bottom: 2em;
   font-size: 14px;
 }
 
-/* FOOTER */
 
-#footer {
-  clear: both;
-  padding-top: 60px;
-  color: #fff;
-  font-size: 12px;
-  text-align: center;
-  opacity: 0.5;
+/* FOOTER ---------------------------------- */
+
+footer {
+  padding     : 60px 0 20px 0;
+  color       : #fff;
+  font-size   : 12px;
+  text-align  : center;
+  opacity     : 0.5;
 }
 
-#footer:hover {
-  opacity: 0.9;
+footer:hover { opacity: 0.9; }
+
+footer p { margin: 0; }
+
+footer a {
+  margin-left     : 10px;
+  color           : #fff;
+  text-decoration : none;
 }
 
-#footer a {
-  margin-left: 10px;
-  color: #fff;
-  text-decoration: none;
-}
-
-#footer a span {
-  opacity: 0.5;
-}
+footer a span { opacity: 0.5; }
