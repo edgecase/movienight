@@ -10,9 +10,9 @@ class User < ActiveRecord::Base
   has_many :hosted_nights, :class_name => 'Night', :foreign_key => :host_id
 
   has_many :invitations, :foreign_key => :invitee_id do
-    def accepted() self.are_attending end
-    def pending() self.awaiting_reply end
-    def rejected() self.not_attending end
+    def accepted() self.are_attending  end
+    def pending()  self.awaiting_reply end
+    def rejected() self.not_attending  end
   end
 
   validates :name, :presence => true, :unless => :invitee?
