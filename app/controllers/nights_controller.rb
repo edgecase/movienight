@@ -9,7 +9,11 @@ class NightsController < ApplicationController
       Night.find(params[:id])
     end
   end
-  assume(:invitee) { current_user.invitations.pending.find_by_night_id(night) if current_user }
+  assume(:invitation) do
+    if current_user
+      current_user.invitations.pending.find_by_night_id(night)
+    end
+  end
 
   assume(:hosted_nights)        { current_user.hosted_nights.sorted        }
   assume(:accepted_invitations) { current_user.invitations.accepted.sorted }

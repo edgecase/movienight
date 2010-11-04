@@ -1,14 +1,10 @@
 require 'spec_helper'
 
-describe Invitee do
-  it "should create a new instance given valid attributes" do
-    Factory.create(:invitee).should be_true
-  end
-
+describe Invitation do
   it "generates an access hash before create" do
-    invitee = Factory.build(:invitee)
-    invitee.access_hash.should be_blank
-    invitee.save!
-    invitee.access_hash.should_not be_blank
+    invitation = Invitation.new(:email => 'bob@email.com', :night => Night.new)
+    invitation.access_hash.should be_blank
+    invitation.save!
+    invitation.access_hash.should_not be_blank
   end
 end

@@ -5,11 +5,11 @@ describe Night do
     Factory(:night).save.should == true
   end
 
-  it "generates an invitee salt before create" do
+  it "generates an invitation salt before create" do
     night = Night.new(Factory.attributes_for(:night))
-    night.invitee_salt.should be_blank
+    night.invitation_salt.should be_blank
     night.save!
-    night.invitee_salt.should_not be_blank
+    night.invitation_salt.should_not be_blank
   end
 
   describe "#send_invitations" do
@@ -29,9 +29,9 @@ describe Night do
         Notifier.stub!(:nonmember_invitation => @mail)
       end
 
-      it "creates invitees for each email" do
+      it "creates invitations for each email" do
         @night.send_invitations "nonreg1@foobars.com; nonreg2@goober.com"
-        @night.invitees.count.should == 2
+        @night.invitations.count.should == 2
       end
 
       it "sends the non-member invitation" do

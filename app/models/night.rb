@@ -3,16 +3,16 @@ class Night < ActiveRecord::Base
 
   belongs_to :host, :class_name => "User"
   belongs_to :location
-  has_many   :invitees
+  has_many   :invitations
 
   belongs_to :movie
   has_many   :voteable_movies
 
   validates_presence_of :curtain_date, :curtain_time, :host, :location
 
-  attr_protected :invitee_salt
+  attr_protected :invitation_salt
 
-  before_create :generate_invitee_salt
+  before_create :generate_invitation_salt
 
   delegate :name,       :to => :location, :prefix => true
   delegate :human_name, :to => :location, :prefix => true
@@ -38,21 +38,21 @@ class Night < ActiveRecord::Base
     end
   end
 
-  def find_invitee(access_hash)
-    invitees.find_by_access_hash(access_hash)
+  def find_invitation(access_hash)
+    invitations.find_by_access_hash(access_hash)
   end
 
   private
 
   def invite(email)
-    user = User.find(:first, :conditions => ["LOWER(email)=?", email.downcase.strip])
-    invitee = invitees.new :email => email, :invited_user => user
-    if invitee.save
-      Notifier.nonmember_invitation(invitee, self).deliver
+    user = User.find_user_or_create_invitee(email)
+    invitation = invitations.new :email => email, :invitee => user
+    if invitation.save
+      Notifier.nonmember_invitation(invitation, self).deliver
     end
   end
 
-  def generate_invitee_salt
-    self.invitee_salt = Night.make_token
+  def generate_invitation_salt
+    self.invitation_salt = Night.make_token
   end
 end

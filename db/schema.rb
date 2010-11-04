@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101026212914) do
+ActiveRecord::Schema.define(:version => 20101104180644) do
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
@@ -20,14 +20,14 @@ ActiveRecord::Schema.define(:version => 20101026212914) do
     t.datetime "updated_at"
   end
 
-  create_table "invitees", :force => true do |t|
-    t.integer  "night_id",        :null => false
-    t.string   "email",           :null => false
+  create_table "invitations", :force => true do |t|
+    t.integer  "night_id",    :null => false
+    t.string   "email",       :null => false
     t.string   "access_hash"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "attending"
-    t.integer  "invited_user_id"
+    t.integer  "invitee_id"
   end
 
   create_table "locations", :force => true do |t|
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(:version => 20101026212914) do
     t.time     "curtain_time"
     t.date     "curtain_date"
     t.integer  "location_id"
-    t.string   "invitee_salt"
+    t.string   "invitation_salt"
     t.boolean  "bring_drinks"
     t.boolean  "bring_snacks"
     t.text     "notes"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(:version => 20101026212914) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.boolean  "invitee"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
@@ -96,7 +97,7 @@ ActiveRecord::Schema.define(:version => 20101026212914) do
   end
 
   create_table "votes", :force => true do |t|
-    t.integer  "invitee_id"
+    t.integer  "watcher_id"
     t.integer  "votable_movie_id"
     t.datetime "created_at"
     t.datetime "updated_at"

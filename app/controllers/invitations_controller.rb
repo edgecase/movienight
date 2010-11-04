@@ -10,7 +10,8 @@ class InvitationsController < ApplicationController
       Night.find(params[:night_id])
     end
   end
-  assume(:invitee) { night.find_invitee(params[:id]) }
+  assume(:invitation) { night.find_invitation(params[:id]) }
+  assume(:invitee)    { invitation.try(:invitee) }
 
   def new
   end
@@ -27,7 +28,7 @@ class InvitationsController < ApplicationController
   end
 
   def update
-    invitee.update_attributes(:attending => params[:attending])
+    invitation.update_attributes(:attending => params[:attending])
     redirect_to night_path(night)
   end
 
