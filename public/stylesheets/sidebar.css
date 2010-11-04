@@ -1,28 +1,31 @@
 #sidebar {
-  float: left;
-  width: 325px;
-  background: #000;
-  -webkit-border-top-left-radius: 5px;
-  -webkit-border-top-right-radius: 5px;
-  -moz-border-radius-topleft: 5px;
-  -moz-border-radius-topright: 5px;
+  position   : relative;
+  float      : left;
+  width      : 325px;
+  background : #000;
+  z-index    : 2;
+  
+  border-radius         : 5px;
+  -moz-border-radius    : 5px;
+  -webkit-border-radius : 5px;
+
+  box-shadow         : 0 0 30px rgba(255,255,255, 0.1);  
+  -moz-box-shadow    : 0 0 30px rgba(255,255,255, 0.1);
+  -webkit-box-shadow : 0 0 40px rgba(255,255,255, 0.1);
 }
 
-/* HEADING */
+/* SIDEBAR HEADING -------------------------------------------- */
 
-#sidebar .heading {
-  position: relative;
-  height: 56px;
-  border-bottom: 1px solid #110217;
-  padding-left: 25px;
-  line-height: 56px;
+#sidebar header {
+  position     : relative;
+  height       : 56px;
+  padding-left : 25px;
+  line-height  : 56px;
 }
 
-#sidebar .heading span.title {
-  font-size: 24px;
-}
+#sidebar header span.title { font-size: 24px; }
 
-#sidebar .heading a.rsvp {
+#sidebar header a.rsvp {
   position: absolute;
   top: 18px;
   display: block;
@@ -30,19 +33,19 @@
   text-indent: -999em;
 }
 
-#sidebar .heading a.yes {
+#sidebar header a.yes {
   right: 60px;
   width: 23px;
   background: url(/images/check_green.png);
 }
 
-#sidebar .heading a.no {
+#sidebar header a.no {
   right: 25px;
   width: 18px;
   background: url(/images/x_red.png);
 }
 
-#sidebar .heading.see_you_there {
+#sidebar header.see_you_there {
   background: #194106;
   -webkit-border-top-left-radius: 5px;
   -webkit-border-top-right-radius: 5px;
@@ -50,21 +53,21 @@
   -moz-border-radius-topright: 5px;
 }
 
-#sidebar .heading.see_you_there a.rsvp,
-#sidebar .heading.maybe_next_time a.rsvp {
+#sidebar header.see_you_there a.rsvp,
+#sidebar header.maybe_next_time a.rsvp {
   top: 22px;
   height: 10px;
 }
 
-#sidebar .heading.see_you_there a.yes,
-#sidebar .heading.maybe_next_time a.yes {
+#sidebar header.see_you_there a.yes,
+#sidebar header.maybe_next_time a.yes {
   right: 45px;
   width: 13px;
   background: url(/images/check_small.png);
 }
 
-#sidebar .heading.see_you_there a.no,
-#sidebar .heading.maybe_next_time a.no {
+#sidebar header.see_you_there a.no,
+#sidebar header.maybe_next_time a.no {
   right: 25px;
   width: 10px;
   background: url(/images/x_small.png);
@@ -72,19 +75,18 @@
 
 /* END HEADING */
 
-.sidebar_content {
-  padding: 20px 25px 25px 25px;
-}
+
+
+/* SIDEBAR CONTENT -------------------------------------------- */
+
+.sidebar_content { padding: 20px 25px 25px 25px; }
 
 .sidebar_content h1 {
   margin-bottom: 0.75em;
   font-size: 16px;
-  font-weight: bold;
 }
 
-.sidebar_content p {
-  margin-bottom: 1em;
-}
+.sidebar_content p { margin-bottom: 1em; }
 
 .sidebar_content p,
 .sidebar_content ul li {
@@ -98,9 +100,7 @@
   left: -25px;
 }
 
-.sidebar_content.invitations p.more {
-  margin-bottom: 0;
-}
+.sidebar_content.invitations p.more { margin-bottom: 0; }
 
 .sidebar_content p.more a {
   position: relative;
@@ -109,7 +109,6 @@
   padding: 6px 25px;
   color: #fff;
   font-size: 16px;
-  font-weight: bold;
   text-decoration: none;
 }
 
@@ -119,9 +118,7 @@
   font-weight: normal;
 }
 
-.sidebar_content p.more a:hover {
-  background: url(/images/sidebar_link_background.png) repeat-x;
-}
+.sidebar_content p.more a:hover { background: url(/images/sidebar_link_background.png) repeat-x; }
 
 .sidebar_content p.more a img {
   position: absolute;
@@ -137,10 +134,6 @@
   line-height: 27px;
 }
 
-.sidebar_content p.beer {
-  background: url(/images/beer.png) no-repeat 0% 50%;
-}
+.sidebar_content p.beer { background: url(/images/beer.png) no-repeat 0% 50%; }
 
-.sidebar_content p.snacks {
-  background: url(/images/fork_and_knife.png) no-repeat 1px 50%;
-}
+.sidebar_content p.snacks { background: url(/images/fork_and_knife.png) no-repeat 1px 50%; }

@@ -1,28 +1,41 @@
-ul#navigation {
-  height: 148px;
-  margin: 0 auto;
-  padding: 72px 0 0 315px;
-  font-size: 14px;
-  background: url(/images/logo.png) no-repeat 0 -65px;
+nav ul {
+  position   : relative;
+  height     : 148px;
+  margin     : 0 auto;
+  padding    : 68px 0 0 315px;
+  background : url(/images/logo.png) no-repeat;
 }
 
-ul#navigation li {
-  display: inline;
-  margin-right: 20px;
+nav ul li { display: inline; }
+
+nav ul li a {
+  margin-right    : 20px;
+  padding         : 10px 0;
+  color           : #645a68;
+  font-size       : 16px;
+  text-decoration : none;
+  text-shadow     : 0px 0px 1px rgba(255, 255, 255, 0.0);
+  
+  transition         : all 0.5s linear;
+  -0-transition      : all 0.5s linear;
+  -moz-transition    : all 0.5s linear;
+  -webkit-transition : all 0.5s linear;
 }
 
-ul#navigation li a {
-  color: #645a68;
-  text-decoration: none;
-  -webkit-transition: all 0.5s linear;
-  text-shadow: 0px 0px 1px rgba(255, 255, 255, 0.0);
+nav ul li a#logo_link {
+  position    : absolute;
+  top         : 62px;
+  left        : 66px;
+  padding     : 0;
+  color       : #c4b1e3;
+  font-size   : 26px;
+  font-weight : 500;
+  text-shadow : 0px 0px 10px rgba(255, 255, 255, 0.25);
 }
 
-ul#navigation:hover li a {
-  color: #fff;
-  text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
+nav ul:hover li a {
+  color       : #fff;
+  text-shadow : 0px 0px 5px rgba(255, 255, 255, 0.5);
 }
 
-body.login_or_signup ul#navigation {
-  display: none;
-}
+body.login_or_signup nav { display: none; }

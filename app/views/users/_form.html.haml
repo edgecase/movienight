@@ -5,17 +5,17 @@
 .field
   = f.label :email
   = f.text_field :email
+  
 - if current_password_required
-
   .field
     = f.label :current_password
     = f.password_field :current_password
 
 .field
-  = f.label :password, 'New password'
+  = f.label :password, 'Password'
   = f.password_field :password
 
 .field
-  = f.label :password_confirmation, 'Confirm new pw'
+  = f.label :password_confirmation, 'Confirm Password'
   = f.password_field :password_confirmation
 

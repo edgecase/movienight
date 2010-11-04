@@ -12,9 +12,8 @@ module ApplicationHelper
 
   def body_classes
     classes = "#{params[:controller]} #{params[:action]}"
-    if ((params[:controller] == 'sessions' && params[:action] == 'new') ||
-        (params[:controller] == 'users' && params[:action] == 'new'))
-      classes << ' login_or_signup'
+    if (classes.scan('devise').any?)
+      classes << ' login'
     end
     classes
   end

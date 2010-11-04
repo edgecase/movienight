@@ -1,21 +1,33 @@
-body.login_or_signup #container {
+body.login #container {
   width: 475px;
   padding-top: 220px;
-  background: url(/images/logo.png) no-repeat 50% -65px;
+  background: url(/images/logo.png) no-repeat 50% 0;
 }
 
-body.login_or_signup h1 {
+body.login nav ul {
+  height: auto;
+  padding: 0;
+  background : none;
+}
+body.login nav a { display:none; }
+body.login nav a#logo_link {
+  display : inline;
+  top     : -159px;
+  left    : 167px;
+}
+
+body.login h1 {
   margin-bottom: 20px;
   padding-left: 112px;
   font-size: 21px;
 }
 
-body.login_or_signup form .field {
+body.login form .field {
   clear: both;
   zoom: 1;
 }
 
-body.login_or_signup form .field label,
+body.login form .field label,
 body.users.edit form .field label {
   zoom: 1;
   float: left;
@@ -26,15 +38,15 @@ body.users.edit form .field label {
   text-transform: lowercase;
 }
 
-body.login_or_signup form .field input {
+body.login form .field input {
   width: 350px;
 }
 
-body.login_or_signup form .field.password input {
+body.login form .field.password input {
   width: 210px;
 }
 
-body.login_or_signup form .field.password a {
+body.login form .field.password a {
   display: block;
   float: right;
   color: #9260bb;
@@ -42,24 +54,23 @@ body.login_or_signup form .field.password a {
   line-height: 45px;
 }
 
-body.login_or_signup form .submit,
+body.login form .submit,
 body.users.edit form .submit {
   padding-left: 115px;
 }
 
-body.login_or_signup form .submit p {
+body.login form .submit p {
   float: right;
   color: #9260bb;
   font-size: 14px;
   line-height: 44px;
 }
 
-body.login_or_signup form .submit p a {
+body.login form .submit p a {
   color: #fff;
-  font-weight: bold;
   text-transform: uppercase;
 }
 
-body.login_or_signup #footer {
+body.login #footer {
   display: none;
 }
