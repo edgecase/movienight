@@ -1,10 +1,10 @@
 #sidebar
   /
     HEADING when user needs to rsvp
-  - if invitee
-    = form_tag night_invitation_path(night, invitee), :method => :put, :id => "rsvp_yes" do
+  - if invitation
+    = form_tag night_invitation_path(night, invitation), :method => :put, :id => "rsvp_yes" do
       = hidden_field_tag :attending, true
-    = form_tag night_invitation_path(night, invitee), :method => :put, :id => "rsvp_no" do
+    = form_tag night_invitation_path(night, invitation), :method => :put, :id => "rsvp_no" do
       = hidden_field_tag :attending, false
     %header.can_you_make_it
       %span.title
@@ -49,13 +49,13 @@
       %p= night.notes
       %br
     %h1
-      - attending = night.invitees.are_attending
+      - attending = night.invitations.are_attending
       = pluralize attending.count, "person"
       attending in addition to host
     %ul
-      - attending.each do |inv|
+      - attending.each do |invitation|
         %li
-          = inv.invited_user || inv.email
+          = invitee_name_or_email(invitation)
   /
     \/.sidebar_content
 /

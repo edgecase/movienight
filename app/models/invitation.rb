@@ -1,8 +1,8 @@
-class Invitee < ActiveRecord::Base
+class Invitation < ActiveRecord::Base
   extend TokenGeneration
 
   belongs_to :night
-  belongs_to :invited_user, :class_name => "User"
+  belongs_to :invitee, :class_name => "User"
 
   has_many :votes
 
@@ -29,7 +29,7 @@ class Invitee < ActiveRecord::Base
   private
 
   def generate_access_hash
-    self.access_hash = Invitee.make_hash(email, night.invitee_salt)
+    self.access_hash = Invitation.make_hash(email, night.invitation_salt)
   end
 
 end
