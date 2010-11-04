@@ -3,7 +3,8 @@ Movienight::Application.routes.draw do
   devise_for :users
 
   resources :nights do
-    resources :invitations, :except => [:index, :show, :destroy], :path_names => { :edit => 'confirm' }
+    resources :invitations, :except     => [:index, :show, :destroy],
+                            :path_names => { :edit => 'confirm' }
   end
 
   resources :locations, :except => [:new, :show]
