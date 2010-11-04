@@ -1,3 +1,6 @@
+form {
+  font-family : 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', arial, sans-serif;
+}
 form fieldset {
   position: relative;
   border-bottom: 1px solid #291c2f;
@@ -14,7 +17,7 @@ form fieldset legend span {
   left: -150px;
   display: block;
   width: 125px;
-  font-size: 24px;
+  font: 24px 'museo-slab-1','museo-slab-2', 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', arial, sans-serif;
   text-align: right;
 }
 
