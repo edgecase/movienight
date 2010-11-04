@@ -9,7 +9,7 @@ gem 'haml'    ,         '~> 3.0.22'
 gem 'httparty',         '~> 0.6.1'
 gem 'jquery-rails',     '~> 0.2.4'
 gem 'nokogiri',         '~> 1.4.3.1'
-gem 'mysql2',           '~> 0.2.6'
+gem 'pg',               '~> 0.9.0'
 
 gem 'thin'
 # gem 'capistrano'
