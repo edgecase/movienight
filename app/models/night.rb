@@ -32,7 +32,7 @@ class Night < ActiveRecord::Base
 
   def send_invitations(emails)
     parsed(emails).each do |email|
-      user = User.find_user_or_create_invitee(email)
+      user = User.find_user_or_create_invited_user(email)
       invitations.create(:email => email, :invitee => user)
     end
   end

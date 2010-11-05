@@ -39,7 +39,7 @@ describe User do
     end
   end
 
-  describe ".find_user_or_create_invitee" do
+  describe ".find_user_or_create_invited_user" do
     let(:email) { "steve@foo.com" }
 
     context "when the email belongs to an existing user" do
@@ -51,7 +51,7 @@ describe User do
       end
 
       it "returns the user" do
-        user = User.find_user_or_create_invitee(email)
+        user = User.find_user_or_create_invited_user(email)
         user.name.should == 'Steve'
         user.should_not be_an_invitee
       end
@@ -63,7 +63,7 @@ describe User do
       end
 
       it "returns a newly create invitee user" do
-        user = User.find_user_or_create_invitee(email)
+        user = User.find_user_or_create_invited_user(email)
 
         user.should be_an_invitee
         user.should be_persisted

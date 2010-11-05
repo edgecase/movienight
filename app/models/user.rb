@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 
   validates :name, :presence => true, :unless => :invitee?
 
-  def self.find_user_or_create_invitee(email)
+  def self.find_user_or_create_invited_user(email)
     user = find(:first, :conditions => ["LOWER(email)=?", email.downcase.strip])
     unless user
       user = User.new(:email => email)
