@@ -10,7 +10,7 @@ class Invitation < ActiveRecord::Base
   before_create :generate_access_hash
   after_create  :send_notification
 
-  attr_protected :access_hash
+  attr_accessible :attending
 
   delegate :email, :to => :invitee
   delegate :location_name, :location_human_name, :curtain_date,
