@@ -31,10 +31,9 @@ class Night < ActiveRecord::Base
   end
 
   def send_invitations(emails)
-    return unless emails
-
-    emails.split(/[\s;,]+/).each do |email|
-      invite(email.strip)
+    parsed(emails).each do |email|
+      user = User.find_user_or_create_invitee(email)
+      invitations.create(:email => email, :invitee => user)
     end
   end
 
@@ -44,12 +43,9 @@ class Night < ActiveRecord::Base
 
   private
 
-  def invite(email)
-    user = User.find_user_or_create_invitee(email)
-    invitation = invitations.new :email => email, :invitee => user
-    if invitation.save
-      Notifier.nonmember_invitation(invitation, self).deliver
-    end
+  def parsed(email)
+    return [] unless emails
+    emails.split(/[\s;,]+/).map(&:strip)
   end
 
   def generate_invitation_salt

@@ -10,6 +10,7 @@ class Invitation < ActiveRecord::Base
   validates_uniqueness_of :night_id, :scope => [:email]
 
   before_create :generate_access_hash
+  after_create  :send_notification
 
   attr_protected :access_hash
 
@@ -30,6 +31,14 @@ class Invitation < ActiveRecord::Base
 
   def generate_access_hash
     self.access_hash = Invitation.make_hash(email, night.invitation_salt)
+  end
+
+  def send_notification
+    if invitee.invitee?
+      Notifier.registered_member_invitation(self, night).deliver
+    else
+      Notifier.nonmember_invitation(self, night).deliver
+    end
   end
 
 end
