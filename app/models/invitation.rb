@@ -17,8 +17,8 @@ class Invitation < ActiveRecord::Base
            :human_curtain_date, :human_curtain_time, :host_name,
            :movie_title, :to => :night
 
-  scope :are_attending,  where(:attending => true)
   scope :awaiting_reply, where(:attending => nil)
+  scope :are_attending,  where(:attending => true)
   scope :not_attending,  where(:attending => false)
   scope :sorted,         joins(:night).order("nights.curtain_date")
 
