@@ -6,14 +6,15 @@ class Invitation < ActiveRecord::Base
 
   has_many :votes
 
-  validates_presence_of :night, :email
-  validates_uniqueness_of :night_id, :scope => [:email]
+  validates_presence_of :night
+  validates_uniqueness_of :night_id, :scope => :invitee
 
   before_create :generate_access_hash
   after_create  :send_notification
 
   attr_protected :access_hash
 
+  delegate :email, :to => :invitee
   delegate :location_name, :location_human_name, :curtain_date,
            :human_curtain_date, :human_curtain_time, :host_name,
            :movie_title, :to => :night

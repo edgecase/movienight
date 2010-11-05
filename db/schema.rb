@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101104180644) do
+ActiveRecord::Schema.define(:version => 20101105023419) do
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(:version => 20101104180644) do
 
   create_table "invitations", :force => true do |t|
     t.integer  "night_id",    :null => false
-    t.string   "email",       :null => false
     t.string   "access_hash"
     t.datetime "created_at"
     t.datetime "updated_at"
