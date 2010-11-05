@@ -6,8 +6,8 @@ class Invitation < ActiveRecord::Base
 
   has_many :votes
 
-  validates_presence_of :night
-  validates_uniqueness_of :night_id, :scope => :invitee
+  validates_presence_of   :night, :invitee
+  validates_uniqueness_of :night_id, :scope => :invitee_id
 
   before_create :generate_access_hash
   after_create  :send_notification
@@ -31,7 +31,7 @@ class Invitation < ActiveRecord::Base
   private
 
   def generate_access_hash
-    self.access_hash = Invitation.make_hash(email, night.invitation_salt)
+    self.access_hash = self.class.make_hash(email, night.invitation_salt)
   end
 
   def send_notification
