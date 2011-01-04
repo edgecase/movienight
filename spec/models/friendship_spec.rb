@@ -1,12 +1,8 @@
 require 'spec_helper'
 
 describe Friendship do
-  it "should create a new instance given valid attributes" do
-    Factory(:friendship).save.should be_true
-  end
-
   it "should not save when a user attemps to friend itself" do
-    user = Factory(:random_user)
+    user = Factory(:user)
     Friendship.new(:user => user, :friend => user).save.should be_false
   end
 

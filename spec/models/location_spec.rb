@@ -7,7 +7,7 @@ describe Location do
 
   describe "#to_s" do
     it "should join fields with a comma" do
-      Factory.build(:location).to_s.should == "2109 W 5th ave, Columbus OH"
+      Factory.build(:location).to_s.should match(/\d+ Any St., Columbus OH/)
     end
   end
 end

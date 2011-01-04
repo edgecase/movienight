@@ -19,5 +19,6 @@ gem 'ruby-debug19', '~> 0.11.6', :platforms => :mri_19
 
 group :test do
   gem 'rspec-rails',        '~> 2.0.1'
+  gem 'factory_girl_rails', '~> 1.0.0'
   gem 'fakeweb',            '~> 1.3.0'
 end

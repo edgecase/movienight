@@ -43,7 +43,7 @@ class Night < ActiveRecord::Base
 
   private
 
-  def parsed(email)
+  def parsed(emails)
     return [] unless emails
     emails.split(/[\s;,]+/).map(&:strip)
   end

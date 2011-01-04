@@ -76,4 +76,28 @@ describe User do
       User.new.friends.should be_empty
     end
   end
+
+  describe "#notify_of_invitation!" do
+    let(:invitation) { Factory(:invitation) }
+    let(:invitee)    { invitation.invitee }
+    let(:email)      { stub.tap {|e| e.should_receive(:deliver)} }
+
+
+    context "when an invitee" do
+      before { invitee.invitee = true }
+      it "sends a member invitation" do
+        Notifier.should_receive(:nonmember_invitation).never
+        Notifier.should_receive(:registered_member_invitation).and_return(email)
+        invitee.notify_of_invitation!(invitation)
+      end
+    end
+
+    context "when a regular user" do
+      it "sends a member invitation" do
+        Notifier.should_receive(:registered_member_invitation).never
+        Notifier.should_receive(:nonmember_invitation).and_return(email)
+        invitee.notify_of_invitation!(invitation)
+      end
+    end
+  end
 end
