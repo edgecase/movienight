@@ -1,14 +1,13 @@
 /*
  * Facebox (for jQuery)
- * version: 1.2 (05/05/2008)
+ * version: 1.3
  * @requires jQuery v1.2 or later
- *
- * Examples at http://famspam.com/facebox/
+ * @homepage https://github.com/defunkt/facebox
  *
  * Licensed under the MIT:
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * Copyright 2007, 2008 Chris Wanstrath [ chris@ozmm.org ]
+ * Copyright Forever Chris Wanstrath, Kyle Neath
  *
  * Usage:
  *
@@ -59,6 +58,7 @@
  *    beforeReveal.facebox
  *    reveal.facebox (aliased as 'afterReveal.facebox')
  *    init.facebox
+ *    afterClose.facebox
  *
  *  Simply bind a function to any of these hooks:
  *
@@ -82,37 +82,17 @@
 
   $.extend($.facebox, {
     settings: {
-      opacity      : 0,
+      opacity      : 0.2,
       overlay      : true,
       loadingImage : '/facebox/loading.gif',
-      closeImage   : '/facebox/closelabel.gif',
+      closeImage   : '/facebox/closelabel.png',
       imageTypes   : [ 'png', 'jpg', 'jpeg', 'gif' ],
       faceboxHtml  : '\
     <div id="facebox" style="display:none;"> \
       <div class="popup"> \
-        <table> \
-          <tbody> \
-            <tr> \
-              <td class="tl"/><td class="b"/><td class="tr"/> \
-            </tr> \
-            <tr> \
-              <td class="b"/> \
-              <td class="body"> \
-                <div class="content"> \
-                </div> \
-                <div class="footer"> \
-                  <a href="#" class="close"> \
-                    <img src="/facebox/closelabel.gif" title="close" class="close_image" /> \
-                  </a> \
-                </div> \
-              </td> \
-              <td class="b"/> \
-            </tr> \
-            <tr> \
-              <td class="bl"/><td class="b"/><td class="br"/> \
-            </tr> \
-          </tbody> \
-        </table> \
+        <div class="content"> \
+        </div> \
+        <a href="#" class="close"><img src="/facebox/closelabel.png" title="close" class="close_image" /></a> \
       </div> \
     </div>'
     },
@@ -144,7 +124,7 @@
       $('#facebox .content').append(data)
       $('#facebox .loading').remove()
       $('#facebox .body').children().fadeIn('normal')
-      $('#facebox').css('left', $(window).width() / 2 - ($('#facebox table').width() / 2))
+      $('#facebox').css('left', $(window).width() / 2 - ($('#facebox .popup').outerWidth() / 2))
       $(document).trigger('reveal.facebox').trigger('afterReveal.facebox')
     },
 
@@ -319,9 +299,10 @@
     $(document).unbind('keydown.facebox')
     $('#facebox').fadeOut(function() {
       $('#facebox .content').removeClass().addClass('content')
-      hideOverlay()
       $('#facebox .loading').remove()
+      $(document).trigger('afterClose.facebox')
     })
+    hideOverlay()
   })
 
 })(jQuery);

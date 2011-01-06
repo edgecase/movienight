@@ -15,13 +15,13 @@ $(function() {
     return false;
   });
 
-  $('a#cancel_new_location').always().click(function(event) {
+  $('a#cancel_new_location').live('click', function(event) {
     $('#new_location.location_source').hide();
     $('#saved_locations').show();
     return false;
   });
 
-  $('a.edit.location').always().click(function(event) {
+  $('a.edit.location').live('click', function(event) {
     $('#edit_location').css('height', $('#saved_locations').css('height')).show();
     $("#saved_locations.location_source").hide();
     $(this).siblings("input[type='radio']").attr('checked', 'checked');
@@ -31,7 +31,7 @@ $(function() {
     return false;
   });
 
-  $('a#cancel_edit_location').always().click(function(event) {
+  $('a#cancel_edit_location').live('click', function(event) {
     $('#edit_location.location_source').html('').hide();
     $("#saved_locations.location_source").show();
     return false;
@@ -44,12 +44,12 @@ $(function() {
     }
   });
 
-  $(".saved_location input[type='radio']").always().click(function(){
+  $(".saved_location input[type='radio']").live('click', function(){
     var $html = $(this).parents(".saved_location").find(".location_details").html();
     $("#saved_location_details").html($html).show();
   });
 
-  $('#edit_location input').always().keydown(function(e) {
+  $('#edit_location input').live('keydown', function(e) {
     if(e.keyCode == 13) {
       $("a#update_location").click();
       return false;
@@ -57,16 +57,21 @@ $(function() {
   });
 
   $('.movie input').blur(function() {
-    var title_input = $(this)
-    var results = title_input.nextAll('span.results');
-    if (title_input.val()) {
-      var search_link = $(this).nextAll('a.search');
-      $.get(search_link.attr('href'), { movie_title: title_input.val() }, function(html) {
-        results.html(html);
+    var titleInput    = $(this)
+    var resultsNotice = titleInput.nextAll('span.results');
+
+    if (titleInput.val()) {
+      var searchLink = $(this).nextAll('a.search');
+      var faceboxId  = $('a.results', resultsNotice).attr('href');
+
+      $.getJSON(searchLink.attr('href'), { movie_title: titleInput.val() }, function(results) {
+        renderResultsToFacebox(faceboxId, results);
+        resultsNotice.show();
         $('a[rel*=facebox]').facebox();
       });
-    } else
+    } else {
       results.html('');
+    }
   });
 
   $('#add_location').click(function() {
@@ -90,7 +95,7 @@ $(function() {
     return false;
   });
 
-  $('a#update_location').always().click(function(event) {
+  $('a#update_location').live('click', function(event) {
     var data = $('#edit_location input').serialize();
     var name = $('#edit_location input#location_name').val();
     $.ajax({
@@ -117,7 +122,7 @@ $(function() {
     return false;
   });
 
-  $('a.delete_location').always().click(function(event) {
+  $('a.delete_location').live('click', function(event) {
     var data = $('#saved_location_details form.delete_location input').serialize();
     $.ajax({
       url: event.target.href,
@@ -168,5 +173,13 @@ $(function() {
     $('.field#movie_header a').toggle();
     return false;
   });
+
+  function renderResultsToFacebox(faceboxId, results) {
+    $facebox = $(faceboxId);
+
+    for(result in results) {
+      
+    }
+  }
 
 });
