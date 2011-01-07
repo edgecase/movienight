@@ -31,15 +31,6 @@ class User < ActiveRecord::Base
     name
   end
 
-  def notify_of_invitation!(invitation)
-    mail = if invitee?
-      Notifier.registered_member_invitation(invitation)
-    else
-      Notifier.nonmember_invitation(invitation)
-    end
-    mail.deliver
-  end
-
   protected
 
   def password_required?

@@ -25,6 +25,15 @@ class Invitation < ActiveRecord::Base
     access_hash if persisted?
   end
 
+  def deliver
+    mail = if invitee.invitee?
+      Notifier.registered_member_invitation(self)
+    else
+      Notifier.nonmember_invitation(self)
+    end
+    mail.deliver
+  end
+
   private
 
   def generate_access_hash
