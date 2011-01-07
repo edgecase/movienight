@@ -8,7 +8,8 @@ module TheMovieDatabase
 
   def self.search_titles(title)
     movie_listings_for(title).collect do |listing|
-      movie_from listing
+      movie = Movie.find_by_imdb_id(listing['imdb'])
+      movie || movie_from(listing)
     end
   end
 
@@ -26,16 +27,17 @@ module TheMovieDatabase
     end
 
     def movie_from(listing)
-      Movie.new(
+      movie = Movie.new(
         :title      => listing['title'],
         :alt_title  => listing['alternative_title'],
         :popularity => listing['popularity'],
         :tmdb_id    => listing['id'],
         :imdb_id    => listing['imdb'],
         :posters    => listing['poster']
-      ).tap do |movie|
-        movie.release = DateTime.parse(listing['release']) if listing['release'] 
-      end
+      )
+      movie.release = DateTime.parse(listing['release']) if listing['release']
+      movie.save
+      movie
     end
   end
 end
