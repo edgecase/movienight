@@ -48,14 +48,33 @@
         Notes
       %p= night.notes
       %br
-    %h1
-      - attending = night.invitations.are_attending
-      = pluralize attending.count, "person"
-      attending in addition to host
-    %ul
-      - attending.each do |invitation|
-        %li
-          = invitee_name_or_email(invitation)
+    - attending = night.invitations.are_attending
+    - if attending.any?
+      %h1
+        = pluralize attending.count, "person"
+        attending in addition to host
+      %ul
+        - attending.each do |invitation|
+          %li
+            = invitee_name_or_email(invitation)
+    - awaiting = night.invitations.awaiting_reply
+    - if awaiting.any?
+      %h1
+        = pluralize awaiting.count, "person"
+        awaiting reply
+      %ul
+        - awaiting.each do |invitation|
+          %li
+            = invitee_name_or_email(invitation)
+    - not_attending = night.invitations.not_attending
+    - if not_attending.any?
+      %h1
+        = pluralize not_attending.count, "person"
+        can't make it
+      %ul
+        - not_attending.each do |invitation|
+          %li
+            = invitee_name_or_email(invitation)
   /
     \/.sidebar_content
 /
