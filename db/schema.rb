@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101107163846) do
+ActiveRecord::Schema.define(:version => 20110107163122) do
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
@@ -96,8 +96,8 @@ ActiveRecord::Schema.define(:version => 20101107163846) do
   end
 
   create_table "votes", :force => true do |t|
-    t.integer  "watcher_id"
-    t.integer  "votable_movie_id"
+    t.integer  "voter_id"
+    t.integer  "voteable_movie_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
