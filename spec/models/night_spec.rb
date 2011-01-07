@@ -43,4 +43,33 @@ describe Night do
     end
   end
 
+  describe "#voted_on_by?" do
+    let(:user)  { Factory :user }
+    let(:night) { Factory :night }
+    let(:movie) { Factory :movie }
+
+    before do
+      night.voteable_movies.create(:movie => movie)
+      other_user = Factory(:user)
+
+      night.voteable_movies.last.votes.create(:voter => other_user)
+    end
+
+    context "user's id appears in votes" do
+      before do
+        night.voteable_movies.last.votes.create(:voter => user)
+      end
+
+      it "returns true" do
+        night.voted_on_by?(user).should be_true
+      end
+    end
+
+    context "user's id does not appear in votes" do
+      it "returns false" do
+        night.voted_on_by?(user).should be_false
+      end
+    end
+  end
+
 end
