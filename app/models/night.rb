@@ -8,6 +8,8 @@ class Night < ActiveRecord::Base
   belongs_to :movie
   has_many   :voteable_movies
 
+  accepts_nested_attributes_for :voteable_movies
+
   validates_presence_of :curtain_date, :curtain_time, :host, :location
 
   attr_protected :invitation_salt

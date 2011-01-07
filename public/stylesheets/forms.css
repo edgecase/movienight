@@ -139,6 +139,10 @@ form .field.movie a.search {
   background: url(/images/zoom_small.png) no-repeat;
 }
 
+form .field.movie span.results {
+  display: none;
+}
+
 form .field.movie a.results {
   position: absolute;
   top: 0;
@@ -147,6 +151,10 @@ form .field.movie a.results {
   color: #fff;
   line-height: 40px;
   text-align: right;
+}
+
+#facebox {
+  color: black;
 }
 
 form #drinks_and_snacks {

@@ -50,26 +50,38 @@
     .half#dictate_movie{:style => 'display: none'}
       .field.movie
         %input{ :type => "text" }
+        %input{ :type => "hidden", :name => "night[movie_id]", :disabled => "disabled" }
         %a{ :href => title_search_movies_path, :class => 'search', :onclick => "return false" }
           search
         %span.results
+          %a.results{ :href => '#full_results', :rel => 'facebox' }
+            %span.results_count 0
+            results found
       %a#nah_lets_vote{:href => '#'}
         you know what, let's vote instead
     .half#voting_options{:style => 'display: none'}
       .field.movie{:style => 'display: none;'}
         %input{ :type => "text" }
+        %input{ :type => "hidden", :name => "night[voteable_movies_attributes][][movie_id]", :disabled => "disabled" }
         %a{ :href => "#", :class => 'remove' }
           remove
         %a{ :href => title_search_movies_path, :class => 'search', :onclick => "return false" }
           search
         %span.results
+          %a.results{ :href => '#full_results', :rel => 'facebox' }
+            %span.results_count 0
+            results found
       .field.movie
         %input{ :type => "text" }
+        %input{ :type => "hidden", :name => "night[voteable_movies_attributes][][movie_id]", :disabled => "disabled" }
         %a{ :href => "#", :class => 'remove' }
           remove
         %a{ :href => title_search_movies_path, :class => 'search', :onclick => "return false" }
           search
         %span.results
+          %a.results{ :href => '#full_results', :rel => 'facebox' }
+            %span.results_count 0
+            results found
       %a#im_gonna_dictate{:href => '#'}
         actually, i know what i want to watch
 
@@ -90,3 +102,12 @@
         = form.text_area :notes
   .submit
     %input{ :type => "submit", :value => "schedule movie night" }
+
+%script(id="movieResult" type="x-jquery-templ")
+  %ul.result
+    %li.title ${title}
+    %li.release-date ${release_date}
+    %li
+      %img(src="${poster_url}" alt="${title}" data-movie-id="${id}")
+
+#full_results{:style => 'display: none;'}

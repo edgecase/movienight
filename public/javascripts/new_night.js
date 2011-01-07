@@ -59,19 +59,43 @@ $(function() {
   $('.movie input').blur(function() {
     var titleInput    = $(this)
     var resultsNotice = titleInput.nextAll('span.results');
+    var fullResults   = $('#full_results');
 
     if (titleInput.val()) {
       var searchLink = $(this).nextAll('a.search');
-      var faceboxId  = $('a.results', resultsNotice).attr('href');
 
       $.getJSON(searchLink.attr('href'), { movie_title: titleInput.val() }, function(results) {
-        renderResultsToFacebox(faceboxId, results);
-        resultsNotice.show();
+        titleInput.attr('data-active-movie-id-input', true);
+
+        fullResults.empty();
+
+        $('#movieResult').tmpl(results.movies).
+          appendTo(fullResults);
+
+        resultsNotice.show().
+          find('span.results_count').
+          html(results.count);
+
         $('a[rel*=facebox]').facebox();
       });
-    } else {
-      results.html('');
     }
+  });
+
+  $('#facebox ul.result img').live('click', function(){
+    var facebox      = $('#facebox');
+    var titleInput   = $('input[data-active-movie-id-input=true]');
+    var movieIdInput = titleInput.nextAll('input[type=hidden]');
+
+    var movieId      = $(this).attr('data-movie-id');
+    movieIdInput.val(movieId);
+    movieIdInput.removeAttr('disabled');
+
+    var movieTitle   = $(this).attr('alt');
+    titleInput.val(movieTitle);
+    titleInput.attr('disabled', 'disabled');
+    titleInput.removeAttr('data-active-movie-id-input');
+
+    facebox.hide();
   });
 
   $('#add_location').click(function() {
@@ -173,13 +197,5 @@ $(function() {
     $('.field#movie_header a').toggle();
     return false;
   });
-
-  function renderResultsToFacebox(faceboxId, results) {
-    $facebox = $(faceboxId);
-
-    for(result in results) {
-      
-    }
-  }
 
 });

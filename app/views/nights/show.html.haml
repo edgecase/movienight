@@ -101,7 +101,7 @@
         .movie
           %h3
             = h movie.title
-          %img.movie_image{ :src => "#{poster_url(movie)}", :alt => "#{movie.title}" }
+          %img.movie_image{ :src => "#{movie.poster_url}", :alt => "#{movie.title}" }
           %p.more_info
             %a{ :href => "http://www.amazon.com/s?index=blended&field-keywords=#{CGI.escape(movie.title)}", :target => '_blank' }
               search amazon.com
