@@ -314,6 +314,13 @@ fieldset #saved_locations #saved_location_details {
   color: #664084;
 }
 
+#dictate_movie a, #voting_options a {
+  display: inline-block;
+  margin-top: 8px;
+  margin-right: 6px;
+  color: #664084;
+}
+
 fieldset #new_location {
   display: none;
   clear: both;
