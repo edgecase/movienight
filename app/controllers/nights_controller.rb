@@ -40,10 +40,18 @@ class NightsController < ApplicationController
 
   def update
     if night.update_attributes(params[:night])
-      flash[:notice] = 'Night was successfully updated.'
-      redirect_to(night)
+      respond_to do |format|
+        format.json { render :json => night.to_json(:include => :movie) }
+        format.html do
+          flash[:notice] = 'Night was successfully updated.'
+          redirect_to(night)
+        end
+      end
     else
-      render :action => "edit"
+      respond_to do |format|
+        format.json { render :json => { :errors => night.errors.full_messages }, :status => :forbidden }
+        format.html { render :action => "edit" }
+      end
     end
   end
 

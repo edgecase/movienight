@@ -6,4 +6,8 @@ class VoteableMovie < ActiveRecord::Base
   has_many :voters, :through => :votes
 
   delegate :poster_url, :title, :release, :imdb_id, :tmdb_id, :to => :movie
+
+  def movie_id
+    movie.id
+  end
 end

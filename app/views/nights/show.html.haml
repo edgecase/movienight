@@ -85,7 +85,8 @@
 #main_content
   %h1
     %span.movie{:class => voting_state_class(night)}
-      = "#{movie_name(night)} at"
+      %span= "#{movie_name(night)}"
+      at
       %span{ :class => current_user_is_host ? "you" : "" }
         = night.location_human_name
     = night.human_curtain_date
@@ -101,7 +102,9 @@
       - night.voteable_movies.each do |movie|
         .movie
           %h3
-            = h movie.title
+            = movie.title
+            - if night.hosted_by? current_user
+              %a.choose_this_movie{:href => night_path(night), 'data-movie-id' => movie.movie_id} Pick this one!
           %img.movie_image{ :src => "#{movie.poster_url}", :alt => "#{movie.title}" }
           %p.more_info
             %a{ :href => "http://www.amazon.com/s?index=blended&field-keywords=#{CGI.escape(movie.title)}", :target => '_blank' }
