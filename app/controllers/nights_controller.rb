@@ -1,14 +1,9 @@
 class NightsController < ApplicationController
   skip_before_filter :authenticate_user!,    :only => :show
   before_filter      :logged_in_or_invited?, :only => :show
+  before_filter      :current_user_is_host?, :only => [:edit, :update, :destroy]
 
-  assume(:night) do
-    if current_user
-      current_user.hosted_nights.find(params[:id])
-    else
-      Night.find(params[:id])
-    end
-  end
+  assume(:night) { Night.find(params[:id]) }
   assume(:invitation) do
     if current_user
       current_user.invitations.pending.find_by_night_id(night)
@@ -68,5 +63,4 @@ class NightsController < ApplicationController
       end
     end
   end
-
 end

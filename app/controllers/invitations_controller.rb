@@ -1,15 +1,8 @@
 class InvitationsController < ApplicationController
-  skip_before_filter :authenticate_user!, :only => [:edit, :update]
+  skip_before_filter :authenticate_user!,    :only => [:edit, :update]
+  before_filter      :current_user_is_host?, :only => :create
 
-  #assume :night, :of => :current_user, :as => :hosted_night, :fallback => true
-
-  assume(:night) do
-    if current_user.present?
-      current_user.hosted_nights.find(params[:night_id])
-    else
-      Night.find(params[:night_id])
-    end
-  end
+  assume(:night)      { Night.find(params[:night_id]) }
   assume(:invitation) { night.find_invitation(params[:id]) }
   assume(:invitee)    { invitation.try(:invitee) }
 
