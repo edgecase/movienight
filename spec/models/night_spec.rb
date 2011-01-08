@@ -13,32 +13,32 @@ describe Night do
   end
 
   describe "#send_invitations" do
-    before do
-      @user1 = Factory(:user, :email => "user1@example.com")
-      @user2 = Factory(:user, :email => "user2@example.com")
-      @night = Factory(:night)
-    end
+    let(:night) { Factory(:night) }
+    let(:user1) { Factory(:user, :email => "user1@example.com") }
+    let(:user2) { Factory(:user, :email => "user2@example.com") }
 
     it "does not blow up when passed nil" do
-      proc { @night.send_invitations nil }.should_not raise_error
+      proc { night.send_invitations nil }.should_not raise_error
     end
 
     describe "when emails do not have associated user accounts" do
+      let(:mail) { stub(:deliver => true) }
+
       before do
-        @mail = stub(:deliver => true)
-        Notifier.stub!(:nonmember_invitation => @mail)
+        Notifier.stub!(:nonmember_invitation => mail)
+        Notifier.stub!(:registered_member_invitation => mail)
       end
 
       it "creates invitations for each email" do
-        pending "Must rework how invites are sent"
-        @night.send_invitations "nonreg1@foobars.com; nonreg2@goober.com"
-        @night.invitations.count.should == 2
+        Notifier.should_receive(:registered_member_invitation).twice
+        night.send_invitations [user1.email, user2.email].join('; ')
+        night.invitations.count.should == 2
       end
 
       it "sends the non-member invitation" do
-        pending "Must rework how invites are sent"
         Notifier.should_receive(:nonmember_invitation).twice
-        @night.send_invitations "nonreg1@foobars.com; nonreg2@goober.com"
+        night.send_invitations "nonreg1@foobars.com; nonreg2@goober.com"
+        night.invitations.count.should == 2
       end
     end
   end
