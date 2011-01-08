@@ -18,7 +18,7 @@ class InvitationsController < ApplicationController
 
   def create
     night.send_invitations params[:invitation_emails]
-    flash[:success] = "Invitations sent."
+    flash[:success] = "Invitations sent!"
     redirect_to night
   end
 
