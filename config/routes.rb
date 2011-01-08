@@ -7,6 +7,10 @@ Movienight::Application.routes.draw do
                             :path_names => { :edit => 'confirm' }
   end
 
+  resources :voteable_movies, :only => [] do
+    resources :votes, :only => :create
+  end
+
   resources :locations, :except => [:new, :show]
 
   resources :movies, :only => [] do

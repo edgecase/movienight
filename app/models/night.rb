@@ -7,6 +7,7 @@ class Night < ActiveRecord::Base
 
   belongs_to :movie
   has_many   :voteable_movies
+  has_many   :votes,  :through => :voteable_movies
 
   accepts_nested_attributes_for :voteable_movies
 
@@ -22,6 +23,23 @@ class Night < ActiveRecord::Base
   delegate :title,      :to => :movie,    :prefix => true, :allow_nil => true
 
   scope :sorted, order("nights.curtain_date ASC")
+
+  def voters
+    voteable_movies.collect {|movie| movie.voters }.flatten
+  end
+
+  def hosted_by?(user)
+    host == user
+  end
+
+  def invitees_include?(user)
+    invitations.find_by_invitee_id(user)
+  end
+
+  def voted_on_by?(user)
+    return false unless user.try :id
+    votes.collect {|v| v.voter_id }.include?(user.id)
+  end
 
   def human_curtain_date
     curtain_date.strftime("%B ") +

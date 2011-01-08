@@ -53,10 +53,16 @@
   width: 23px;
   height: 18px;
   text-indent: -999em;
+  background: url(/images/check_white.png) no-repeat;
+}
+
+#voting .movie a.vote_for_me.do_not_want {
+  cursor: default;
   background: url(/images/x.png) no-repeat;
 }
 
 #voting .movie a.vote_for_me.i_choose_you_pikachu {
+  cursor: default;
   background: url(/images/check_green.png) no-repeat;
 }
 
