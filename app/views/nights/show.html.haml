@@ -94,7 +94,7 @@
   %p#time_info
     -# Doors open at 8:00pm &ndash; Movie start at 8:30pm
 
-  - unless night.voteable_movies.empty?
+  - if show_voteable_movies?(night)
     #voting
       %h2
         Vote:

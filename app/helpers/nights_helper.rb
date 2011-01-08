@@ -8,6 +8,10 @@ module NightsHelper
     end
   end
 
+  def show_voteable_movies?(night)
+    night.movie.blank? && night.voteable_movies.any?
+  end
+
   def voting_state_class(night)
     unless night.movie
       "undecided"
