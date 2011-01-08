@@ -31,7 +31,7 @@
     <a href="#" class="rsvp no">no</a>
     </header>
   .sidebar_content
-    - if user_signed_in? and current_user == night.host
+    - if night.hosted_by? current_user
       %p.more
         = link_to "Invite people", new_night_invitation_path(night)
     %p.more
@@ -84,9 +84,7 @@
   \/#sidebar
 #main_content
   %h1
-    /
-      class="movie.undecided" when still voting
-    %span.movie
+    %span.movie{:class => voting_state_class(night)}
       = "#{movie_name(night)} at"
       %span{ :class => current_user_is_host ? "you" : "" }
         = night.location_human_name

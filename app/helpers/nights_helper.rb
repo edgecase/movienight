@@ -8,6 +8,12 @@ module NightsHelper
     end
   end
 
+  def voting_state_class(night)
+    unless night.movie
+      "undecided"
+    end
+  end
+
   def cast_vote_class(voteable_movie)
     night = voteable_movie.night
     if voteable_movie.voters.include? current_user

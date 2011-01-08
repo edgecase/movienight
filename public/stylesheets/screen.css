@@ -54,7 +54,6 @@ em { font-style: italic; }
 #main_content h1 span.movie.undecided {
   color: #f00;
   font-weight: bold;
-  text-transform: uppercase;
 }
 
 #main_content h1 span.time { color: #645a68; }
