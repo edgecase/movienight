@@ -27,9 +27,9 @@ class Invitation < ActiveRecord::Base
 
   def deliver
     mail = if invitee.invitee?
-      Notifier.registered_member_invitation(self)
-    else
       Notifier.nonmember_invitation(self)
+    else
+      Notifier.registered_member_invitation(self)
     end
     mail.deliver
   end

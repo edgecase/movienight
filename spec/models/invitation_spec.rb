@@ -52,18 +52,18 @@ describe Invitation do
 
     context "when an invitee" do
       before { invitee.invitee = true }
-      it "sends a member invitation" do
-        Notifier.should_receive(:nonmember_invitation).never
-        Notifier.should_receive(:registered_member_invitation).and_return(email)
-        invitee.deliver(invitation)
+      it "sends a nonmember invitation" do
+        Notifier.should_receive(:registered_member_invitation).never
+        Notifier.should_receive(:nonmember_invitation).and_return(email)
+        invitation.deliver
       end
     end
 
     context "when a regular user" do
       it "sends a member invitation" do
-        Notifier.should_receive(:registered_member_invitation).never
-        Notifier.should_receive(:nonmember_invitation).and_return(email)
-        invitee.deliver(invitation)
+        Notifier.should_receive(:nonmember_invitation).never
+        Notifier.should_receive(:registered_member_invitation).and_return(email)
+        invitation.deliver
       end
     end
   end
