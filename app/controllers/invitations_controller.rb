@@ -6,9 +6,6 @@ class InvitationsController < ApplicationController
   assume(:invitation) { night.find_invitation(params[:id]) }
   assume(:invitee)    { invitation.try(:invitee) }
 
-  def new
-  end
-
   def create
     night.send_invitations params[:invitation_emails]
     flash[:success] = "Invitations sent!"

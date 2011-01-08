@@ -1,5 +1,7 @@
 $(function() {
 
+  $('a[rel=facebox]').facebox();
+
   $('#voting .movie a.choose_this_movie').click(function(event) {
     var chosen = this;
     $.ajax({

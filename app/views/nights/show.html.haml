@@ -33,7 +33,7 @@
   .sidebar_content
     - if night.hosted_by? current_user
       %p.more
-        = link_to "Invite people", new_night_invitation_path(night)
+        %a(rel="facebox" href="#invitations_facebox") Invite people
     %p.more
       %a{ :href => "http://maps.google.com?q=#{CGI.escape(night.location.to_s)}", :rel => "external" }
         = night.location.user.name + "'s"
@@ -118,3 +118,6 @@
           %a.vote_for_me{ :href => voteable_movie_votes_path(movie), :class => cast_vote_class(movie) }
             vote
           %span.vote_count= "+#{movie.votes.size}"
+
+#invitations_facebox
+  = render 'invitations'
