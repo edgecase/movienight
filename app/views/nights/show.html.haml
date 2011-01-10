@@ -87,7 +87,7 @@
     %span.movie{:class => voting_state_class(night)}
       %span= "#{movie_name(night)}"
       at
-      %span{ :class => current_user_is_host ? "you" : "" }
+      %span{ :class => night.hosted_by?(current_user) ? "you" : "" }
         = night.location_human_name
     = night.human_curtain_date
     %span.time
