@@ -22,11 +22,6 @@ module ApplicationHelper
     movie.poster_url(size) || ''
   end
 
-  def gravatar_url(user, size=80)
-    hash = Digest::MD5.hexdigest(user.email.downcase)
-    "http://www.gravatar.com/avatar/#{hash}.jpg?d=mm&s=#{size}"
-  end
-
   def movie_name(night)
     night.movie_title || "DUNNO YET"
   end

@@ -31,6 +31,11 @@ class User < ActiveRecord::Base
     name
   end
 
+  def gravatar_url(size=80)
+    hash = Digest::MD5.hexdigest(email.downcase)
+    "http://www.gravatar.com/avatar/#{hash}.jpg?d=mm&s=#{size}"
+  end
+
   def can_add_as_friend?(user)
     return false if user == self
     !invitee? && !friends.include?(user)

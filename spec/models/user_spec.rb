@@ -71,6 +71,24 @@ describe User do
     end
   end
 
+  describe "#gravatar_url" do
+    let(:email)  { "UserEmail@foo.com" }
+    let(:digest) { Digest::MD5.hexdigest(email.downcase) }
+    let(:user)   { Factory(:user, :email => email) }
+
+    it "contains the MD5 hash of the user's downcased email" do
+      url = user.gravatar_url
+      url.should match(/avatar\/#{digest}/)
+    end
+
+    context "when a size is specified" do
+      it "contains the size parameter" do
+        url = user.gravatar_url(512)
+        url.should match(/[&|?]s=512/)
+      end
+    end
+  end
+
   context "friends" do
     it 'should have no friends to start with' do
       User.new.friends.should be_empty
