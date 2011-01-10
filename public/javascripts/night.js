@@ -65,7 +65,7 @@ $(function() {
     $.ajax({
       url: event.target.href,
       type: 'post',
-      data: {},
+      data: {friend_id: $(this).attr('data-friend-id')},
       dataType: 'json',
       error: function(req) {
         // TODO: Use JS-driven flash message
@@ -78,4 +78,28 @@ $(function() {
     return false;
   });
 
+  $('#friend_list .friend a.invite').live('click', function() {
+    var $emails       = $('#facebox ' + $(this).attr('href'));
+    var  emailAddress = $(this).attr('data-friend-email');
+    var previousValue = $emails.val();
+
+    $emails.val(emailAddress + ',' + previousValue);
+    $(this).parent().hide();
+    return false;
+  });
+
+});
+
+$(function() {
+  var $friendsList = $('#friend_list');
+  $.ajax({
+    url: $friendsList.attr('href'),
+    type: 'post',
+    data: {},
+    dataType: 'json',
+    success: function(response) {
+      $('#friendInfo').tmpl(response).appendTo($friendsList);
+      $friendsList.show();
+    }
+  });
 });

@@ -1,0 +1,10 @@
+- if invitations.any?
+  %h1
+    = "#{pluralize(invitations.count, "person")} #{message}"
+  %ul
+    - invitations.each do |invitation|
+      %li
+        = invitee_name_or_email(invitation)
+        - if current_user.can_add_as_friend?(invitation.invitee)
+          / add_friend_path => friend_path
+          %a.add_friend{:href => add_friend_path(invitation.invitee), 'data-friend-id' => invitation.invitee.id} Add as friend

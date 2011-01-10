@@ -56,9 +56,9 @@ class Night < ActiveRecord::Base
       invite = invitations.build
 
       invite.invitee = user
-      invite.save!
-
-      invite.deliver
+      if invite.save
+        invite.deliver
+      end
     end
   end
 

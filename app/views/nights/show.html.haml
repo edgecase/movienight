@@ -94,3 +94,12 @@
 
 #invitations_facebox
   = render 'invitations'
+
+  %script(id="friendInfo" type="x-jquery-templ")
+    .friend
+      %img(src="${user.gravatar_url}" alt="${user.name}")
+      %span.name ${user.name}
+      %a.invite(href="#invitation_emails" data-friend-email="${user.email}" data-friend-id="${user.id}")
+        Invite this friend
+
+  #friend_list(href=friends_path style = 'display: none;')

@@ -2,8 +2,10 @@ Movienight::Application.routes.draw do
 
   devise_for :users
 
-  match '/users/friends/:friend_id/add', :to => 'users#add_friend',
-                                         :as => 'add_friend'
+  match '/friends/:friend_id/add', :to => 'users#add_friend',
+                                   :as => 'add_friend'
+  match '/friends/all',            :to => 'users#all_friends',
+                                   :as => 'friends'
 
   resources :nights do
     resources :invitations, :only       => [:create, :edit, :update],
