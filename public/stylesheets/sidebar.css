@@ -138,3 +138,5 @@
 .sidebar_content p.beer { background: url(/images/beer.png) no-repeat 0% 50%; }
 
 .sidebar_content p.snacks { background: url(/images/fork_and_knife.png) no-repeat 1px 50%; }
+
+.sidebar_content a.add_friend { color: #664084; }

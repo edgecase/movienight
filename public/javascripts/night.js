@@ -60,4 +60,22 @@ $(function() {
     return false;
   });
 
+  $('#sidebar a.add_friend').click(function(event) {
+    var friend = this;
+    $.ajax({
+      url: event.target.href,
+      type: 'post',
+      data: {},
+      dataType: 'json',
+      error: function(req) {
+        // TODO: Use JS-driven flash message
+      },
+      success: function(response) {
+        // TODO: Use JS-driven flash message
+        $(friend).hide();
+      }
+    });
+    return false;
+  });
+
 });

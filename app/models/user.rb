@@ -31,6 +31,11 @@ class User < ActiveRecord::Base
     name
   end
 
+  def can_add_as_friend?(user)
+    return false if user == self
+    !invitee? && !friends.include?(user)
+  end
+
   protected
 
   def password_required?

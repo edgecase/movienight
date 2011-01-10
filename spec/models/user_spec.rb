@@ -76,4 +76,37 @@ describe User do
       User.new.friends.should be_empty
     end
   end
+
+  describe "#can_add_as_friend?" do
+    context "when user is an invitee" do
+      it "is false" do
+        user = Factory(:user, :invitee => true)
+        user.can_add_as_friend?(stub(:user)).should be_false
+      end
+    end
+
+    context "when user has friends" do
+      let(:user)   { Factory(:user) }
+      let(:friend) { Factory(:user) }
+
+      context "when potential friend is already a friend" do
+        before { Friendship.create!(:user => user, :friend => friend) }
+        it "is false" do
+          user.can_add_as_friend?(friend).should be_false
+        end
+      end
+
+      context "when potential friend is not already a friend" do
+        it "is true" do
+          user.can_add_as_friend?(friend).should be_true
+        end
+      end
+
+      context "when potential friend is the user" do
+        it "is false" do
+          user.can_add_as_friend?(user).should be_false
+        end
+      end
+    end
+  end
 end
