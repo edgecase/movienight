@@ -68,6 +68,22 @@
   %p#time_info
     -# Doors open at 8:00pm &ndash; Movie start at 8:30pm
 
+  - if movie = night.movie
+    #chosen
+      .movie
+        %h3
+          = movie.title
+        %img.movie_image{ :src => "#{movie.poster_url}", :alt => "#{movie.title}" }
+        %p.more_info
+          %a{ :href => "http://www.amazon.com/s?index=blended&field-keywords=#{CGI.escape(movie.title)}", :target => '_blank' }
+            search amazon.com
+          - if movie.tmdb_id
+            %a{ :href => "http://www.themoviedb.org/movie/#{movie.tmdb_id}", :target => '_blank' }
+              movie database
+          - if movie.imdb_id
+            %a{ :href => "http://www.imdb.com/title/#{movie.imdb_id}/", :target => '_blank' }
+              imdb
+
   - if show_voteable_movies?(night)
     #voting
       %h2

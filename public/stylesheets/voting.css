@@ -8,10 +8,18 @@
   font-weight: bold;
 }
 
+#chosen .movie,
 #voting .movie {
   position: relative;
   height: 90px;
   padding-left: 115px;
+}
+
+#chosen .movie img.movie_image {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  width: 76px;
 }
 
 #voting .movie img.movie_image {
@@ -21,6 +29,7 @@
   width: 46px;
 }
 
+#chosen .movie h3,
 #voting .movie h3 {
   margin-bottom: 10px;
   color: #fff;
@@ -28,10 +37,12 @@
   font-weight: bold;
 }
 
+#chosen .movie p.more_info,
 #voting .movie p.more_info {
   font-size: 14px;
 }
 
+#chosen .movie p.more_info a,
 #voting .movie p.more_info a {
   color: #fff;
   margin-right: 8px;
@@ -40,6 +51,7 @@
   -webkit-transition: all 0.25s linear;
 }
 
+#chosen .movie p.more_info a:hover,
 #voting .movie p.more_info a:hover {
   opacity: 1;
   text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
