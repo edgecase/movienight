@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
     unless user
       user = User.new(:email => email)
       user.invitee = true
+      user.reset_authentication_token!
       user.save
     end
     user

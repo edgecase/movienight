@@ -1,16 +1,10 @@
 class NightsController < ApplicationController
-  skip_before_filter :authenticate_user!,    :only => :show
-  before_filter      :logged_in_or_invited?, :only => :show
   before_filter      :current_user_is_host?, :only => [:edit, :update, :destroy]
 
-  assume(:night) { Night.find(params[:id]) }
-  assume(:invitation) do
-    if current_user
-      current_user.invitations.pending.find_by_night_id(night)
-    end
-  end
-
+  assume(:night)                { Night.find(params[:id]) }
   assume(:hosted_nights)        { current_user.hosted_nights.sorted        }
+
+  assume(:invitation)           { current_user.invitations.pending.find_by_night_id(night) }
   assume(:accepted_invitations) { current_user.invitations.accepted.sorted }
   assume(:pending_invitations)  { current_user.invitations.pending.sorted  }
 
@@ -60,15 +54,5 @@ class NightsController < ApplicationController
     night.destroy
 
     redirect_to(nights_url)
-  end
-
-  private
-
-  def logged_in_or_invited?
-    unless user_signed_in?
-      unless session[:accessible_night] == night.id
-        redirect_to new_user_session_path
-      end
-    end
   end
 end

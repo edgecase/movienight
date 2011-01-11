@@ -1,0 +1,5 @@
+%p
+  You have been invited to movie night!
+%p
+  - url = @invitee.invitee? ? night_url(@night, :auth_token => @invitee.authentication_token) : night_url(@night)
+  = link_to "Click here to RSVP!", url

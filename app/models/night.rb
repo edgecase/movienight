@@ -1,5 +1,4 @@
 class Night < ActiveRecord::Base
-  extend TokenGeneration
 
   belongs_to :host, :class_name => "User"
   belongs_to :location
@@ -12,10 +11,6 @@ class Night < ActiveRecord::Base
   accepts_nested_attributes_for :voteable_movies
 
   validates_presence_of :curtain_date, :curtain_time, :host, :location
-
-  attr_protected :invitation_salt
-
-  before_create :generate_invitation_salt
 
   delegate :name,       :to => :location, :prefix => true
   delegate :human_name, :to => :location, :prefix => true
@@ -62,18 +57,10 @@ class Night < ActiveRecord::Base
     end
   end
 
-  def find_invitation(access_hash)
-    invitations.find_by_access_hash(access_hash)
-  end
-
   private
 
   def parsed(emails)
     return [] unless emails
     emails.split(/[\s;,]+/).map(&:strip)
-  end
-
-  def generate_invitation_salt
-    self.invitation_salt = Night.make_token
   end
 end

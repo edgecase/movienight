@@ -68,6 +68,12 @@ describe User do
         user.should be_an_invitee
         user.should be_persisted
       end
+
+      it "generates an auth_token for that user" do
+        user = User.find_user_or_create_invited_user(email)
+
+        user.authentication_token.should_not be_nil
+      end
     end
   end
 

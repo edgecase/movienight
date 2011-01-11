@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110107163122) do
+ActiveRecord::Schema.define(:version => 20110110220212) do
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
@@ -21,8 +21,7 @@ ActiveRecord::Schema.define(:version => 20110107163122) do
   end
 
   create_table "invitations", :force => true do |t|
-    t.integer  "night_id",    :null => false
-    t.string   "access_hash"
+    t.integer  "night_id",   :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "attending"
@@ -59,7 +58,6 @@ ActiveRecord::Schema.define(:version => 20110107163122) do
     t.time     "curtain_time"
     t.date     "curtain_date"
     t.integer  "location_id"
-    t.string   "invitation_salt"
     t.boolean  "bring_drinks"
     t.boolean  "bring_snacks"
     t.text     "notes"

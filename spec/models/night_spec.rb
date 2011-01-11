@@ -5,13 +5,6 @@ describe Night do
     Factory(:night).save.should == true
   end
 
-  it "generates an invitation salt before create" do
-    night = Night.new(:host => Factory(:user))
-    night.invitation_salt.should be_blank
-    night.save(:validate => false)
-    night.invitation_salt.should_not be_blank
-  end
-
   describe "#send_invitations" do
     let(:night) { Factory(:night) }
     let(:user1) { Factory(:user, :email => "user1@example.com") }
@@ -24,19 +17,12 @@ describe Night do
     describe "when emails do not have associated user accounts" do
       let(:mail) { stub(:deliver => true) }
 
-      before do
-        Notifier.stub!(:nonmember_invitation => mail)
-        Notifier.stub!(:registered_member_invitation => mail)
-      end
-
       it "creates invitations for each email" do
-        Notifier.should_receive(:registered_member_invitation).twice
         night.send_invitations [user1.email, user2.email].join('; ')
         night.invitations.count.should == 2
       end
 
       it "sends the non-member invitation" do
-        Notifier.should_receive(:nonmember_invitation).twice
         night.send_invitations "nonreg1@foobars.com; nonreg2@goober.com"
         night.invitations.count.should == 2
       end

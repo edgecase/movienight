@@ -10,4 +10,11 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
+
+  def log_in_token_user
+    return unless current_user && current_user.invitee?
+    return unless current_user.authentication_token == params[:auth_token]
+    sign_in(current_user, :bypass => true)
+    redirect_to "http://#{request.host}#{request.port != 80 ? ':' + request.port.to_s : nil}#{request.request_uri}"
+  end
 end
