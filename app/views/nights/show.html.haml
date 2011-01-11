@@ -68,8 +68,8 @@
   %p#time_info
     -# Doors open at 8:00pm &ndash; Movie start at 8:30pm
 
-  - if movie = night.movie
-    #chosen
+  #chosen
+    - if movie = night.movie
       .movie
         %h3
           = movie.title
@@ -117,5 +117,17 @@
       %span.name ${user.name}
       %a.invite(href="#invitation_emails" data-friend-email="${user.email}" data-friend-id="${user.id}")
         Invite this friend
+
+  %script(id="chosenMovie" type="x-jquery-templ")
+    .movie
+      %h3 ${title}
+      %img.movie_image{ :src => "${posters[1]}", :alt => "${title}" }
+      %p.more_info
+        %a{ :href => "http://www.amazon.com/s?index=blended&field-keywords=${title}", :target => '_blank' }
+          search amazon.com
+        %a{ :href => "http://www.themoviedb.org/movie/${tmdb_id}", :target => '_blank' }
+          movie database
+        %a{ :href => "http://www.imdb.com/title/${imdb_id}/", :target => '_blank' }
+          imdb
 
   #friend_list(href=friends_path style = 'display: none;')

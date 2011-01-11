@@ -16,6 +16,8 @@ $(function() {
         $('#voting').hide();
         $('#main_content h1 span.movie').removeClass('undecided');
         $('#main_content h1 span.movie span:first').html(response.night.movie.title);
+
+        $('#chosenMovie').tmpl(response.night.movie).appendTo('#chosen');
       }
     });
     return false;
