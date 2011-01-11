@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :friends, :class_name => 'User', :through => :friendships
   has_many :hosted_nights, :class_name => 'Night', :foreign_key => :host_id
 
-  has_many :invitations, :foreign_key => :invitee_id do
+  has_many :invitations, :foreign_key => :invitee_id, :dependent => :destroy do
     def accepted() self.are_attending  end
     def pending()  self.awaiting_reply end
     def rejected() self.not_attending  end
