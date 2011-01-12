@@ -8,7 +8,7 @@ gem 'dynamic_form',     '~> 1.1.3'
 gem 'haml'    ,         '~> 3.0.24'
 gem 'httparty',         '~> 0.6.1'
 gem 'jquery-rails',     '~> 0.2.4'
-gem 'sqlite-ruby',      '~> 2.2.3',  :platforms => :mswin
+gem 'sqlite-ruby3',     '~> 1.3.1'
 
 gem 'ruby-debug',       '~> 0.10.3', :platforms => :mri_18
 gem 'ruby-debug19',     '~> 0.11.6', :platforms => :mri_19
