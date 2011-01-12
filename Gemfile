@@ -9,7 +9,7 @@ path './vender/pathed_gems' do
   gem 'haml'    ,         '~> 3.0.24'
   gem 'httparty',         '~> 0.6.1'
   gem 'jquery-rails',     '~> 0.2.4'
-  gem 'sqlite-ruby',      '~> 2.2.3',  :platforms => [:mswin, :mingw]
+  gem 'sqlite-ruby',      '~> 2.2.3',  :platforms => :mswin
   gem 'pg',               '~> 0.9.0',  :platforms => :mri
 
   gem 'thin',             '~> 1.2.7',  :platforms => :mri
