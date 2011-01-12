@@ -11,7 +11,7 @@ gem 'jquery-rails',     '~> 0.2.4'
 gem 'nokogiri',         '~> 1.4.4'
 gem 'pg',               '~> 0.9.0'
 
-gem 'thin',             '~> 1.2.7'
+gem 'thin',             '~> 1.2.7',  :platforms => :mri
 
 gem 'ruby-debug',       '~> 0.10.3', :platforms => :mri_18
 gem 'ruby-debug19',     '~> 0.11.6', :platforms => :mri_19
